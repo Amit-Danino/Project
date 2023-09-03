@@ -90,8 +90,22 @@ const allUsers = async(req, res) => {
     }
 }
 
+const getUserId = async(req, res) => {
+    try {
+        const email = req.body.email
+        const users = await db.promise().query(
+            'SELECT user_id FROM users where email = ?', [email]
+        );
+        res.status(200).json(users[0]);
+    } catch (error) {
+        console.error('Error in allUsers function:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 module.exports = {
     register,
     allUsers,
-    encryptPass
+    encryptPass,
+    getUserId
 };

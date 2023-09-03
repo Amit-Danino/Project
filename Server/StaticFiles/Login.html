@@ -82,10 +82,17 @@
                 });
         }
 
+        function deleteCookie(email, value) {
+            const pastDate = new Date(0);
+            const expires = 'expires=' + pastDate.toUTCString();
+            document.cookie = email + '=' + value + '; ' + expires + ';path=/';
+        }
+
         function setCookie(email, value, daysToExpire) {
             const expirationDate = new Date();
             expirationDate.setTime(expirationDate.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
             const expires = 'expires=' + expirationDate.toUTCString();
+            deleteCookie(email, value);
             document.cookie = email + '=' + value + ';' + expires + ';path=/';
         }
 
