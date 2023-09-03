@@ -17,7 +17,25 @@ function getUserCountry() {
     return 'Afghanistan'; // If the country cookie is not set
 }
 
+async function getCurrentUserId() {
+    const cookies = document.cookie.split(';');
+    let [name, value] = cookies[cookies.length - 1].split('=');
+    name = name.split(' ').join('')
+    const response = await fetch('http://localhost:3000/api/users/getUserId', {
+        method: 'POST',
+        body: JSON.stringify({ email: name }), // Make sure you define post_id and user_id
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
 
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data[0].user_id;
+}
 
 // Function to format the post date
 function formatDate(dateString) {
@@ -36,12 +54,12 @@ function displayPosts(posts) {
         let currentPost = null;
 
         posts.forEach(post => {
-            if (!currentPost || currentPost.post_id !== post.post_id) {
-                // Start a new post
-                currentPost = post;
-                const postElement = document.createElement('div');
-                postElement.classList.add('post');
-                postElement.innerHTML = `
+                    if (!currentPost || currentPost.post_id !== post.post_id) {
+                        // Start a new post
+                        currentPost = post;
+                        const postElement = document.createElement('div');
+                        postElement.classList.add('post');
+                        postElement.innerHTML = `
                     <div class="post-header">
                         <h3>${post.full_name}</h3>
                         <p>${formatDate(post.post_date)}</p>
@@ -72,9 +90,9 @@ function displayPosts(posts) {
 
                 likeButton.addEventListener('click', async () => {
                     console.log('Like button clicked');
-                
-                    const liked = await handleLike(post.post_id, post.user_id);
-                
+                    const userId = await getCurrentUserId();
+                    console.log(userId)
+                    const liked = await handleLike(post.post_id, userId);                
                     if (liked) {
                         likeButton.style.display = 'none'; // Hide the Like button
                         cancelLikeButton.style.display = 'inline-block'; // Show the Cancel Like button
@@ -116,7 +134,7 @@ function displayPosts(posts) {
                 
                 dislikeButton.addEventListener('click', () => {
                     console.log('Dislike button clicked');
-                    handledisLike(post.post_id, post.user_id);
+                    handleDislike(post.post_id, post.user_id);
                 });
 
                 feedContainer.appendChild(postElement);
@@ -131,6 +149,7 @@ function displayPosts(posts) {
     }
 }
 async function handleLike(post_id, user_id) {
+    console.log("asdf",user_id)
     try {
         const response = await fetch('http://localhost:3000/api/posts/like', {
             method: 'POST',
@@ -152,9 +171,9 @@ async function handleLike(post_id, user_id) {
     }
 }
 
-async function handleLike(post_id, user_id) {
+async function handleDislike(post_id, user_id) {
     try {
-        const response = await fetch('http://localhost:3000/api/posts/like', {
+        const response = await fetch('http://localhost:3000/api/posts/dislike', {
             method: 'POST',
             body: JSON.stringify({ post_id: post_id, user_id: user_id }),
             headers: {
@@ -166,10 +185,10 @@ async function handleLike(post_id, user_id) {
             // Reload the page to reflect the updated state
             window.location.reload();
         } else {
-            throw new Error('Error liking post');
+            throw new Error('Error disliking post');
         }
     } catch (error) {
-        console.error('Error liking post:', error);
+        console.error('Error disliking post:', error);
     }
 }
 
