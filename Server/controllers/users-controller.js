@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt'); // npm install bcrypt
-const db = require('../database/db');  //improt db connectoin
+const db = require('../database/db'); //improt db connectoin
 
 
-const register = async (req, res) => {
+const register = async(req, res) => {
     console.log(req.body);
 
     const {
@@ -17,7 +17,7 @@ const register = async (req, res) => {
         gender,
     } = req.body;
 
-    const password_hash = encryptPass(password);
+    const password_hash = encryptPassFunc(password);
     const username = `${firstname}_${lastname}`; // Generate a username based on first and last name
 
     const user = {
@@ -45,14 +45,53 @@ const register = async (req, res) => {
 };
 
 // used to encrypt the password before uploading to database
-const encryptPass = (password) =>{
+const encryptPassFunc = (password) => {
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(password, salt);
     return hash;
 };
 
+const encryptPass = async(req, res) => {
+    try {
+        const body = req.body;
+        const hashed_password = body.password_hashed
+        const password = body.passwordToHash;
+        bcrypt.compare(password, hashed_password, (err, result) => {
+            if (err) {
+                // Handle the error (e.g., log it or return an error response)
+                console.error('Error comparing passwords:', err);
+                return res.status(500).json({ success: false, message: 'Internal Server Error' });
+            } else if (result) {
+                // Passwords match, authentication is successful
+                console.log('Password is correct');
+                console.log({ success: true, message: 'Authentication successful' })
+                return res.status(200).json({ success: true, message: 'Authentication successful' });
+            } else {
+                // Passwords do not match, authentication failed
+                return res.status(200).json({ success: false, message: 'Invalid email or password' });
+            }
+        });
+    } catch (error) {
+        console.error('Error encrypting password:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+const allUsers = async(req, res) => {
+    try {
+        const users = await db.promise().query(
+            'SELECT * FROM users'
+        );
+        res.status(200).json(users[0]);
+    } catch (error) {
+        console.error('Error in allUsers function:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 module.exports = {
-    register
+    register,
+    allUsers,
+    encryptPass
 };

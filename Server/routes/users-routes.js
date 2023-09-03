@@ -6,19 +6,7 @@ const usersController = require('../controllers/users-controller');
 const router = express.Router();
 
 router.post("/register", usersController.register);
-
-// router.post(
-// 	"/signup",
-// 	[
-// 		check("fullname").not().isEmpty(),
-// 		check("email").normalizeEmail().isEmail(),
-// 		check("password").isLength({ min: 6 }),
-// 		check("shippingAddress").not().isEmpty(),
-// 		check("phone").not().isEmpty(),
-// 	],
-// 	signup
-// );
-
-// router.post("/login", login);
+router.post("/getUsers", usersController.allUsers);
+router.post("/encryptPass", usersController.encryptPass)
 
 module.exports = router;

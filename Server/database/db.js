@@ -1,10 +1,10 @@
-const mysql = require('mysql2'); 
+const mysql = require('mysql2');
 
 //connect to the db
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'Durhkvdurhkv!1',
+    password: 'mysqlpassword',
     database: 'world_Link_dataBase',
 });
 

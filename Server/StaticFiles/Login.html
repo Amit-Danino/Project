@@ -22,64 +22,103 @@
 
     <form onsubmit="return handleLogin()">
 
-    <div class="login-form">
-        <div class="login-title">Login</div>
-        <input id="email" type="text" placeholder="Email">
-        <div style="position: relative;">
-            <input type="password" id="password" placeholder="Password">
-            <i class="password-toggle-icon" id="passwordToggle" onclick="togglePasswordVisibility()">&#128065;</i>
-        </div>
-        <label class="checkbox-label">
+        <div class="login-form">
+            <div class="login-title">Login</div>
+            <input id="email" type="text" placeholder="Email">
+            <div style="position: relative;">
+                <input type="password" id="password" placeholder="Password">
+                <i class="password-toggle-icon" id="passwordToggle" onclick="togglePasswordVisibility()">&#128065;</i>
+            </div>
+            <label class="checkbox-label">
       <input type="checkbox" name="rememberMe" id="rememberMe"> Remember me
     </label>
-        <button class="login-button" type="submit">Login</button>
-    </div>
+            <button class="login-button" type="submit">Login</button>
+        </div>
     </form>
     <script>
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            event.preventDefault();
+            fetch('http://localhost:3000/api/users/getUsers', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(users => {
+                    correctCredentials = false
+                    const promises = [];
+                    users.forEach(user => {
+                        const promise = encryptPass(user.password_hash, password)
+                            .then((authenticationResult) => {
+                                if (authenticationResult && user.email == email) {
+                                    if (rememberMe) {
+                                        // Set the "remember me" cookie with a 10-day expiration time
+                                        setCookie(email, password, 10);
+                                    } else {
+                                        // Set the "remember me" cookie with a 30-minute expiration time
+                                        setCookie(email, password, 0.0208); // (1/24) * 0.5 = 0.0208
+                                    }
+                                    correctCredentials = true
+                                        // Redirect to the home/dashboard page
+                                    window.location.href = 'feed.html';
+                                }
+                            });
+                        promises.push(promise);
+                    })
+                    return Promise.all(promises).then(() => correctCredentials);
+                })
+                .then((correctCredentials) => {
+                    if (!correctCredentials) {
+                        alert("Wrong email or password.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    alert("Error fetching Data: " + error.message); // Display an error message to the user
+                });
+        }
 
+        function setCookie(email, value, daysToExpire) {
+            const expirationDate = new Date();
+            expirationDate.setTime(expirationDate.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+            const expires = 'expires=' + expirationDate.toUTCString();
+            document.cookie = email + '=' + value + ';' + expires + ';path=/';
+        }
 
-function handleLogin() {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const rememberMe = document.getElementById('rememberMe').checked;
+        async function encryptPass(password_hash, password) {
+            const requestData = {
+                password_hashed: password_hash,
+                passwordToHash: password
+            };
 
-  // Authenticate user - replace this with your actual authentication logic
-  const isAuthenticated = authenticateUser(email, password);
+            try {
+                const response = await fetch('http://localhost:3000/api/users/encryptPass', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
 
-  if (isAuthenticated) {
-      if (rememberMe) {
-          // Set the "remember me" cookie with a 10-day expiration time
-          setCookie(email, password, 10);
-      } else {
-          // Set the "remember me" cookie with a 30-minute expiration time
-          setCookie(email, password, 0.0208); // (1/24) * 0.5 = 0.0208
-      }
-      // Redirect to the home/dashboard page
-      window.location.href = 'feed.html';
-  } else {
-      alert('Invalid email or password. Please try again.');
-  }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-  return false; // Prevent form submission
-}
+                const data = await response.json();
+                console.log('data.success:', data.success);
 
-function setCookie(email, value, daysToExpire) {
-  const expirationDate = new Date();
-  expirationDate.setTime(expirationDate.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
-  const expires = 'expires=' + expirationDate.toUTCString();
-  document.cookie = email + '=' + value + ';' + expires + ';path=/';
-}
-
-function authenticateUser(email, password) {
-  //TODO:  // Replace this with the actual authentication logic.
-
-  if(email=="admin@gmail.com" && password=="admin")
-  {
-    return true;
-  }
-  return false;
-}
-
+                // Return the authentication result
+                return data.success;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                // Handle the error here and return a specific value indicating failure
+                return false;
+            }
+        }
     </script>
 </body>
 
