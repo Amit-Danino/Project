@@ -105,6 +105,7 @@ function displayPosts(posts) {
 
                 postButton.addEventListener('click', async() => {
                     const boxContent = commentTextBox.value;
+                    if (isWhitespace(boxContent)) return;
                     commentTextBox.value = ''
                     const post_id = post.post_id
                     const user_id = await getCurrentUserId();
@@ -410,6 +411,9 @@ async function handleCancelDislike(post_id, user_id) {
     }
 }
 
+function isWhitespace(str) {
+    return /^\s*$/.test(str);
+}
 
 async function displayPostForm() {
     const feedContainer = document.getElementById('feed');
@@ -427,12 +431,8 @@ async function displayPostForm() {
     postInput.style.resize = 'none';
 
     postInput.addEventListener('input', () => {
-        // Get the current character count
         const characterCount = postInput.value.length;
-
-        // Check if character count exceeds 300
         if (characterCount > 300) {
-            // Truncate the content to 300 characters
             postInput.value = postInput.value.slice(0, 300);
         }
     });
@@ -444,6 +444,7 @@ async function displayPostForm() {
 
     postButton.addEventListener('click', async() => {
         const caption = postInput.value;
+        if (isWhitespace(caption)) return;
         postInput.value = ''
         const user_id = await getCurrentUserId();
         try {
@@ -455,15 +456,13 @@ async function displayPostForm() {
                 },
             });
             if (response.ok) {
-                const data = await response.json();
-                console.log("the data:", data);
-                return true; // Indicate success
+                window.location.reload();
             } else {
-                throw new Error('Errorz liking post');
+                throw new Error('Errorz adding post');
             }
         } catch (error) {
-            console.error('Errors liking post:', error);
-            return false; // Indicate error
+            console.error('Errors adding post:', error);
+            return false;
         }
     });
 
@@ -481,7 +480,6 @@ async function displayPostForm() {
 const loadFeed = async() => {
     const user_id = await getCurrentUserId()
     const userCountry = getUserCountry(user_id);
-
     if (!userCountry) {
         // Handle the case where the country cookie is not set
         alert('Please log in to view the feed.');
