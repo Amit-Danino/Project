@@ -25,8 +25,8 @@ VALUES
 CREATE TABLE Posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    caption TEXT,
-    image_url VARCHAR(255) NOT NULL,
+    caption TEXT NOT NULL,
+    image_url VARCHAR(255),
     post_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );

@@ -411,7 +411,7 @@ async function handleCancelDislike(post_id, user_id) {
 }
 
 
-function displayPostForm() {
+async function displayPostForm() {
     const feedContainer = document.getElementById('feed');
     feedContainer.textContent = ''
         // Create a div element to contain the post form
@@ -442,10 +442,29 @@ function displayPostForm() {
     postButton.textContent = 'Post';
     postButton.classList.add('post-button');
 
-    postButton.addEventListener('click', () => {
-        const postContent = postInput.value;
-
-        console.log('Post button clicked with content:', postContent);
+    postButton.addEventListener('click', async() => {
+        const caption = postInput.value;
+        postInput.value = ''
+        const user_id = await getCurrentUserId();
+        try {
+            const response = await fetch('http://localhost:3000/api/posts/addPost', {
+                method: 'POST',
+                body: JSON.stringify({ caption: caption, user_id: user_id }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log("the data:", data);
+                return true; // Indicate success
+            } else {
+                throw new Error('Errorz liking post');
+            }
+        } catch (error) {
+            console.error('Errors liking post:', error);
+            return false; // Indicate error
+        }
     });
 
     // Append the text input and button to the post form container

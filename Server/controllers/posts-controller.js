@@ -9,12 +9,8 @@ const feed = async(req, res) => {
     }
 
     try {
-        // Assuming you have a 'posts' table with a 'country' column
-        // const posts = await db.promise().query(
-        //     'SELECT users.full_name,users.user_id,posts.post_id ,posts.caption, posts.post_date, comments.comment_text, count(DISTINCT dislike_id) as DisLike, count(distinct like_id) as Likes FROM posts JOIN users ON users.user_id = posts.user_id JOIN  likes ON likes.post_id = posts.post_id JOIN  DisLikes ON DisLikes.post_id = posts.post_id JOIN comments ON comments.post_id = posts.post_id WHERE posts.user_Id IN (SELECT user_id FROM users WHERE users.country != ?) GROUP BY  users.full_name,users.user_id,posts.post_id,posts.caption, post_date, comments.comment_text ORDER BY post_date;', [userCountry]
-        // );
         const posts = await db.promise().query(
-            'SELECT * FROM posts JOIN users ON posts.user_id = users.user_id'
+            'SELECT * FROM posts JOIN users ON posts.user_id = users.user_id ORDER BY posts.post_date DESC'
         )
         res.status(200).json(posts[0]);
     } catch (error) {
@@ -105,13 +101,14 @@ const getUpdatedDislikeCount = async(req, res) => {
 
 const addPost = async(req, res) => {
     try {
-        const postId = req.body.post_id
-        const [rows] = await db.promise().query(
-            'SELECT COUNT(*) AS dislikeCount FROM dislikes WHERE post_id = ?', [postId]
+        const { caption, user_id } = req.body
+        await db.promise().query(
+            'INSERT INTO posts (user_id, caption) VALUES (?, ?);', [user_id, caption]
         );
-        res.status(200).json(rows[0].dislikeCount);
+
+        res.status(200).json(caption);
     } catch (error) {
-        console.error('Error in allUsers function:', error);
+        console.error('Error in adding post function:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
@@ -124,5 +121,6 @@ module.exports = {
     cancelLike,
     getUpdatedLikeCount,
     getUpdatedDislikeCount,
-    cancelDislike, // Add this line to export the function
+    cancelDislike,
+    addPost, // Add this line to export the function
 };
