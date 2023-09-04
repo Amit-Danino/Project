@@ -43,7 +43,7 @@ app.use(`/api/successstories`, successstoriesRoutes);
 //TODO:
 //open html file - later on maybe change to home page
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/StaticFiles/register.html');
+    res.sendFile(__dirname + '/StaticFiles/home.html');
 })
 
 //in the first run of the server  - the server will listen to the request in port port.

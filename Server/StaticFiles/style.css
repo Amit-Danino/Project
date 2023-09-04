@@ -1,57 +1,29 @@
-/* Common styles for both pages */
+/* Reset default margin and padding /
+body, h1, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    /*margin: 20px; */
-}
-
-h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-p {
-    margin-bottom: 10px;
-}
-
-ul,
-ol {
-    margin-bottom: 15px;
-}
-
-
-/* Button styling */
-
-.button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #08c168;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin-right: 10px;
+    background-image: url('Untitled_Artwork[562].png'); / Replace with your image file path /
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .button:hover {
-    background-color: #3b987f;
+    background-color: #2980b9;
+    color: #fff;
 }
 
-
-/* Styling for the top bar */
-
 .top-bar {
-    background-color: #333;
+    background-color: #f2f2f2;
     color: #fff;
-    padding: 10px;
     display: flex;
     align-items: center;
+    --justify-content: space-between;
+    padding: 10px 20px;
 }
 
 .top-bar .logo {
@@ -70,27 +42,71 @@ ol {
     margin-right: 0;
 }
 
+/ Main content styling /
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-/* Footer styles */
+.title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #2980b9;
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+}
+
+.content {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.content h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #2980b9;
+}
+
+.content ul, .content ol {
+    margin-bottom: 15px;
+}
+
+/ Adjust width and center-align content /
+.content p {
+    text-align: justify;
+}
+
+.button {
+    background-color: #fff;
+    color: #3498db;
+    border: none;
+    margin-right : 10px;
+
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif; 
+}
+.button:hover {
+    background-color: #2980b9;
+    color:#fff
+}
+/ Footer styling */
 
 .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
+    background-color: #f2f2f2;
     text-align: center;
+    padding: 10px 0;
+    color: #333;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
 }
-
-
-/* Container styles */
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-
-/* Additional styles specific to each page can be added here */

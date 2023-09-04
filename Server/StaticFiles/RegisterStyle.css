@@ -1,44 +1,63 @@
 /* Reset default margin and padding */
-body, h1, p {
+
+body,
+h1,
+p {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-image: url('Untitled_Artwork[562].png'); /* Replace with your image file path */
+    background-image: url('Untitled_Artwork[562].png');
+    /* Replace with your image file path */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: 'Poppins', sans-serif;
 }
 
-/* Top bar styling */
+.button:hover {
+    background-color: #2980b9;
+    color: #fff
+}
+
 .top-bar {
-    background-color: #3498db;
+    background-color: #f2f2f2;
     color: #fff;
     display: flex;
     align-items: center;
-    padding: 5px 20px; /* Adjusted padding */
+    --justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
 }
 
 .button {
     background-color: #fff;
     color: #3498db;
     border: none;
+    margin-right: 10px;
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
 
+
 /* Main content styling */
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    --justify-content: center;
     min-height: 100vh;
+    margin-top: 60px;
 }
 
 .title {
@@ -46,35 +65,49 @@ body {
     margin-bottom: 20px;
     color: #2980b9;
     font-family: 'Dosis', sans-serif;
+    text-align: center;
 }
 
+
 /* New styling for two-column layout with spacing */
+
 .form-columns {
     display: flex;
     justify-content: space-between;
+    border: 2px solid lightblue;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 .form-column {
-    flex: 1; /* Distribute available space equally between columns */
-    margin-right: 40px; /* Add margin between columns */
+    flex: 1;
+    /* Distribute available space equally between columns */
+    margin-right: 40px;
+    /* Add margin between columns */
 }
 
 .form-column:last-child {
-    margin-right: 0; /* Remove margin from the last column */
+    margin-right: 0;
+    /* Remove margin from the last column */
 }
 
+
 /* Adjust form-group width for better spacing */
+
 .form-group {
     margin-bottom: 20px;
 }
 
+
 /* Optional: Adjust width of specific form elements within a column */
+
 .form-column input[type="text"],
 .form-column input[type="email"],
 .form-column input[type="password"],
 .form-column textarea,
 .form-column select {
-    width: 100%; /* Make sure elements fill the column width */
+    width: 100%;
+    /* Make sure elements fill the column width */
 }
 
 input[type="text"],
@@ -91,7 +124,9 @@ select {
     font-family: 'Poppins', sans-serif;
 }
 
+
 /* Checkbox label styling */
+
 .checkbox-label {
     display: flex;
     align-items: center;
@@ -99,7 +134,9 @@ select {
     margin-top: 10px;
 }
 
+
 /* Submit button styling */
+
 button[type="submit"] {
     background-color: #3498db;
     color: #fff;
@@ -116,7 +153,9 @@ button[type="submit"]:hover {
     background-color: #2980b9;
 }
 
+
 /* Footer styling */
+
 .footer {
     background-color: #f2f2f2;
     text-align: center;
@@ -130,15 +169,19 @@ button[type="submit"]:hover {
     width: 100%;
 }
 
+
 /* Birthdate group styling */
+
 .birthdate-group {
     display: flex;
-    gap: 10px; /* Add some space between dropdowns */
+    gap: 10px;
+    /* Add some space between dropdowns */
     align-items: flex-start;
 }
 
 select#birthDay,
 select#birthMonth,
 select#birthYear {
-    flex: 1; /* Distribute available space equally among dropdowns */
+    flex: 1;
+    /* Distribute available space equally among dropdowns */
 }
