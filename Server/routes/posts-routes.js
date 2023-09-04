@@ -14,5 +14,6 @@ router.post('/cancel-dislike', postsController.cancelDislike);
 router.post('/like-count', postsController.getUpdatedLikeCount);
 router.post('/dislike-count', postsController.getUpdatedDislikeCount);
 
+// router.post('/addPost', postController.addPost);
 
 module.exports = router;

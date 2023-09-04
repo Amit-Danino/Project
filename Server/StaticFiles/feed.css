@@ -280,3 +280,22 @@ p {
     right: 0;
     font-size: 10px;
 }
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-left: 30%;
+}
+
+.post-input {
+    width: 100%;
+    max-width: 100%;
+    resize: none;
+}
+
+.post-button {
+    align-self: flex-end;
+    margin-top: 6px;
+}

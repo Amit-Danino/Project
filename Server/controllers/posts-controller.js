@@ -103,6 +103,19 @@ const getUpdatedDislikeCount = async(req, res) => {
     }
 };
 
+const addPost = async(req, res) => {
+    try {
+        const postId = req.body.post_id
+        const [rows] = await db.promise().query(
+            'SELECT COUNT(*) AS dislikeCount FROM dislikes WHERE post_id = ?', [postId]
+        );
+        res.status(200).json(rows[0].dislikeCount);
+    } catch (error) {
+        console.error('Error in allUsers function:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 
 module.exports = {
     feed,

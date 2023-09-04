@@ -49,7 +49,7 @@ function formatDate(dateString) {
 // Function to display the posts like on Facebook
 function displayPosts(posts) {
     const feedContainer = document.getElementById('feed');
-    feedContainer.innerHTML = '';
+    // feedContainer.innerHTML = '';
 
     if (posts.length === 0) {
         feedContainer.textContent = 'No posts available from other countries.';
@@ -411,6 +411,53 @@ async function handleCancelDislike(post_id, user_id) {
 }
 
 
+function displayPostForm() {
+    const feedContainer = document.getElementById('feed');
+    feedContainer.textContent = ''
+        // Create a div element to contain the post form
+    const postFormContainer = document.createElement('div');
+    postFormContainer.classList.add('post-form');
+
+    // Create a text input for the post content
+    const postInput = document.createElement('textarea');
+    postInput.setAttribute('placeholder', 'What\'s on your mind?');
+    postInput.classList.add('post-input');
+    postInput.setAttribute('rows', '3');
+    postInput.setAttribute('cols', '50');
+    postInput.style.resize = 'none';
+
+    postInput.addEventListener('input', () => {
+        // Get the current character count
+        const characterCount = postInput.value.length;
+
+        // Check if character count exceeds 300
+        if (characterCount > 300) {
+            // Truncate the content to 300 characters
+            postInput.value = postInput.value.slice(0, 300);
+        }
+    });
+
+    const inputContainer = document.createElement('div');
+    const postButton = document.createElement('button');
+    postButton.textContent = 'Post';
+    postButton.classList.add('post-button');
+
+    postButton.addEventListener('click', () => {
+        const postContent = postInput.value;
+
+        console.log('Post button clicked with content:', postContent);
+    });
+
+    // Append the text input and button to the post form container
+    inputContainer.appendChild(postInput);
+    inputContainer.appendChild(postButton);
+
+    postFormContainer.appendChild(inputContainer);
+
+    // Append the post form container to the feed container
+    feedContainer.appendChild(postFormContainer);
+}
+
 // Fetch and display posts from different countries
 const loadFeed = async() => {
     const user_id = await getCurrentUserId()
@@ -440,6 +487,7 @@ const loadFeed = async() => {
         const posts = await response.json();
 
         // Display posts like on Facebook
+        displayPostForm();
         displayPosts(posts);
     } catch (error) {
         console.error('Error fetching or displaying posts:', error);
