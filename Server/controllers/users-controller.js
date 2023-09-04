@@ -103,9 +103,36 @@ const getUserId = async(req, res) => {
     }
 }
 
+const getUserCountry = async(req, res) => {
+    try {
+        const user_id = req.body.user_id
+        const country = await db.promise().query(
+            'SELECT country FROM users where user_id = ?', [user_id]
+        );
+        res.status(200).json(country[0]);
+    } catch (error) {
+        console.error('Error in fetching user country function:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+const getUserFullname = async(req, res) => {
+    try {
+        const user_id = req.body.user_id
+        const country = await db.promise().query(
+            'SELECT full_name FROM users where user_id = ?', [user_id]
+        );
+        res.status(200).json(country[0]);
+    } catch (error) {
+        console.error('Error in fetching user country function:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 module.exports = {
     register,
     allUsers,
     encryptPass,
-    getUserId
+    getUserId,
+    getUserCountry,
+    getUserFullname
 };

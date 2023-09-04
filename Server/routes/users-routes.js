@@ -9,5 +9,7 @@ router.post("/register", usersController.register);
 router.post("/getUsers", usersController.allUsers);
 router.post("/encryptPass", usersController.encryptPass)
 router.post("/getUserId", usersController.getUserId)
+router.post("/getUserCountry", usersController.getUserCountry)
+router.post("/getUserFullname", usersController.getUserFullname);
 
 module.exports = router;

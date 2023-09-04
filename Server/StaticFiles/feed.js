@@ -4,17 +4,20 @@
 
 
 
-function getUserCountry() {
-    /*
-    const cookies = document.cookie.split(';');
-    for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split('=');
-        if (name === 'country') {
-            return decodeURIComponent(value);
-        }
+async function getUserCountry(userId) {
+    const response = await fetch('http://localhost:3000/api/users/getUserCountry', {
+        method: 'POST',
+        body: JSON.stringify({ user_id: userId }), // Make sure you define post_id and user_id
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
     }
-    */
-    return 'Afghanistan'; // If the country cookie is not set
+
+    const data = await response.json();
+    return data[0].country;
 }
 
 async function getCurrentUserId() {
@@ -63,7 +66,9 @@ function displayPosts(posts) {
                     <div class="post-header">
                         <h3>${post.full_name}</h3>
                         <p class="date">${formatDate(post.post_date)}</p>
+                        <p class="country"> </p>
                     </div>
+                    
                     <p class="post-caption">${post.caption}</p>
 
                     <div class="post-comments">          </div>
@@ -80,13 +85,15 @@ function displayPosts(posts) {
                     </div>
                     <div class="comment-input">
                     <input type="text" placeholder="Write your comment here" class="comment-textbox" maxlength="300">
-                    <button class="post-button">Post</button>
+                    <button class="post-button">Comment</button>
 
                 </div>
                 `;
 
                 addCommentsToPost(post.post_id, postElement);
                 addLikesAndDislikesToPost(post.post_id, postElement);
+                addCountry(post.user_id, postElement)
+
                 // Inside your postElement creation block:
                 const likeButton = postElement.querySelector('.like-button');
                 const dislikeButton = postElement.querySelector('.dislike-button');
@@ -105,9 +112,10 @@ function displayPosts(posts) {
                     console.log(jsonData)
                     addComment(jsonData)
 
+                    const full_name = await getUserFullname(user_id);
                     const post_comments_ul = postElement.querySelector('.post-comments ul');
                     const newLi = document.createElement('li');
-                    newLi.textContent = boxContent;
+                    newLi.textContent = full_name + ": " + boxContent;
                     post_comments_ul.appendChild(newLi)
                 })
 
@@ -238,7 +246,33 @@ function displayPosts(posts) {
     }
 }
 
+async function addCountry(user_Id, postElement) {
+    const country = await getUserCountry(user_Id);
+    const countryElement = postElement.querySelector('.country');
+    countryElement.textContent = "Country: " + country;
+}
 
+async function getUserFullname(user_id) {
+    try {
+        const response = await fetch('http://localhost:3000/api/users/getUserFullname', {
+            method: 'POST',
+            body: JSON.stringify({ user_id: user_id }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            data = await response.json()
+            return data[0].full_name; // Indicate success
+        } else {
+            throw new Error('Errorz liking post');
+        }
+    } catch (error) {
+        console.error('Errors liking post:', error);
+        return false; // Indicate error
+    }
+
+}
 async function addCommentsToPost(post_id, postElement) {
     try {
         const response = await fetch('http://localhost:3000/api/comments/getCommentsFromPost', {
@@ -253,9 +287,12 @@ async function addCommentsToPost(post_id, postElement) {
             const postCommentsDiv = postElement.querySelector('.post-comments');
             const ulElement = document.createElement('ul'); // Use document.createElement to create a new <ul> element
 
-            data.forEach(comment => {
+            data.forEach(async comment => {
+                // console.log(comment.user_id)
+                const full_name = await getUserFullname(comment.user_id)
+
                 const liElement = document.createElement('li'); // Use document.createElement to create a new <li> element
-                liElement.textContent = comment.comment_text;
+                liElement.textContent = full_name + ": " + comment.comment_text;
                 ulElement.appendChild(liElement);
             });
 
@@ -363,7 +400,6 @@ async function handleCancelDislike(post_id, user_id) {
             },
         });
         if (response.ok) {
-            //  location.reload(); // or window.location.reload();
             return true; // Indicate success
         } else {
             throw new Error('Errorz liking post');
@@ -377,7 +413,8 @@ async function handleCancelDislike(post_id, user_id) {
 
 // Fetch and display posts from different countries
 const loadFeed = async() => {
-    const userCountry = getUserCountry();
+    const user_id = await getCurrentUserId()
+    const userCountry = getUserCountry(user_id);
 
     if (!userCountry) {
         // Handle the case where the country cookie is not set
