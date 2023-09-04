@@ -108,7 +108,7 @@ const registerUser = async(e) => {
             return response.json();
         })
         .then(data => {
-            alert("Registered successfully!");
+            window.location.href = 'login.html';
             // Handle the successful response data here
         })
         .catch(error => {
