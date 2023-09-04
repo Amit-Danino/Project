@@ -54,75 +54,143 @@ function displayPosts(posts) {
         let currentPost = null;
 
         posts.forEach(post => {
-                    if (!currentPost || currentPost.post_id !== post.post_id) {
-                        // Start a new post
-                        currentPost = post;
-                        const postElement = document.createElement('div');
-                        postElement.classList.add('post');
-                        postElement.innerHTML = `
+            if (!currentPost || currentPost.post_id !== post.post_id) {
+                // Start a new post
+                currentPost = post;
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                postElement.innerHTML = `
                     <div class="post-header">
                         <h3>${post.full_name}</h3>
-                        <p>${formatDate(post.post_date)}</p>
+                        <p class="date">${formatDate(post.post_date)}</p>
                     </div>
                     <p class="post-caption">${post.caption}</p>
-                    <p class="post-likes">${post.Likes} Likes ${post.DisLike} DisLikes</p>
 
-                    <div class="post-comments">
-                        <ul>Comments:
-                            ${post.comment_text ? `<li>${post.comment_text}</li>` : ''}
-                        </ul>
-                    </div>
+                    <div class="post-comments">          </div>
+
+                    <p class="post-likes">      </p>
+
+                    <br>
+
                     <div class="post-actions">
-                        <div class="comment-input">
-                            <input type="text" placeholder="Write your comment here" class="comment-textbox">
-                        </div>
-                        <br>
-                        <button class="add-comment-button">Comment</button>
                         <button class="like-button">Like</button>
-                        <button class="cancel-like-button" style="display: none;">Cancel Like</button>
+                        <button class="cancel-like-button" style="display: none;">Like</button>
                         <button class="dislike-button">DisLike</button>
+                        <button class="cancel-dislike-button" style="display: none;">Dislike</button>
                     </div>
+                    <div class="comment-input">
+                    <input type="text" placeholder="Write your comment here" class="comment-textbox" maxlength="300">
+                    <button class="post-button">Post</button>
+
+                </div>
                 `;
-               // Inside your postElement creation block:
+
+                addCommentsToPost(post.post_id, postElement);
+                addLikesAndDislikesToPost(post.post_id, postElement);
+                // Inside your postElement creation block:
                 const likeButton = postElement.querySelector('.like-button');
                 const dislikeButton = postElement.querySelector('.dislike-button');
                 const cancelLikeButton = postElement.querySelector('.cancel-like-button'); // Add this line 
+                const cancelDislikeButton = postElement.querySelector('.cancel-dislike-button');
 
-                likeButton.addEventListener('click', async () => {
+                const postButton = postElement.querySelector('.post-button');
+                const commentTextBox = postElement.querySelector('.comment-textbox');
+
+                postButton.addEventListener('click', async() => {
+                    const boxContent = commentTextBox.value;
+                    commentTextBox.value = ''
+                    const post_id = post.post_id
+                    const user_id = await getCurrentUserId();
+                    const jsonData = { post_id: post_id, user_id: user_id, boxContent: boxContent }
+                    console.log(jsonData)
+                    addComment(jsonData)
+
+                    const post_comments_ul = postElement.querySelector('.post-comments ul');
+                    const newLi = document.createElement('li');
+                    newLi.textContent = boxContent;
+                    post_comments_ul.appendChild(newLi)
+                })
+
+                likeButton.addEventListener('click', async() => {
                     console.log('Like button clicked');
                     const userId = await getCurrentUserId();
-                    console.log(userId)
-                    const liked = await handleLike(post.post_id, userId);                
+                    const liked = await handleLike(post.post_id, userId);
                     if (liked) {
                         likeButton.style.display = 'none'; // Hide the Like button
                         cancelLikeButton.style.display = 'inline-block'; // Show the Cancel Like button
+                        cancelLikeButton.style.backgroundColor = "lightBlue";
+
                         // Update the displayed like count with the response data
                         const updatedLikeCount = await fetchUpdatedLikeCount(post.post_id);
-                        postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${post.DisLike} DisLikes`;
+                        const updatedDislikeCount = await fetchUpdatedDislikeCount(post.post_id);
+                        postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${updatedDislikeCount} DisLikes`;
+
+                        if (dislikeButton.style.display === 'none') {
+                            cancelDislikeButton.click();
+                        }
                     }
                 });
-                
-                cancelLikeButton.addEventListener('click', async () => {
+
+                cancelLikeButton.addEventListener('click', async() => {
                     console.log('Cancel Like button clicked');
-                    const canceled = await handleCancelLike(post.post_id, post.user_id);
+                    const userId = await getCurrentUserId();
+                    const canceled = await handleCancelLike(post.post_id, userId);
                     if (canceled) {
                         cancelLikeButton.style.display = 'none'; // Hide the Cancel Like button
                         likeButton.style.display = 'inline-block'; // Show the Like button
                         // Update the displayed like count with the response data
                         const updatedLikeCount = await fetchUpdatedLikeCount(post.post_id);
-                        postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${post.DisLike} DisLikes`;
+                        const updatedDislikeCount = await fetchUpdatedDislikeCount(post.post_id);
+                        postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${updatedDislikeCount} DisLikes`;
                     }
                 });
-                
-                
+
+                dislikeButton.addEventListener('click', async() => {
+                    console.log('Dislike button clicked');
+                    const userId = await getCurrentUserId();
+                    const disliked = await handleDislike(post.post_id, userId);
+                    if (disliked) {
+                        dislikeButton.style.display = 'none'; // Hide the Like button
+                        cancelDislikeButton.style.display = 'inline-block'; // Show the Cancel Like button
+                        cancelDislikeButton.style.backgroundColor = "lightBlue";
+
+                        // Update the displayed like count with the response data
+                        const updatedLikeCount = await fetchUpdatedLikeCount(post.post_id);
+                        const updatedDislikeCount = await fetchUpdatedDislikeCount(post.post_id);
+                        postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${updatedDislikeCount} DisLikes`;
+                        if (likeButton.style.display === 'none') {
+                            cancelLikeButton.click();
+                        }
+                    }
+                });
+                cancelDislikeButton.addEventListener('click', async() => {
+                    console.log('Cancel dislike button clicked');
+                    const userId = await getCurrentUserId();
+                    const canceled = await handleCancelDislike(post.post_id, userId);
+                    if (canceled) {
+                        cancelDislikeButton.style.display = 'none'; // Hide the Cancel Like button
+                        dislikeButton.style.display = 'inline-block'; // Show the Like button
+                        // Update the displayed like count with the response data
+                        const updatedLikeCount = await fetchUpdatedLikeCount(post.post_id);
+                        const updatedDislikeCount = await fetchUpdatedDislikeCount(post.post_id);
+                        postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${updatedDislikeCount} DisLikes`;
+                    }
+                });
+
                 // Function to fetch the updated like count from the server
                 async function fetchUpdatedLikeCount(postId) {
                     try {
-                        const response = await fetch(`http://localhost:3000/api/posts/like-count/${postId}`); // Correctly pass postId in the URL
-                        
+                        jsonData = { post_id: postId }
+                        const response = await fetch('http://localhost:3000/api/posts/like-count', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(jsonData),
+                        });
                         if (response.ok) {
                             const data = await response.json();
-                            return data.likeCount; // Return the updated like count
+                            return data; // Return the updated like count
                         } else {
                             throw new Error('Error fetching updated like count');
                         }
@@ -131,12 +199,33 @@ function displayPosts(posts) {
                         return null;
                     }
                 }
-                
-                dislikeButton.addEventListener('click', () => {
-                    console.log('Dislike button clicked');
-                    handleDislike(post.post_id, post.user_id);
-                });
-
+                async function fetchUpdatedDislikeCount(postId) {
+                    try {
+                        jsonData = { post_id: postId }
+                        const response = await fetch('http://localhost:3000/api/posts/dislike-count', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(jsonData),
+                        });
+                        if (response.ok) {
+                            const data = await response.json();
+                            return data; // Return the updated like count
+                        } else {
+                            throw new Error('Error fetching updated like count');
+                        }
+                    } catch (error) {
+                        console.error('Error fetching updated like count:', error);
+                        return null;
+                    }
+                }
+                async function addLikesAndDislikesToPost(post_id, postElement) {
+                    const updatedLikeCount = await fetchUpdatedLikeCount(post_id);
+                    const updatedDislikeCount = await fetchUpdatedDislikeCount(post_id);
+                    const postCommentsDiv = postElement.querySelector('.post-likes');
+                    postCommentsDiv.textContent = `${updatedLikeCount} Likes ${updatedDislikeCount} DisLikes`;
+                }
                 feedContainer.appendChild(postElement);
             } else {
                 // Add comments to the current post
@@ -148,8 +237,61 @@ function displayPosts(posts) {
         });
     }
 }
+
+
+async function addCommentsToPost(post_id, postElement) {
+    try {
+        const response = await fetch('http://localhost:3000/api/comments/getCommentsFromPost', {
+            method: 'POST',
+            body: JSON.stringify({ post_id: post_id }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            const data = await response.json();
+            const postCommentsDiv = postElement.querySelector('.post-comments');
+            const ulElement = document.createElement('ul'); // Use document.createElement to create a new <ul> element
+
+            data.forEach(comment => {
+                const liElement = document.createElement('li'); // Use document.createElement to create a new <li> element
+                liElement.textContent = comment.comment_text;
+                ulElement.appendChild(liElement);
+            });
+
+            postCommentsDiv.appendChild(ulElement);
+
+            return data; // Indicate success
+        } else {
+            throw new Error('Errorz liking post');
+        }
+    } catch (error) {
+        console.error('Errors liking post:', error);
+        return false; // Indicate error
+    }
+}
+
+async function addComment(jsonData) {
+    try {
+        const response = await fetch('http://localhost:3000/api/comments/addComment', {
+            method: 'POST',
+            body: JSON.stringify(jsonData),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            return true; // Indicate success
+        } else {
+            throw new Error('Errorz liking post');
+        }
+    } catch (error) {
+        console.error('Errors liking post:', error);
+        return false; // Indicate error
+    }
+}
+
 async function handleLike(post_id, user_id) {
-    console.log("asdf",user_id)
     try {
         const response = await fetch('http://localhost:3000/api/posts/like', {
             method: 'POST',
@@ -158,15 +300,13 @@ async function handleLike(post_id, user_id) {
                 'Content-Type': 'application/json',
             },
         });
-
         if (response.ok) {
-          //  location.reload(); // or window.location.reload();
             return true; // Indicate success
         } else {
-            throw new Error('Error liking post');
+            throw new Error('Errorz liking post');
         }
     } catch (error) {
-        console.error('Error liking post:', error);
+        console.error('Errors liking post:', error);
         return false; // Indicate error
     }
 }
@@ -182,8 +322,8 @@ async function handleDislike(post_id, user_id) {
         });
 
         if (response.ok) {
-            // Reload the page to reflect the updated state
-            window.location.reload();
+            //  location.reload(); // or window.location.reload();
+            return true; // Indicate success
         } else {
             throw new Error('Error disliking post');
         }
@@ -192,11 +332,51 @@ async function handleDislike(post_id, user_id) {
     }
 }
 
+async function handleCancelLike(post_id, user_id) {
+    try {
+        const response = await fetch('http://localhost:3000/api/posts/cancel-like', {
+            method: 'POST',
+            body: JSON.stringify({ post_id: post_id, user_id: user_id }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            //  location.reload(); // or window.location.reload();
+            return true; // Indicate success
+        } else {
+            throw new Error('Errorz liking post');
+        }
+    } catch (error) {
+        console.error('Errors liking post:', error);
+        return false; // Indicate error
+    }
+}
 
+async function handleCancelDislike(post_id, user_id) {
+    try {
+        const response = await fetch('http://localhost:3000/api/posts/cancel-dislike', {
+            method: 'POST',
+            body: JSON.stringify({ post_id: post_id, user_id: user_id }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            //  location.reload(); // or window.location.reload();
+            return true; // Indicate success
+        } else {
+            throw new Error('Errorz liking post');
+        }
+    } catch (error) {
+        console.error('Errors liking post:', error);
+        return false; // Indicate error
+    }
+}
 
 
 // Fetch and display posts from different countries
-const loadFeed = async () => {
+const loadFeed = async() => {
     const userCountry = getUserCountry();
 
     if (!userCountry) {
@@ -228,26 +408,6 @@ const loadFeed = async () => {
         console.error('Error fetching or displaying posts:', error);
     }
 };
-async function handleCancelLike(postId, userId) {
-    try {
-        const response = await fetch('http://localhost:3000/api/posts/cancel-like', {
-            method: 'POST',
-            body: JSON.stringify({ post_id: postId, user_id: userId }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (response.ok) {
-            // Reload the page to reflect the updated state
-            window.location.reload();
-        } else {
-            throw new Error('Error canceling like');
-        }
-    } catch (error) {
-        console.error('Error canceling like:', error);
-    }
-}
 
 // Load the feed when the page is loaded
 window.addEventListener('load', loadFeed);

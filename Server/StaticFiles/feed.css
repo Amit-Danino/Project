@@ -1,18 +1,26 @@
 /* Reset default margin and padding */
-body, h1, p {
+
+body,
+h1,
+p {
     margin: 0;
     padding: 0;
 }
 
+
 /* Main content styling */
-.container {
+
+
+/* .container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 85vh;
-}
+} */
+
 
 /* Top bar styling */
+
 .top-bar {
     background-color: #f2f2f2;
     color: #fff;
@@ -21,7 +29,6 @@ body, h1, p {
     justify-content: space-between;
     padding: 10px 20px;
 }
-
 
 h1 {
     font-size: 48px;
@@ -48,14 +55,8 @@ p {
     font-family: 'Lexend Deca', sans-serif;
 }
 
-.like-button,
-.cancel-like-button {
-    display: inline-block;
-    /* Add other styling properties if needed */
-    background-color: blue;
-    color: white; /* Optionally, change text color to white for better visibility */
-}
-.get-started-button {
+
+/* .get-started-button {
     background-color: #3498db;
     color: #fff;
     border: none;
@@ -65,19 +66,22 @@ p {
     font-size: 16px;
     transition: background-color 0.3s;
     font-family: 'Dosis', sans-serif;
-    font-family: 'Lexend Deca', sans-serif; 
+    font-family: 'Lexend Deca', sans-serif;
 }
 
 .get-started-button:hover {
     background-color: #2980b9;
-}
+} */
 
-.button:hover {
+
+/* .button:hover {
     background-color: #3498db;
     color: #fff;
-}
+} */
+
 
 /* Footer styling */
+
 .footer {
     background-color: #f2f2f2;
     text-align: center;
@@ -90,11 +94,7 @@ p {
     left: 0;
     width: 100%;
 }
-/* Your existing CSS styles */
 
-/* Add these styles to the end of your existing CSS file */
-
-/* Post styling */
 .post {
     display: flex;
     flex-direction: column;
@@ -106,38 +106,173 @@ p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 /* Post content container */
+
 .post-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+
 /* Post header */
+
 .post-header {
     display: flex;
     align-items: center;
 }
 
-.post-header h3 {
+
+/* .post-header h3 {
     margin-right: 10px;
     font-weight: bold;
+} */
+
+.date {
+    font-size: 12px;
 }
 
+
 /* Post caption */
+
 .post-caption {
     margin-top: 5px;
 }
 
+
 /* Post footer */
+
 .post-footer {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
 }
 
-/* Post comments and likes */
-.post-comment,
+
+/* Style the post container */
+
+.post {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+    gap: 2px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Style the post header */
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+
+/* .post-header h3 {
+    margin-right: 8px;
+    font-weight: bold;
+    color: #333;
+} */
+
+.post-header p {
+    color: #777;
+}
+
+
+/* Style the post caption */
+
+.post-caption {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+
+/* Style the post likes and dislikes */
+
 .post-likes {
     font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+
+/* Style the post comments */
+
+.post-comments {
+    color: #777;
+    margin-bottom: 16px;
+}
+
+
+/* Style the comment input and buttons */
+
+.comment-input {
+    margin-bottom: 16px;
+}
+
+.comment-textbox {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+.post-button,
+.like-button,
+.cancel-like-button,
+.dislike-button,
+.cancel-dislike-button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    padding: 8px 16px;
+    margin-right: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.post-button:hover,
+.like-button:hover,
+.cancel-like-button:hover,
+.dislike-button:hover,
+.cancel-dislike-button:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Style the buttons that are initially hidden */
+
+.cancel-like-button,
+.cancel-dislike-button {
+    display: none;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0);
+    /* Transparent black */
+    color: #000;
+    text-align: left;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 10px;
 }

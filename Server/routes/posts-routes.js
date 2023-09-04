@@ -6,12 +6,13 @@ const postsController = require('../controllers/posts-controller');
 const router = express.Router();
 
 router.post("/feed", postsController.feed);
-// Add a route for liking a post
 router.post('/like', postsController.like);
-
 router.post('/dislike', postsController.dislike);
 router.post('/cancel-like', postsController.cancelLike);
+router.post('/cancel-dislike', postsController.cancelDislike);
 
-router.get('/like-count/:post_id', postsController.getUpdatedLikeCount);
+router.post('/like-count', postsController.getUpdatedLikeCount);
+router.post('/dislike-count', postsController.getUpdatedDislikeCount);
+
 
 module.exports = router;
