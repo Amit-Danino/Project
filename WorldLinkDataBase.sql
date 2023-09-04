@@ -121,23 +121,6 @@ VALUES
     (3, 3, 'logout', '2023-07-31 12:30:15');
 
 
-CREATE TABLE Messages (
-    message_id INT  AUTO_INCREMENT PRIMARY KEY,
-    sender_id INT NOT NULL,
-    recipient_id INT NOT NULL,
-    message_text TEXT NOT NULL,
-    message_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (sender_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (recipient_id) REFERENCES Users(user_id) ON DELETE CASCADE
-);
-
-INSERT INTO Messages (message_id, sender_id, recipient_id, message_text, message_date)
-VALUES
-    (1, 1, 2, 'Hi there!', '2023-07-31 14:00:00'),
-    (2, 2, 1, 'Hello!', '2023-07-31 14:05:00'),
-    (3, 3, 1, 'Great post!', '2023-07-31 15:30:00');
-
-
 CREATE TABLE SuccessStories (
     story_id INT AUTO_INCREMENT PRIMARY KEY,
     user1_id INT NOT NULL,

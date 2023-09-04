@@ -5,45 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Success Stories</title>
+
+    <link rel="stylesheet" href="successstories.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Success Stories</h1>
+    <div class="top-bar">
+        <a href="register.html"><button class="button">Register</button></a><a href="login.html"><button
+                class="button">Login</button></a><a href="readMe.html"><button class="button">Read Me</button>
+                    <a href="SuccessStories.html"><button class="button">SuccessStories</button></a>
+        <a href="SuccessStories.html"></a>
+    </div>
+    <h1 class="readme-title">Success Stories</h1>
+    <ul id="successStoriesList"></ul>
+    <div class="footer">
+        &copy; 2023 WorldLink. All rights reserved.
+    </div>
+    <script>
+        const successStoriesList = document.getElementById("successStoriesList");
 
-    <h2>Add a New Success Story</h2>
-    <form action="submit_story.php" method="post">
-        <label for="user2_id">Select a User:</label>
-        <select name="user2_id" id="user2_id">
-            <!-- Populate this dropdown with users (except the logged-in user) from your database -->
-            <!-- You can use PHP to dynamically generate options -->
-            <?php
-                // Replace this with your database query to fetch users
-                $users = []; // Fetch users from the database
-                foreach ($users as $user) {
-                    echo "<option value='" . $user['user_id'] . "'>" . $user['username'] . "</option>";
+        // Function to fetch and populate success stories
+        async function fetchAndPopulateStories() {
+            try {
+                const response = await fetch("http://localhost:3000/api/successstories/selectSuccessStories");
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Clear existing list items
+                    successStoriesList.innerHTML = "";
+
+                    // Loop through the data and create list items
+                    data.data.forEach((story) => {
+                        // Create a list item
+                        const listItem = document.createElement("li");
+
+                        // Create a paragraph for user 1 name
+                        const users = document.createElement("p");
+                        users.innerHTML = `<strong>${story.user1_name}</strong> and <strong>${story.user2_name}</strong> Success Story:`;
+
+                        // Create a paragraph for story text
+                        const storyText = document.createElement("p");
+                        storyText.textContent = story.story_text;
+
+                        // Add the 'story-item' class to the list item
+                        listItem.classList.add("story-item");
+
+                        // Append user 1 name, user 2 name, and story text to the list item
+                        listItem.appendChild(users);
+                        listItem.appendChild(storyText);
+
+                        // Append the list item to the list
+                        successStoriesList.appendChild(listItem);
+                    });
+                } else {
+                    console.error("Error fetching success stories:", response.status);
                 }
-            ?>
-        </select>
-        <br><br>
-
-        <label for="story_text">Write your Success Story:</label>
-        <textarea name="story_text" id="story_text" rows="4" cols="50" required></textarea>
-        <br><br>
-
-        <input type="submit" value="Submit">
-    </form>
-
-    <!-- Display existing success stories from your database -->
-    <h2>Existing Success Stories</h2>
-    <?php
-        // Replace this with your database query to fetch existing success stories
-        $successStories = []; // Fetch success stories from the database
-        foreach ($successStories as $story) {
-            echo "<p><strong>User " . $story['user1_id'] . ":</strong> " . $story['story_text'] . "</p>";
-            echo "<p><em>Date: " . $story['story_date'] . "</em></p>";
-            echo "<hr>";
+            } catch (error) {
+                console.error("Error fetching success stories:", error);
+            }
         }
-    ?>
+
+        // Call the function when the page loads
+        window.addEventListener("load", fetchAndPopulateStories);
+    </script>
+
+
 
 </body>
 

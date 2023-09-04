@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="RegisterStyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Lexend+Deca:wght@300;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
@@ -18,7 +17,9 @@
     <div class="top-bar">
         <a href="register.html"><button class="button">Register</button></a><a href="login.html"><button
                 class="button">Login</button></a><a href="readMe.html"><button class="button">Read Me</button>
-                    <a href="register.html"><button class="button">SS</button></a><a href="login.html"></a>
+        <a href="SuccessStories.html"><button class="button">Success Stories</button></a>
+
+        <a href="login.html"></a>
     </div>
 
     <div class="container">
@@ -56,8 +57,7 @@
                 <div class="form-column">
                     <div class="form-group">
                         <label for="profile_picture_url">Profile Picture URL</label>
-                        <input type="text" id="profile_picture_url" name="profile_picture_url"
-                            placeholder="https://example.com/profile.jpg">
+                        <input type="text" id="profile_picture_url" name="profile_picture_url" placeholder="https://example.com/profile.jpg">
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label>
@@ -108,11 +108,10 @@
 
     <!-- Footer -->
     <div class="footer">
-        &copy; 2023 Your Karaoke Social Network. All rights reserved.
+        &copy; 2023 WorldLink. All rights reserved.
     </div>
     <script src="RegisterJavascript.js"></script>
     <script>
-
         //Listening/waitig for the document to be ready
         document.addEventListener('DOMContentLoaded', () => {
             const selectDrop = document.querySelector('#countries');
@@ -120,8 +119,8 @@
 
             fetch('https://restcountries.com/v3.1/all').then(res => {
                 return res.json();
-            }).then(data => {  
-                data.sort((a, b) => a.name.common.localeCompare(b.name.common));              
+            }).then(data => {
+                data.sort((a, b) => a.name.common.localeCompare(b.name.common));
                 let output = "";
                 data.forEach(country => {
                     output += `
@@ -136,8 +135,6 @@
 
 
         });
-
-
     </script>
 
 

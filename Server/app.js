@@ -3,6 +3,8 @@ const express = require('express');
 const usersRoutes = require("./routes/users-routes");
 const postsRoutes = require("./routes/posts-routes");
 const commentsRoutes = require("./routes/comments-routes");
+const successstoriesRoutes = require("./routes/successstories-routes");
+
 //function that saves the server 
 const app = express();
 const port = 3000;
@@ -32,12 +34,10 @@ app.use((req, res, next) => {
 
 
 //routes - routes the requests to the server
-//TODO:add routs for each table in the db
 app.use(`/api/users`, usersRoutes);
-// app.use(`/api/orders`, ordersRoutes);
 app.use(`/api/posts`, postsRoutes);
 app.use(`/api/comments`, commentsRoutes);
-
+app.use(`/api/successstories`, successstoriesRoutes);
 
 
 //TODO:
