@@ -1,12 +1,17 @@
-/* Reset default margin and padding /
-body, h1, p, ul, li {
+/* Reset default margin and padding */
+
+body,
+h1,
+p,
+ul,
+li {
     margin: 0;
     padding: 0;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url('Untitled_Artwork[562].png'); / Replace with your image file path /
+    background-image: url('Untitled_Artwork[562].png');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -42,7 +47,6 @@ body {
     margin-right: 0;
 }
 
-/ Main content styling /
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -70,11 +74,11 @@ body {
     color: #2980b9;
 }
 
-.content ul, .content ol {
+.content ul,
+.content ol {
     margin-bottom: 15px;
 }
 
-/ Adjust width and center-align content /
 .content p {
     text-align: justify;
 }
@@ -83,20 +87,19 @@ body {
     background-color: #fff;
     color: #3498db;
     border: none;
-    margin-right : 10px;
-
+    margin-right: 10px;
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
 }
+
 .button:hover {
     background-color: #2980b9;
-    color:#fff
+    color: #fff
 }
-/ Footer styling */
 
 .footer {
     background-color: #f2f2f2;
