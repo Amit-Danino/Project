@@ -47,16 +47,33 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
+function addActivity(user_id, activity) {
+    const jsonData = {
+        activity: activity,
+        user_id: user_id
+    }
+    try {
+        fetch('http://localhost:3000/api/activitylog/addActivity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(jsonData),
+        });
+        return true;
+    } catch (error) {
+        alert(`error adding ${activity} activity`)
+        return false;
+    }
+}
 // Function to display the posts like on Facebook
 function displayPosts(posts) {
     const feedContainer = document.getElementById('feed');
     // feedContainer.innerHTML = '';
-
     if (posts.length === 0) {
         feedContainer.textContent = 'No posts available from other countries.';
     } else {
         let currentPost = null;
-
         posts.forEach(post => {
             if (!currentPost || currentPost.post_id !== post.post_id) {
                 // Start a new post
@@ -71,13 +88,9 @@ function displayPosts(posts) {
                     </div>
                     
                     <p class="post-caption">${post.caption}</p>
-
                     <div class="post-comments">          </div>
-
                     <p class="post-likes">      </p>
-
                     <br>
-
                     <div class="post-actions">
                         <button class="like-button">Like</button>
                         <button class="cancel-like-button" style="display: none;">Like</button>
@@ -106,11 +119,12 @@ function displayPosts(posts) {
                 const logoutButton = document.getElementById('logoutButton');
 
                 logoutButton.addEventListener('click', async() => {
-                    console.log("sup")
+                    const user_id = await getCurrentUserId();
                     const pastDate = new Date();
                     pastDate.setTime(pastDate.getTime() - (1 * 24 * 60 * 60 * 1000));
                     document.cookie = 'logout=logout;expires=' + pastDate.toUTCString() + ';path=/';
                     document.cookie = 'logout=logout;path=/';
+                    addActivity(user_id, 'logout');
                 })
 
                 postButton.addEventListener('click', async() => {
@@ -120,9 +134,7 @@ function displayPosts(posts) {
                     const post_id = post.post_id
                     const user_id = await getCurrentUserId();
                     const jsonData = { post_id: post_id, user_id: user_id, boxContent: boxContent }
-                    console.log(jsonData)
                     addComment(jsonData)
-
                     const full_name = await getUserFullname(user_id);
                     const post_comments_ul = postElement.querySelector('.post-comments ul');
                     const newLi = document.createElement('li');
@@ -474,6 +486,7 @@ async function displayPostForm() {
             console.error('Errors adding post:', error);
             return false;
         }
+        addActivity(user_id, 'post');
     });
 
     // Append the text input and button to the post form container
@@ -503,6 +516,7 @@ async function displayAdminButtons() {
     topBar.prepend(adminButton);
 
 }
+
 // Fetch and display posts from different countries
 const loadFeed = async() => {
     try {

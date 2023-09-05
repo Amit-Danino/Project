@@ -61,6 +61,7 @@
                                         setCookie(email, password, 0.0208); // (1/24) * 0.5 = 0.0208
                                     }
                                     correctCredentials = true
+                                    addLoginActivity(user.user_id);
                                     window.location.href = 'feed.html';
                                 }
                             });
@@ -77,6 +78,24 @@
                     console.error('Error fetching data:', error);
                     alert("Error fetching Data: " + error.message); // Display an error message to the user
                 });
+        }
+
+        async function addLoginActivity(user_id) {
+            const jsonData = {
+                activity: "login",
+                user_id: user_id
+            }
+            try {
+                const response = await fetch('http://localhost:3000/api/activitylog/addActivity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonData),
+                });
+            } catch (error) {
+                alert("error adding login activity")
+            }
         }
 
         function deleteCookie(email, value) {

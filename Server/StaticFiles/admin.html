@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+    <!-- Add your CSS stylesheets or links here -->
+</head>
+
+<body onload="loadAdminFeed(event)">
+    <div class="top-bar">
+        <a href="admin.html"><button class="button">Admin Feature</button></a>
+        <a href="feed.html"><button class="button">Feed</button></a>
+        <a href="profile.html"><button class="button">Profile</button></a>
+        <a href="login.html"><button id="logoutButton" class="button">Logout</button></a>
+    </div>
+
+    <div id="feed"></div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>

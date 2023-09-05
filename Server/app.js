@@ -4,7 +4,7 @@ const usersRoutes = require("./routes/users-routes");
 const postsRoutes = require("./routes/posts-routes");
 const commentsRoutes = require("./routes/comments-routes");
 const successstoriesRoutes = require("./routes/successstories-routes");
-
+const activitylogRoutes = require("./routes/activitylog-routes");
 //function that saves the server 
 const app = express();
 const port = 3000;
@@ -38,6 +38,7 @@ app.use(`/api/users`, usersRoutes);
 app.use(`/api/posts`, postsRoutes);
 app.use(`/api/comments`, commentsRoutes);
 app.use(`/api/successstories`, successstoriesRoutes);
+app.use(`/api/activitylog`, activitylogRoutes);
 
 
 //TODO:

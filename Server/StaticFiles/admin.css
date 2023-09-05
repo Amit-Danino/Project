@@ -1,0 +1,89 @@
+body,
+h1,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.top-bar {
+    background-color: #f2f2f2;
+    color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    /* Align buttons to the right */
+    padding: 10px 20px;
+}
+
+.top-bar a {
+    text-decoration: none;
+    /* Remove underlines from anchor tags */
+    margin-left: 10px;
+    /* Add some spacing between buttons */
+}
+
+.button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+.activity-containers {
+    display: flex;
+    justify-content: space-between;
+    /* Distribute space between containers */
+}
+
+.post-activity-container,
+.login-activity-container,
+.logout-activity-container {
+    flex: 0 0 calc(33.33% - 20px);
+    /* Each container takes up 33.33% width with spacing */
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.post-activity-container {
+    background-color: #f0f0f0;
+    /* Light gray */
+}
+
+.login-activity-container {
+    background-color: #d0e0ff;
+    /* Light blue */
+}
+
+.logout-activity-container {
+    background-color: #ffe0d0;
+    /* Light orange */
+}
+
+.activity-item {
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+/* Style the line breaks */
+
+.post-activity-container br,
+.login-activity-container br,
+.logout-activity-container br {
+    display: none;
+}
