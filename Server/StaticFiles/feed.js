@@ -37,6 +37,7 @@ async function getCurrentUserId() {
     }
 
     const data = await response.json();
+    console.log(data[0].user_id)
     return data[0].user_id;
 }
 
@@ -102,6 +103,15 @@ function displayPosts(posts) {
 
                 const postButton = postElement.querySelector('.post-button');
                 const commentTextBox = postElement.querySelector('.comment-textbox');
+                const logoutButton = document.getElementById('logoutButton');
+
+                logoutButton.addEventListener('click', async() => {
+                    console.log("sup")
+                    const pastDate = new Date();
+                    pastDate.setTime(pastDate.getTime() - (1 * 24 * 60 * 60 * 1000));
+                    document.cookie = 'logout=logout;expires=' + pastDate.toUTCString() + ';path=/';
+                    document.cookie = 'logout=logout;path=/';
+                })
 
                 postButton.addEventListener('click', async() => {
                     const boxContent = commentTextBox.value;
@@ -476,18 +486,28 @@ async function displayPostForm() {
     feedContainer.appendChild(postFormContainer);
 }
 
+async function displayAdminButtons() {
+    const topBar = document.querySelector('.top-bar');
+    const adminButton = document.createElement('button');
+    adminButton.textContent = 'Admin Feature';
+    adminButton.classList.add('button');
+
+    // Add an event handler for the admin button
+    adminButton.addEventListener('click', () => {
+        // Perform the admin-specific action here
+        window.location.href = 'admin.html';
+        // You can replace the alert with your admin feature logic
+    });
+
+    // Append the admin button to the top-bar
+    topBar.prepend(adminButton);
+
+}
 // Fetch and display posts from different countries
 const loadFeed = async() => {
-    const user_id = await getCurrentUserId()
-    const userCountry = getUserCountry(user_id);
-    if (!userCountry) {
-        // Handle the case where the country cookie is not set
-        alert('Please log in to view the feed.');
-        window.location.href = 'login.html';
-        return;
-    }
-
     try {
+        const user_id = await getCurrentUserId()
+        const userCountry = getUserCountry(user_id);
         // Fetch posts from the database using your server-side script
         const response = await fetch('http://localhost:3000/api/posts/feed', {
             method: 'POST',
@@ -506,10 +526,14 @@ const loadFeed = async() => {
         // Display posts like on Facebook
         displayPostForm();
         displayPosts(posts);
+        if (user_id == 1) {
+            displayAdminButtons();
+        }
     } catch (error) {
-        console.error('Error fetching or displaying posts:', error);
+        alert('Please log in to view the feed.');
+        window.location.href = 'login.html';
     }
 };
 
 // Load the feed when the page is loaded
-window.addEventListener('load', loadFeed);
+// window.addEventListener('load', loadFeed);
