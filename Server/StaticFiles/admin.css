@@ -87,3 +87,54 @@ p {
 .logout-activity-container br {
     display: none;
 }
+
+.users-container {
+    max-height: 200px;
+    width: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+/* Style for user-list (ul) */
+
+.user-item {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+
+/* Style for the remove button */
+
+.user-item button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+    cursor: pointer;
+}
+
+
+/* Style the remove button on hover */
+
+.user-item button:hover {
+    background-color: #2980b9;
+}

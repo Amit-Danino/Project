@@ -3,8 +3,6 @@ const db = require('../database/db'); //improt db connectoin
 
 
 const register = async(req, res) => {
-    console.log(req.body);
-
     const {
         firstname,
         lastname,
@@ -37,7 +35,6 @@ const register = async(req, res) => {
             console.error('Error inserting user:', err);
             return res.status(500).json({ error: 'Error registering user', details: err.message });
         } else {
-            console.log('User registered successfully!');
             res.status(201).json({ message: 'User registered successfully!' });
         }
     });
@@ -64,7 +61,6 @@ const encryptPass = async(req, res) => {
                 return res.status(500).json({ success: false, message: 'Internal Server Error' });
             } else if (result) {
                 // Passwords match, authentication is successful
-                console.log('Password is correct');
                 console.log({ success: true, message: 'Authentication successful' })
                 return res.status(200).json({ success: true, message: 'Authentication successful' });
             } else {
@@ -103,6 +99,19 @@ const getUserId = async(req, res) => {
     }
 }
 
+const removeUser = async(req, res) => {
+    try {
+        const user_id = req.body.user_id
+        await db.promise().query(
+            'DELETE FROM users where user_id = ?', [user_id]
+        );
+        res.status(200).json("removed successfully");
+    } catch (error) {
+        console.error('Error in allUsers function:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 const getUserCountry = async(req, res) => {
     try {
         const user_id = req.body.user_id
@@ -134,5 +143,6 @@ module.exports = {
     encryptPass,
     getUserId,
     getUserCountry,
-    getUserFullname
+    getUserFullname,
+    removeUser
 };

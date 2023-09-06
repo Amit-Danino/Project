@@ -11,5 +11,6 @@ router.post("/encryptPass", usersController.encryptPass)
 router.post("/getUserId", usersController.getUserId)
 router.post("/getUserCountry", usersController.getUserCountry)
 router.post("/getUserFullname", usersController.getUserFullname);
+router.post("/removeUser", usersController.removeUser);
 
 module.exports = router;

@@ -49,14 +49,78 @@ logoutButton.addEventListener('click', async() => {
     addActivity(user_id, 'logout');
 })
 
-const loadAdminFeed = async() => {
-    const user_id = await getCurrentUserId();
+function adminWelcome(user_id) {
     if (user_id != 1) {
         alert('Only admins are allowed to view this page.');
         window.location.href = 'login.html';
     }
-
+}
+const loadAdminFeed = async() => {
+    const user_id = await getCurrentUserId();
+    adminWelcome(user_id);
     await addActivityFeed();
+    await showAllUsers();
+}
+
+async function showAllUsers() {
+    fetch('http://localhost:3000/api/users/getUsers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(users => {
+            const feedContainer = document.getElementById('feed');
+            const allUsersContainer = document.createElement('div');
+            allUsersContainer.classList.add('users-container');
+            feedContainer.appendChild(allUsersContainer)
+            users.forEach(user => {
+                const userItemElement = document.createElement('li');
+                userItemElement.classList.add('user-item');
+                const userInfoSpan = document.createElement('span');
+                userInfoSpan.textContent = `User ID: ${user.user_id}, Username: ${user.full_name}`;
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.id = user.user_id;
+                removeButton.addEventListener('click', async() => {
+                    const confirmed = window.confirm('Are you sure you want to remove this user?');
+                    if (confirmed) {
+                        const user_id = removeButton.id;
+                        if (user_id == 1) {
+                            alert("Naughty admin, you can't remove yourself!")
+                            return;
+                        }
+                        await removeUser(user_id);
+                        userItemElement.remove();
+                    }
+                });
+
+                userItemElement.appendChild(userInfoSpan);
+                userItemElement.appendChild(removeButton);
+                allUsersContainer.appendChild(userItemElement);
+            })
+        })
+        .catch(error => {
+            console.log("unable to show users for admin!")
+        })
+}
+
+async function removeUser(user_id) {
+    const jsonData = { user_id: user_id }
+    const response = await fetch('http://localhost:3000/api/users/removeUser', {
+        method: 'POST',
+        body: JSON.stringify(jsonData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Error getting activity feed');
+    }
+
+    return response;
 }
 
 async function addActivityFeed() {
