@@ -1,24 +1,35 @@
 /* Reset default margin and padding */
 
-body, h1, p {
+body,
+h1,
+p {
     margin: 0;
     padding: 0;
 }
+
 body {
-    background-image: url('Untitled_Artwork[562].png'); /* Replace 'background.jpg' with your image file path */
-    background-size: cover; /* This will cover the entire background with the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-attachment: fixed; /* Keep the background image fixed while scrolling */
+    background-image: url('Background.png');
+    background-size: cover;
+    /* This will cover the entire background with the image */
+    background-repeat: no-repeat;
+    /* Prevent the image from repeating */
+    background-attachment: fixed;
+    /* Keep the background image fixed while scrolling */
 }
 
+
 /* Main content styling */
+
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 85vh;
 }
+
+
 /* Top bar styling */
+
 .top-bar {
     background-color: #f2f2f2;
     color: #fff;
@@ -46,51 +57,61 @@ body {
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
 }
+
+
 /* Main content styling */
+
+
 /* Main content styling */
+
 .main-content {
-    text-align: left; /* Change text alignment to left */
+    text-align: left;
+    /* Change text alignment to left */
     padding: 40px;
-    background-color:white;
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
-    display: flex; /* Use flexbox layout */
-    align-items: center; /* Vertically center align items */
-    justify-content: center; /* Horizontally center align items */
+    display: flex;
+    /* Use flexbox layout */
+    align-items: center;
+    /* Vertically center align items */
+    justify-content: center;
+    /* Horizontally center align items */
     max-width: 1200px;
 }
 
 .earth-logo-container {
     margin-right: 20px;
-    margin-left: 0; /* Add this line to remove the left margin */
+    margin-left: 0;
+    /* Add this line to remove the left margin */
 }
 
 .text-content {
     text-align: left;
-    max-width: 600px; /* Adjust the width as needed */
-    order: 2; /* Change the order to make it appear second */
+    max-width: 600px;
+    /* Adjust the width as needed */
+    order: 2;
+    /* Change the order to make it appear second */
 }
-
 
 .earth-logo {
     animation: rotate 10s linear infinite;
     width: 300px;
     height: 300px;
-    margin-right: 20px; /* Add spacing between logo and text */
+    margin-right: 20px;
+    /* Add spacing between logo and text */
 }
-
 
 h1 {
     font-size: 48px;
     margin-left: 10px;
     margin-bottom: 10px;
-
     color: #2980b9;
     font-family: 'Dosis', sans-serif;
-font-family: 'Lexend Deca', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
 }
 
 p {
@@ -119,18 +140,21 @@ p {
     font-size: 16px;
     transition: background-color 0.3s;
     font-family: 'Dosis', sans-serif;
-font-family: 'Lexend Deca', sans-serif; 
+    font-family: 'Lexend Deca', sans-serif;
 }
 
 .get-started-button:hover {
     background-color: #2980b9;
 }
+
 .button:hover {
     background-color: #3498db;
     color: #fff;
 }
 
+
 /* Footer styling */
+
 .footer {
     background-color: #f2f2f2;
     text-align: center;

@@ -12,6 +12,7 @@
 
 <body>
     <div class="top-bar">
+        <a href="home.html"><button class="button">Home</button></a>
         <a href="register.html"><button class="button">Register</button></a>
         <a href="login.html"><button class="button">Login</button></a>
         <a href="readMe.html"><button class="button">Read Me</button></a>
@@ -94,6 +95,7 @@
                     body: JSON.stringify(jsonData),
                 });
             } catch (error) {
+                alert(error.message)
                 alert("error adding login activity")
             }
         }

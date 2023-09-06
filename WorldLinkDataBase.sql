@@ -18,10 +18,10 @@ CREATE TABLE Users (
 
 INSERT INTO Users (username, email, password_hash, full_name, bio, profile_picture_url, country, birth_date, gender)
 VALUES
-    ('user1', 'user1@example.com', 'password1hash', 'User One', 'I love photography!', 'profile1.jpg', 'Country A','1990-06-20', 'male'),
-    ('user2', 'user2@example.com', 'password2hash', 'User Two', 'Travel enthusiast', 'profile2.jpg', 'Country B','1997-03-11', 'female'),
-    ('user3', 'user3@example.com', 'password3hash', 'User Three', 'Foodie and blogger', 'profile3.jpg', 'Country C','1996-05-07', 'other'),
-    ('admin', 'admin', 'admin', 'admin admin', 'Foodie and blogger', 'profile3.jpg', 'Israel','1996-11-07', 'male');
+    ('admin', 'admin', 'admin', 'admin admin', 'Foodie and blogger', 'profile3.jpg', 'Israel','1996-11-07', 'male'),
+    ('user1', 'user1@example.com', 'password1hash', 'John Doe', 'I love photography!', 'profile1.jpg', 'Israel','1990-06-20', 'male'),
+    ('user2', 'user2@example.com', 'password2hash', 'Hagar Yulevich', 'Travel enthusiast', 'profile2.jpg', 'Afghanistan','1997-03-11', 'female'),
+    ('user3', 'user3@example.com', 'password3hash', 'Elad Ozer', 'Foodie and blogger', 'profile3.jpg', 'Croatia','1996-05-07', 'other');
 
 CREATE TABLE Posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,

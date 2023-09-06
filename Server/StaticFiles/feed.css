@@ -7,6 +7,10 @@ p {
     padding: 0;
 }
 
+body {
+    background-image: url('Background.png');
+}
+
 
 /* Top bar styling */
 
@@ -14,7 +18,7 @@ p {
     background-color: #f2f2f2;
     color: #fff;
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     /* Align buttons to the right */
     padding: 10px 20px;
 }
