@@ -24,7 +24,7 @@
             <div class="login-title">Login</div>
             <input id="email" type="text" placeholder="Email">
             <div style="position: relative;">
-                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="password" placeholder="Password" onclick="getPasswordCookie()">
                 <i class="password-toggle-icon" id="passwordToggle" onclick="togglePasswordVisibility()">&#128065;</i>
             </div>
             <label class="checkbox-label">
@@ -34,6 +34,23 @@
         </div>
     </form>
     <script>
+        function getPasswordCookie() {
+            const emailInput = document.getElementById("email");
+            const emailText = emailInput.value;
+            const cookies = document.cookie.split(";");
+
+            for (const cookie of cookies) {
+                const [name, value] = cookie.trim().split("=");
+
+                if (name === emailText) {
+                    const passwordInput = document.getElementById("password");
+                    passwordInput.value = value;
+                    break; // Exit the loop since you found a match
+                }
+            }
+
+        }
+
         function handleLogin() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
