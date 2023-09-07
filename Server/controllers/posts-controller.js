@@ -38,7 +38,6 @@ const explore = async(req, res) => {
 
 const dislike = async(req, res) => {
     const { post_id, user_id } = req.body; // Correctly extract post_id and user_id
-    console.log("in dislike", post_id);
     try {
         // Assuming you have a 'likes' table with a 'post_id' and 'user_id' column
         await db.promise().query('DELETE FROM dislikes WHERE post_id = ? AND user_id = ?', [post_id, user_id]);
@@ -52,7 +51,6 @@ const dislike = async(req, res) => {
 
 const cancelLike = async(req, res) => {
     const { post_id, user_id } = req.body; // Correctly extract post_id and user_id
-    console.log("in cancel-like", post_id);
     try {
         // Assuming you have a 'likes' table with a 'post_id' and 'user_id' column
         await db.promise().query('DELETE FROM likes WHERE post_id = ? AND user_id = ?', [post_id, user_id]);
@@ -64,7 +62,6 @@ const cancelLike = async(req, res) => {
 };
 const cancelDislike = async(req, res) => {
     const { post_id, user_id } = req.body; // Correctly extract post_id and user_id
-    console.log("in cancel-dislike", post_id);
     try {
         // Assuming you have a 'likes' table with a 'post_id' and 'user_id' column
         await db.promise().query('DELETE FROM dislikes WHERE post_id = ? AND user_id = ?', [post_id, user_id]);
@@ -77,7 +74,6 @@ const cancelDislike = async(req, res) => {
 
 const like = async(req, res) => {
     const { post_id, user_id } = req.body; // Correctly extract post_id and user_id
-    console.log("in like", post_id);
     try {
         // Assuming you have a 'likes' table with a 'post_id' and 'user_id' column
         await db.promise().query('DELETE FROM likes WHERE post_id = ? AND user_id = ?', [post_id, user_id]);

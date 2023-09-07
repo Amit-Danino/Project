@@ -37,7 +37,6 @@ async function getCurrentUserId() {
     }
 
     const data = await response.json();
-    console.log(data[0].user_id)
     return data[0].user_id;
 }
 
@@ -181,7 +180,6 @@ function displayPosts(posts) {
                 })
 
                 likeButton.addEventListener('click', async() => {
-                    console.log('Like button clicked');
                     const userId = await getCurrentUserId();
                     const liked = await handleLike(post.post_id, userId);
                     if (liked) {
@@ -201,7 +199,6 @@ function displayPosts(posts) {
                 });
 
                 cancelLikeButton.addEventListener('click', async() => {
-                    console.log('Cancel Like button clicked');
                     const userId = await getCurrentUserId();
                     const canceled = await handleCancelLike(post.post_id, userId);
                     if (canceled) {
@@ -215,7 +212,6 @@ function displayPosts(posts) {
                 });
 
                 dislikeButton.addEventListener('click', async() => {
-                    console.log('Dislike button clicked');
                     const userId = await getCurrentUserId();
                     const disliked = await handleDislike(post.post_id, userId);
                     if (disliked) {
@@ -233,7 +229,6 @@ function displayPosts(posts) {
                     }
                 });
                 cancelDislikeButton.addEventListener('click', async() => {
-                    console.log('Cancel dislike button clicked');
                     const userId = await getCurrentUserId();
                     const canceled = await handleCancelDislike(post.post_id, userId);
                     if (canceled) {
@@ -259,7 +254,6 @@ function displayPosts(posts) {
                         })
                         if (response.ok) {
                             const data = await response.json();
-                            console.log(data.length)
                             return data.length > 0;
                         } else {
                             throw new error('Unable to add follow')
@@ -274,7 +268,6 @@ function displayPosts(posts) {
                     try {
                         const user_id = await getCurrentUserId();
                         jsonData = { user_id: user_id, post_user_id: post_user_id };
-                        console.log(jsonData)
                         const response = await fetch('http://localhost:3000/api/likes/checkIfUserLikes', {
                             method: 'POST',
                             headers: {
@@ -284,7 +277,6 @@ function displayPosts(posts) {
                         })
                         if (response.ok) {
                             const data = await response.json();
-                            console.log("length:", data.length)
                             return data.length > 0;
                         } else {
                             throw new error('Unable to add follow')
@@ -466,7 +458,6 @@ async function addCommentsToPost(post_id, postElement) {
             const ulElement = document.createElement('ul'); // Use document.createElement to create a new <ul> element
 
             data.forEach(async comment => {
-                // console.log(comment.user_id)
                 const full_name = await getUserFullname(comment.user_id)
 
                 const liElement = document.createElement('li'); // Use document.createElement to create a new <li> element

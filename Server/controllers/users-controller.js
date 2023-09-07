@@ -61,7 +61,6 @@ const encryptPass = async(req, res) => {
                 return res.status(500).json({ success: false, message: 'Internal Server Error' });
             } else if (result) {
                 // Passwords match, authentication is successful
-                console.log({ success: true, message: 'Authentication successful' })
                 return res.status(200).json({ success: true, message: 'Authentication successful' });
             } else {
                 // Passwords do not match, authentication failed
