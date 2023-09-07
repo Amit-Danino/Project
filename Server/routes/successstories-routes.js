@@ -3,7 +3,6 @@ const successstoriesController = require('../controllers/successstories-controll
 const router = express.Router();
 
 router.get("/selectSuccessStories", (req, res) => {
-    console.log("Route reached.");
     successstoriesController.selectSuccessStories(req, res);
 });
 

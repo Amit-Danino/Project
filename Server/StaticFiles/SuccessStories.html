@@ -16,9 +16,10 @@
 <body>
     <div class="top-bar">
         <a href="feed.html"><button class="button">Feed</button></a>
-        <a href="readMe.html"><button class="button">Read Me</button></a>
-        <a href="SuccessStories.html"><button class="button">SuccessStories</button></a>
-        <a href="login.html"><button class="button">Logout</button></a>
+        <a href="explore.html"><button class="button">Explore</button></a>
+        <a href="SuccessStories.html"><button class="button">Success Stories</button></a>
+        <a href="About.html"><button class="button">About</button></a>
+        <a href="login.html"><button id="logoutButton" class="button">Logout</button></a>
     </div>
     <h1 class="readme-title">Success Stories</h1>
     <ul id="successStoriesList"></ul>
@@ -27,6 +28,48 @@
     </div>
     <script>
         const successStoriesList = document.getElementById("successStoriesList");
+
+        async function getCurrentUserId() {
+            const cookies = document.cookie.split(';');
+            let [name, value] = cookies[cookies.length - 1].split('=');
+            name = name.split(' ').join('')
+            const response = await fetch('http://localhost:3000/api/users/getUserId', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: name
+                }), // Make sure you define post_id and user_id
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            return data[0].user_id;
+        }
+
+        async function displayAdminButtons() {
+            const user_id = await getCurrentUserId();
+            if (user_id == 1) {
+                const topBar = document.querySelector('.top-bar');
+                const adminButton = document.createElement('button');
+                adminButton.textContent = 'Admin Feature';
+                adminButton.classList.add('button');
+
+                // Add an event handler for the admin button
+                adminButton.addEventListener('click', () => {
+                    // Perform the admin-specific action here
+                    window.location.href = 'admin.html';
+                    // You can replace the alert with your admin feature logic
+                });
+
+                // Append the admin button to the top-bar
+                topBar.prepend(adminButton);
+            }
+        }
 
         // Function to fetch and populate success stories
         async function fetchAndPopulateStories() {
@@ -71,6 +114,7 @@
 
         // Call the function when the page loads
         window.addEventListener("load", fetchAndPopulateStories);
+        window.addEventListener("load", displayAdminButtons);
     </script>
 
 

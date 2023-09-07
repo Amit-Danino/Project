@@ -74,31 +74,55 @@ body {
 
 /* Reduce padding and margins for buttons */
 
-.buttons a {
-    text-decoration: none;
-}
 
-.button {
+/* .button {
     background-color: #fff;
     color: #3498db;
     border: none;
     padding: 5px 10px;
-    /* Adjust padding as needed */
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     margin: 2px 3px;
-    /* Adjust margin as needed */
+} */
+
+.top-bar {
+    background-color: #f2f2f2;
+    color: #fff;
+    display: flex;
+    padding: 10px 20px;
+}
+
+.top-bar a {
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.button:hover {
+    background-color: #2980b9;
 }
 
 
 /* If necessary, adjust margin for buttons */
 
-.button:not(:first-child) {
+
+/* .button:not(:first-child) {
     margin-left: 5px;
-    /* Adjust margin as needed */
-}
+} */
 
 .readme-title {
     text-align: center;

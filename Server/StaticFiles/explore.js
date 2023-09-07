@@ -73,7 +73,7 @@ function displayPosts(posts) {
         feedContainer.textContent = 'No posts available from other countries.';
     } else {
         let currentPost = null;
-        posts.forEach(post => {
+        posts.forEach(async post => {
             if (!currentPost || currentPost.post_id !== post.post_id) {
                 // Start a new post
                 currentPost = post;
@@ -122,6 +122,61 @@ function displayPosts(posts) {
                 const postButton = postElement.querySelector('.post-button');
                 const commentTextBox = postElement.querySelector('.comment-textbox');
                 const logoutButton = document.getElementById('logoutButton');
+
+                bonusFeaturesVisibility();
+
+                async function bonusFeaturesVisibility() {
+                    const data = await getFeatureData();
+
+                    if (getStatus(data, 'dislikes') == 'disabled') {
+                        dislikeButton.style.display = 'none';
+                        dislikeButton.disabled = true;
+                    }
+                    if (getStatus(data, 'comments') == 'disabled') {
+                        const commentInput = postElement.querySelector('.comment-input');
+                        commentInput.style.display = 'none';
+                    }
+                    if (getStatus(data, 'successStories') == 'disabled') {
+                        const linkElement = document.querySelector('a[href="SuccessStories.html"]');
+                        linkElement.style.display = 'none';
+                    }
+                    if (getStatus(data, 'aboutMe') == 'disabled') {
+                        const linkElement = document.querySelector('a[href="About.html"]');
+                        linkElement.style.display = 'none';
+                    }
+                }
+
+                function getStatus(feature_Data, feature_name) {
+                    let status_to_return = "Enabled";
+                    feature_Data.forEach(feature => {
+                        if (feature.feature_name == feature_name) {
+                            status_to_return = feature.feature_status
+                        }
+                    })
+
+                    return status_to_return
+                }
+
+                async function getFeatureData() {
+                    return fetch('http://localhost:3000/api/feature/getFeatureData', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json(); // You can use response.json() if the server sends JSON back
+                        })
+                        .then((data) => {
+                            return data;
+                        })
+                        .catch((error) => {
+                            console.error('There was a problem with the fetch operation:', error);
+                        });
+                }
 
                 async function likeAndDislikeButtonVisibility(post_user_id) {
                     if (await checkIfAlreadyLikedPost(post_user_id)) {
@@ -192,7 +247,7 @@ function displayPosts(posts) {
                         const updatedDislikeCount = await fetchUpdatedDislikeCount(post.post_id);
                         postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${updatedDislikeCount} DisLikes`;
 
-                        if (dislikeButton.style.display === 'none') {
+                        if (dislikeButton.style.display === 'none' && dislikeButton.disabled == false) {
                             cancelDislikeButton.click();
                         }
                     }

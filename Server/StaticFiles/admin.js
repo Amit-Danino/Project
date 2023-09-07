@@ -79,7 +79,6 @@ async function getFeatureData() {
             return response.json(); // You can use response.json() if the server sends JSON back
         })
         .then((data) => {
-            console.log(data)
             return data;
         })
         .catch((error) => {
@@ -155,9 +154,6 @@ async function modifyFeatureData(feature, info) {
                 throw new Error('Network response was not ok');
             }
             return response.text(); // You can use response.json() if the server sends JSON back
-        })
-        .then((data) => {
-            console.log(data); // The response from the server
         })
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);

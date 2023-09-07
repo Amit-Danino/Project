@@ -15,8 +15,6 @@ const getFeatureData = async(req, res) => {
 const modify = async(req, res) => {
     try {
         const { feature, info } = req.body
-        console.log(feature)
-        console.log(info)
         await db.promise().query(
             'UPDATE features SET feature_status = ? WHERE feature_name = ?', [info, feature]
         );
