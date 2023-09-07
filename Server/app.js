@@ -5,6 +5,10 @@ const postsRoutes = require("./routes/posts-routes");
 const commentsRoutes = require("./routes/comments-routes");
 const successstoriesRoutes = require("./routes/successstories-routes");
 const activitylogRoutes = require("./routes/activitylog-routes");
+const followsRoutes = require("./routes/follows-routes");
+const likesRoutes = require("./routes/likes-routes");
+
+
 //function that saves the server 
 const app = express();
 const port = 3000;
@@ -39,6 +43,9 @@ app.use(`/api/posts`, postsRoutes);
 app.use(`/api/comments`, commentsRoutes);
 app.use(`/api/successstories`, successstoriesRoutes);
 app.use(`/api/activitylog`, activitylogRoutes);
+app.use(`/api/follows`, followsRoutes);
+app.use(`/api/likes`, likesRoutes);
+
 
 
 //TODO:

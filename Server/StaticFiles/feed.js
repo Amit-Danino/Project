@@ -113,10 +113,24 @@ function displayPosts(posts) {
                 const dislikeButton = postElement.querySelector('.dislike-button');
                 const cancelLikeButton = postElement.querySelector('.cancel-like-button'); // Add this line 
                 const cancelDislikeButton = postElement.querySelector('.cancel-dislike-button');
+                likeAndDislikeButtonVisibility(post.user_id);
 
                 const postButton = postElement.querySelector('.post-button');
                 const commentTextBox = postElement.querySelector('.comment-textbox');
                 const logoutButton = document.getElementById('logoutButton');
+
+
+
+
+                async function likeAndDislikeButtonVisibility(post_user_id) {
+                    if (await checkIfAlreadyLikedPost(post_user_id)) {
+                        likeButton.click();
+                    }
+                    if (await checkIfAlreadyDislikedPost(post_user_id)) {
+                        dislikeButton.click();
+                    }
+                }
+
 
                 logoutButton.addEventListener('click', async() => {
                     const user_id = await getCurrentUserId();
@@ -207,7 +221,54 @@ function displayPosts(posts) {
                         postElement.querySelector('.post-likes').textContent = `${updatedLikeCount} Likes ${updatedDislikeCount} DisLikes`;
                     }
                 });
+                async function checkIfAlreadyDislikedPost(post_user_id) {
+                    try {
+                        const user_id = await getCurrentUserId();
+                        jsonData = { user_id: user_id, post_user_id: post_user_id };
+                        const response = await fetch('http://localhost:3000/api/likes/checkIfUserDislikes', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(jsonData),
+                        })
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log(data.length)
+                            return data.length > 0;
+                        } else {
+                            throw new error('Unable to add follow')
+                        }
+                    } catch (error) {
+                        console.error('Error adding follow:', error);
+                        return false;
+                    }
+                }
 
+                async function checkIfAlreadyLikedPost(post_user_id) {
+                    try {
+                        const user_id = await getCurrentUserId();
+                        jsonData = { user_id: user_id, post_user_id: post_user_id };
+                        console.log(jsonData)
+                        const response = await fetch('http://localhost:3000/api/likes/checkIfUserLikes', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(jsonData),
+                        })
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log("length:", data.length)
+                            return data.length > 0;
+                        } else {
+                            throw new error('Unable to add follow')
+                        }
+                    } catch (error) {
+                        console.error('Error adding follow:', error);
+                        return false;
+                    }
+                }
                 // Function to fetch the updated like count from the server
                 async function fetchUpdatedLikeCount(postId) {
                     try {
@@ -525,7 +586,7 @@ const loadFeed = async() => {
         // Fetch posts from the database using your server-side script
         const response = await fetch('http://localhost:3000/api/posts/feed', {
             method: 'POST',
-            body: JSON.stringify({ userCountry }),
+            body: JSON.stringify({ user_id }),
             headers: {
                 'Content-Type': 'application/json',
             },

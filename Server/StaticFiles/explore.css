@@ -1,0 +1,302 @@
+/* Reset default margin and padding */
+
+body,
+h1,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('Background.png');
+}
+
+
+/* Top bar styling */
+
+.top-bar {
+    background-color: #f2f2f2;
+    color: #fff;
+    display: flex;
+    /* justify-content: flex-end; */
+    /* Align buttons to the right */
+    padding: 10px 20px;
+}
+
+.top-bar a {
+    text-decoration: none;
+    /* Remove underlines from anchor tags */
+    margin-left: 10px;
+    /* Add some spacing between buttons */
+}
+
+.button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+h1 {
+    font-size: 48px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    color: #2980b9;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+p {
+    font-size: 20px;
+    margin-left: 10px;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Post content container */
+
+.post-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+/* Post header */
+
+.post-header {
+    display: flex;
+    align-items: center;
+}
+
+
+/* .post-header h3 {
+    margin-right: 10px;
+    font-weight: bold;
+} */
+
+.date {
+    font-size: 12px;
+}
+
+
+/* Post caption */
+
+.post-caption {
+    margin-top: 5px;
+}
+
+
+/* Post footer */
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+
+/* Style the post container */
+
+.post {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+    gap: 2px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Style the post header */
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+
+/* .post-header h3 {
+    margin-right: 8px;
+    font-weight: bold;
+    color: #333;
+} */
+
+.post-header p {
+    color: #777;
+}
+
+
+/* Style the post caption */
+
+.post-caption {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+
+/* Style the post likes and dislikes */
+
+.post-likes {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+
+/* Style the post comments */
+
+.post-comments {
+    color: #777;
+    margin-bottom: 16px;
+}
+
+.country {
+    font-size: 12px;
+}
+
+
+/* Style the comment input and buttons */
+
+.comment-input {
+    margin-bottom: 16px;
+}
+
+.comment-textbox {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+.post-button,
+.like-button,
+.cancel-like-button,
+.dislike-button,
+.cancel-dislike-button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    padding: 8px 16px;
+    margin-right: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.post-button:hover,
+.like-button:hover,
+.cancel-like-button:hover,
+.dislike-button:hover,
+.cancel-dislike-button:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Style the buttons that are initially hidden */
+
+.cancel-like-button,
+.cancel-dislike-button {
+    display: none;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0);
+    color: #000;
+    text-align: left;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 10px;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-left: 30%;
+}
+
+.post-input {
+    width: 100%;
+    max-width: 100%;
+    resize: none;
+}
+
+.post-button {
+    align-self: flex-end;
+    margin-top: 6px;
+}
+
+.follow-button,
+.unfollow-button {
+    padding: 6px 12px;
+    /* Smaller padding for a more compact size */
+    margin-left: 10px;
+    /* Add some space between the buttons */
+    border: none;
+    border-radius: 3px;
+    /* Slightly rounded corners */
+    cursor: pointer;
+    font-size: 12px;
+    /* Smaller font size */
+    color: white;
+}
+
+.follow-button {
+    background-color: #5391f4;
+    /* Blue color for Follow */
+}
+
+.unfollow-button {
+    background-color: #e74c3c;
+    /* Red color for Unfollow */
+}
