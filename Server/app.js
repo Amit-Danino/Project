@@ -7,6 +7,7 @@ const successstoriesRoutes = require("./routes/successstories-routes");
 const activitylogRoutes = require("./routes/activitylog-routes");
 const followsRoutes = require("./routes/follows-routes");
 const likesRoutes = require("./routes/likes-routes");
+const featureRoutes = require("./routes/feature-routes");
 
 
 //function that saves the server 
@@ -45,6 +46,7 @@ app.use(`/api/successstories`, successstoriesRoutes);
 app.use(`/api/activitylog`, activitylogRoutes);
 app.use(`/api/follows`, followsRoutes);
 app.use(`/api/likes`, likesRoutes);
+app.use(`/api/feature`, featureRoutes);
 
 
 

@@ -118,7 +118,33 @@ function displayPosts(posts) {
                 const commentTextBox = postElement.querySelector('.comment-textbox');
                 const logoutButton = document.getElementById('logoutButton');
 
+                bonusFeaturesVisibility();
 
+                async function bonusFeaturesVisibility() {
+                    const data = await getFeatureData();
+                }
+
+                async function getFeatureData() {
+                    return fetch('http://localhost:3000/api/feature/getFeatureData', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                        .then((response) => {
+                            if (!response.ok) {
+                                console.log("not ok response")
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json(); // You can use response.json() if the server sends JSON back
+                        })
+                        .then((data) => {
+                            return data;
+                        })
+                        .catch((error) => {
+                            console.error('There was a problem with the fetch operation:', error);
+                        });
+                }
 
 
                 async function likeAndDislikeButtonVisibility(post_user_id) {

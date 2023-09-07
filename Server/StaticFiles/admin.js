@@ -60,6 +60,108 @@ const loadAdminFeed = async() => {
     adminWelcome(user_id);
     await addActivityFeed();
     await showAllUsers();
+
+    await additionalFeaturePages();
+}
+
+async function getFeatureData() {
+    return fetch('http://localhost:3000/api/feature/getFeatureData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                console.log("not ok response")
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // You can use response.json() if the server sends JSON back
+        })
+        .then((data) => {
+            console.log(data)
+            return data;
+        })
+        .catch((error) => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function getStatus(feature_Data, feature_name) {
+    let status_to_return = "Enabled";
+    feature_Data.forEach(feature => {
+        if (feature.feature_name == feature_name) {
+            status_to_return = feature.feature_status
+        }
+    })
+
+    return status_to_return
+}
+
+function statusToText(status) {
+    if (status == 'disabled') {
+        return 'Enable'
+    }
+
+    return 'Disable'
+}
+async function additionalFeaturePages() {
+    const data = await getFeatureData();
+    createFeatureDeletionComponent(data, 'dislikes');
+    createFeatureDeletionComponent(data, 'comments');
+    createFeatureDeletionComponent(data, 'aboutMe');
+    createFeatureDeletionComponent(data, 'successStories');
+}
+
+function createFeatureDeletionComponent(data, feature) {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = `Toggle ${feature} feature -> `;
+
+    const enableButton = document.createElement("button");
+    enableButton.textContent = statusToText(getStatus(data, feature));
+
+    enableButton.addEventListener("click", async() => {
+        const data = await getFeatureData();
+        const status = getStatus(data, feature)
+        if (status == 'disabled') {
+            enableButton.textContent = 'Disable'
+            modifyFeatureData(feature, 'enabled');
+        } else {
+            enableButton.textContent = 'Enable'
+            modifyFeatureData(feature, 'disabled');
+        }
+    });
+
+    paragraph.appendChild(enableButton);
+
+    document.body.appendChild(paragraph);
+}
+
+async function modifyFeatureData(feature, info) {
+
+    const featureData = {
+        feature: feature,
+        info: info,
+    };
+    fetch('http://localhost:3000/api/feature/modify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(featureData),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // You can use response.json() if the server sends JSON back
+        })
+        .then((data) => {
+            console.log(data); // The response from the server
+        })
+        .catch((error) => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
 }
 
 async function showAllUsers() {
@@ -133,6 +235,8 @@ async function addActivityFeed() {
     addActivityToFeed('post');
     addActivityToFeed('login');
     addActivityToFeed('logout');
+
+
 }
 
 async function addActivityToFeed(activityType) {
@@ -151,17 +255,39 @@ async function addActivityToFeed(activityType) {
     activity.forEach(activity => {
         const activityItemElement = document.createElement('li');
         const activity_done = (activity.activity_type === 'login') ? 'logged in' : (activity.activity_type === 'logout') ? 'logged out' : 'posted';
-        activityItemElement.textContent = `${activity.full_name}(user Id:${activity.user_id}) has ${activity_done} at ${formatDateTime(activity.activity_time)}`;
+        activityItemElement.textContent = `${activity.full_name}(user Id:${activity.user_id}) has ${activity_done} ${timeAgo(activity.activity_time)} (${formatDateTime(activity.activity_time)})`;
         activityContainer.appendChild(activityItemElement);
     })
     activitiesContainer.appendChild(activityContainer);
 }
 
 function formatDateTime(dateTimeString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     const dateTime = new Date(dateTimeString);
     return dateTime.toLocaleString(undefined, options);
 }
+
+function timeAgo(dateTimeString) {
+    const currentDate = new Date();
+    const targetDate = new Date(dateTimeString);
+
+    const timeDifference = currentDate - targetDate;
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+        return `${days} day${days !== 1 ? 's' : ''} ago`;
+    } else if (hours > 0) {
+        return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+    } else if (minutes > 0) {
+        return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+    } else {
+        return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+    }
+}
+
 
 async function getActivityFromDB(activityType) {
     const jsonData = { activity: activityType }
