@@ -31,7 +31,8 @@ ol {
     margin-bottom: 15px;
 }
 
-.footer {
+
+/* .footer {
     background-color: rgba(0, 0, 0, 0);
     color: #000;
     text-align: left;
@@ -42,7 +43,7 @@ ol {
     right: 0;
     font-size: 10px;
     font-family: 'Poppins', sans-serif;
-}
+} */
 
 .top-bar {
     background-color: #f2f2f2;

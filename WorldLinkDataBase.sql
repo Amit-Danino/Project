@@ -16,12 +16,6 @@ CREATE TABLE Users (
     gender TEXT
 );
 
-INSERT INTO Users (username, email, password_hash, full_name, bio, profile_picture_url, country, birth_date, gender)
-VALUES
-    ('admin', 'admin', 'admin', 'admin admin', 'Foodie and blogger', 'profile3.jpg', 'Israel','1996-11-07', 'male'),
-    ('user1', 'user1@example.com', 'password1hash', 'John Doe', 'I love photography!', 'profile1.jpg', 'Israel','1990-06-20', 'male'),
-    ('user2', 'user2@example.com', 'password2hash', 'Hagar Yulevich', 'Travel enthusiast', 'profile2.jpg', 'Afghanistan','1997-03-11', 'female'),
-    ('user3', 'user3@example.com', 'password3hash', 'Elad Ozer', 'Foodie and blogger', 'profile3.jpg', 'Croatia','1996-05-07', 'other');
 
 CREATE TABLE Posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,11 +26,6 @@ CREATE TABLE Posts (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
-INSERT INTO Posts (post_id, user_id, caption, image_url)
-VALUES
-    (1, 1, 'Enjoying the sunset!', 'sunset.jpg'),
-    (2, 2, 'Exploring new places!', 'travel.jpg'),
-    (3, 3, 'Delicious homemade meal!', 'food.jpg');
 
 
 
@@ -50,12 +39,6 @@ CREATE TABLE Comments (
     FOREIGN KEY (post_id) REFERENCES Posts(post_id) ON DELETE CASCADE
 );
 
-INSERT INTO Comments (comment_id, user_id, post_id, comment_text)
-VALUES
-    (1, 2, 1, 'Amazing view!'),
-    (2, 1, 2, 'Looks like a great adventure!'),
-    (3, 3, 3, 'Yum, recipe please! Looks delicious!');
-
 
 
 CREATE TABLE Likes (
@@ -67,12 +50,6 @@ CREATE TABLE Likes (
     FOREIGN KEY (post_id) REFERENCES Posts(post_id) ON DELETE CASCADE
 );
 
-INSERT INTO Likes (like_id, user_id, post_id)
-VALUES
-    (1, 3, 1),
-    (2, 2, 2),
-    (3, 1, 3);
-    
     
 CREATE TABLE DisLikes (
     dislike_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,29 +60,16 @@ CREATE TABLE DisLikes (
     FOREIGN KEY (post_id) REFERENCES Posts(post_id) ON DELETE CASCADE
 );
 
-INSERT INTO DisLikes (dislike_id, user_id, post_id)
-VALUES
-    (1, 3, 1),
-    (2, 2, 2),
-    (3, 1, 3);
-
 
 
 CREATE TABLE Follows (
-    follow_id INT PRIMARY KEY,
+    follow_id INT PRIMARY KEY AUTO_INCREMENT,
     follower_user_id INT NOT NULL,
     following_user_id INT NOT NULL,
     follow_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (follower_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (following_user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
-
-INSERT INTO Follows (follow_id, follower_user_id, following_user_id)
-VALUES
-    (1, 1, 2),
-    (2, 2, 3),
-    (3, 3, 1);
-
 
 CREATE TABLE ActivityLog (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -115,11 +79,6 @@ CREATE TABLE ActivityLog (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
-INSERT INTO ActivityLog (log_id, user_id, activity_type, activity_time)
-VALUES
-    (1, 1, 'login', '2023-07-31 09:12:34'),
-    (2, 2, 'post', '2023-07-31 10:45:21'),
-    (3, 3, 'logout', '2023-07-31 12:30:15');
 
 
 CREATE TABLE SuccessStories (
@@ -133,8 +92,122 @@ CREATE TABLE SuccessStories (
 );
 
 
-INSERT INTO SuccessStories (story_id, user1_id, user2_id, story_text, story_date)
+CREATE TABLE features (
+    feature_name VARCHAR(255) NOT NULL UNIQUE,
+    feature_status ENUM('enabled', 'disabled') NOT NULL
+);
+
+
+
+
+INSERT INTO features (feature_name, feature_status) VALUES
+    ('dislikes', 'enabled'),
+    ('comments', 'enabled'),
+    ('successStories', 'enabled'),
+    ('aboutMe', 'enabled');
+    
+INSERT INTO Users (username, email, password_hash, full_name, bio, profile_picture_url, country, birth_date, gender)
 VALUES
-    (1, 1, 2, 'We met through this platform and became travel buddies!', '2023-07-15'),
-    (2, 2, 3, 'Found a food blogging partner here. It changed our lives!', '2023-07-20'),
-    (3, 1, 3, 'Happily married after meeting on this social media!', '2023-07-25');
+    ('admin', 'admin', 'admin', 'admin admin', 'Foodie and blogger', 'profile3.jpg', 'Israel','1996-11-07', 'male'),
+    ('john_doe', 'john@example.com', 'johnpassword', 'John Doe', 'I love photography!', 'profile1.jpg', 'USA', '1990-06-20', 'male'),
+    ('hagar_traveler', 'hagar@example.com', 'hagarpassword', 'Hagar Yulevich', 'Travel enthusiast', 'profile2.jpg', 'Afghanistan', '1997-03-11', 'female'),
+    ('elad_foodie', 'elad@example.com', 'eladpassword', 'Elad Ozer', 'Foodie and blogger', 'profile3.jpg', 'Croatia', '1996-05-07', 'other'),
+    ('sara_photography', 'sara@example.com', 'sarapassword', 'Sara Smith', 'Photographer', 'profile4.jpg', 'Canada', '1985-09-15', 'female'),
+    ('mike_traveler', 'mike@example.com', 'mikepassword', 'Mike Johnson', 'Travel enthusiast', 'profile5.jpg', 'USA', '1992-02-28', 'male'),
+    ('rachel_foodie', 'rachel@example.com', 'rachelpassword', 'Rachel Green', 'Foodie and chef', 'profile6.jpg', 'France', '1988-12-03', 'female'),
+    ('david_outdoor', 'david@example.com', 'davidpassword', 'David Miller', 'Outdoor enthusiast', 'profile7.jpg', 'Australia', '1994-07-10', 'male'),
+    ('linda_nature', 'linda@example.com', 'lindapassword', 'Linda Davis', 'Nature lover', 'profile8.jpg', 'Canada', '1983-04-22', 'female'),
+    ('peter_music', 'peter@example.com', 'peterpassword', 'Peter Walker', 'Musician and composer', 'profile9.jpg', 'USA', '1990-03-19', 'male');
+
+INSERT INTO Posts (user_id, caption, image_url)
+VALUES
+    (2, 'Exploring the world, one adventure at a time. #Wanderlust #Traveler #Adventure', 'travel1.jpg'),
+    (3, 'Delicious homemade pizza for dinner tonight. Here is the recipe! #Foodie #Cooking', 'pizza1.jpg'),
+    (4, 'Capturing the beauty of nature in its purest form. #NaturePhotography #Wilderness', 'nature1.jpg'),
+    (5, 'Creating soul-touching music with every note. #Music #Composer', 'music1.jpg'),
+    (6, 'Sunset views that take your breath away. #SunsetLovers #Nature', 'sunset1.jpg'),
+    (7, 'French cuisine at its finest. Bon appétit! #FrenchCuisine #Foodie', 'french_cuisine1.jpg'),
+    (8, 'Camping under the starry night sky. #Camping #Adventure', 'camping1.jpg'),
+    (9, 'Nature\'s symphony - birds, rivers, and trees. #NatureLover #Outdoors', 'nature2.jpg'),
+    (10, 'Exploring historical landmarks and their stories. #History #Travel', 'landmarks1.jpg'),
+    (2, 'Making memories that last a lifetime. #AdventureTime #TravelGoals', 'travel2.jpg');
+
+INSERT INTO Comments (user_id, post_id, comment_text)
+VALUES
+    (3, 1, 'Amazing sunset view! I wish I could be there right now.'),
+    (4, 2, 'This adventure looks incredible! How did you find this place?'),
+    (5, 3, 'That pizza looks mouthwatering! Can you share the recipe, please?'),
+    (6, 4, 'The beauty of nature is awe-inspiring. Great shot!'),
+    (7, 5, 'Your music touches my soul. Keep creating!'),
+    (8, 6, 'I adore French cuisine. What dish is that?'),
+    (9, 7, 'Camping under the stars must be magical. Tell me more!'),
+    (10, 8, 'Nature\'s beauty is unparalleled, and you capture it perfectly.'),
+    (2, 9, 'Your music is inspiring. Do you have any upcoming concerts?'),
+    (4, 10, 'These landmarks have so much history. Which one is your favorite?');
+
+INSERT INTO Likes (user_id, post_id)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+    (6, 6),
+    (7, 7),
+    (8, 8),
+    (9, 9),
+    (10, 10);
+
+INSERT INTO DisLikes (user_id, post_id)
+VALUES
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 4),
+    (6, 5),
+    (7, 6),
+    (8, 7),
+    (9, 8),
+    (10, 9),
+    (1, 10);
+
+INSERT INTO Follows (follower_user_id, following_user_id)
+VALUES
+    (1, 2),
+    (2, 3),
+    (3, 4),
+    (4, 5),
+    (5, 6),
+    (6, 7),
+    (7, 8),
+    (8, 9),
+    (9, 10),
+    (10, 1);
+
+INSERT INTO ActivityLog (user_id, activity_type)
+VALUES
+    (1, 'login'),
+    (2, 'login'),
+    (3, 'login'),
+    (4, 'login'),
+    (5, 'login'),
+    (6, 'login'),
+    (7, 'login'),
+    (8, 'login'),
+    (9, 'login'),
+    (10, 'login');
+
+INSERT INTO SuccessStories (user1_id, user2_id, story_text, story_date)
+VALUES
+    (1, 2, 'We met through this platform and became travel buddies! #TravelBuddies', '2023-08-01'),
+    (2, 3, 'Found a food blogging partner here. It changed our lives! #FoodBloggers', '2023-08-05'),
+    (3, 4, 'Happily married after meeting on this social media! #LoveStory', '2023-08-10'),
+    (4, 5, 'Our photography journey began here, and it keeps getting better! #PhotographyJourney', '2023-08-12'),
+    (5, 6, 'Music brought us together, and we\'ve been making beautiful music ever since! #Musicians', '2023-08-15'),
+    (6, 7, 'Exploring the culinary world, one dish at a time. #FoodiesForLife', '2023-08-20'),
+    (7, 8, 'Nature lovers who found their paradise on this platform. #NatureLovers', '2023-08-25'),
+    (8, 9, 'Our outdoor adventures started here, and they are still going strong! #AdventureTime', '2023-08-30'),
+    (9, 10, 'History buffs exploring the world\'s wonders together. #HistoryExplorers', '2023-09-01'),
+    (10, 1, 'From different worlds to a world of our own. #LoveKnowsNoBounds', '2023-09-05');
+
+    
