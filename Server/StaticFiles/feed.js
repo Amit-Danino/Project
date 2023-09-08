@@ -115,12 +115,11 @@ function displayPosts(posts) {
                 const dislikeButton = postElement.querySelector('.dislike-button');
                 const cancelLikeButton = postElement.querySelector('.cancel-like-button'); // Add this line 
                 const cancelDislikeButton = postElement.querySelector('.cancel-dislike-button');
-                likeAndDislikeButtonVisibility(post.user_id);
+                likeAndDislikeButtonVisibility(post.post_id);
 
                 const postButton = postElement.querySelector('.post-button');
                 const commentTextBox = postElement.querySelector('.comment-textbox');
                 const logoutButton = document.getElementById('logoutButton');
-
                 bonusFeaturesVisibility();
 
                 async function bonusFeaturesVisibility() {
@@ -178,11 +177,10 @@ function displayPosts(posts) {
                 }
 
 
-                async function likeAndDislikeButtonVisibility(post_user_id) {
-                    if (await checkIfAlreadyLikedPost(post_user_id)) {
+                async function likeAndDislikeButtonVisibility(post_id) {
+                    if (await checkIfAlreadyLikedPost(post_id)) {
                         likeButton.click();
-                    }
-                    if (await checkIfAlreadyDislikedPost(post_user_id)) {
+                    } else if (await checkIfAlreadyDislikedPost(post_id)) {
                         dislikeButton.click();
                     }
                 }

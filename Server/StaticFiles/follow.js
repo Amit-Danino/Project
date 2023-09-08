@@ -243,7 +243,8 @@ async function populateFollowersList() {
             followersList.appendChild(listItem);
         });
     } catch (error) {
-        console.error(error);
+        alert('Please log in to view the follow page.');
+        window.location.href = 'login.html';
     }
 }
 
@@ -351,9 +352,42 @@ searchInput.addEventListener('input', (event) => {
     populateNotFollowUsersList(searchText); // Pass the search text to the function
 });
 
+async function displayAdminButtons() {
+    const topBar = document.querySelector('.top-bar');
+    const adminButton = document.createElement('button');
+    adminButton.textContent = 'Admin Feature';
+    adminButton.classList.add('button');
+
+    // Add an event handler for the admin button
+    adminButton.addEventListener('click', () => {
+        // Perform the admin-specific action here
+        window.location.href = 'admin.html';
+        // You can replace the alert with your admin feature logic
+    });
+
+    // Append the admin button to the top-bar
+    topBar.prepend(adminButton);
+
+}
+
 // Call the populateFollowersList and populateFollowingList functions when the page loads
-window.addEventListener('load', () => {
+window.addEventListener('load', async() => {
     populateFollowersList();
     populateFollowingList();
-    populateNotFollowUsersList(''); // Initially, show the full list
+    populateNotFollowUsersList('');
+    const user_id = await getCurrentUserId();
+    if (user_id == 1) {
+        await displayAdminButtons();
+    }
+
+    const logoutButton = document.getElementById('logoutButton');
+    logoutButton.addEventListener('click', async() => {
+            const user_id = await getCurrentUserId();
+            const pastDate = new Date();
+            pastDate.setTime(pastDate.getTime() - (1 * 24 * 60 * 60 * 1000));
+            document.cookie = 'logout=logout;expires=' + pastDate.toUTCString() + ';path=/';
+            document.cookie = 'logout=logout;path=/';
+            addActivity(user_id, 'logout');
+        })
+        // Initially, show the full list
 });

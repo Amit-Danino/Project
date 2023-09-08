@@ -4,11 +4,8 @@ const db = require('../database/db'); //improt db connectoin
 const feed = async(req, res) => {
     try {
         const user_id = req.body.user_id
-            // const posts = await db.promise().query(
-            //     'SELECT * FROM posts JOIN users on users.user_id = posts.user_id WHERE posts.user_id IN (SELECT following_user_id FROM follows WHERE follower_user_id = ?)', [user_id]
-            // )
         const posts = await db.promise().query(
-            'SELECT * FROM posts JOIN users on users.user_id = posts.user_id WHERE posts.user_id IN (SELECT following_user_id FROM follows WHERE follower_user_id = ?) OR posts.user_id=?', [user_id, user_id]
+            'SELECT * FROM posts JOIN users on users.user_id = posts.user_id WHERE posts.user_id IN (SELECT following_user_id FROM follows WHERE follower_user_id = ?) OR posts.user_id=? ORDER BY posts.post_id DESC', [user_id, user_id]
         );
         res.status(200).json(posts[0]);
     } catch (error) {
@@ -26,7 +23,7 @@ const explore = async(req, res) => {
 
     try {
         const posts = await db.promise().query(
-            'SELECT * FROM posts JOIN users ON posts.user_id = users.user_id WHERE country != ? ORDER BY posts.post_date DESC', [userCountry]
+            'SELECT * FROM posts JOIN users ON posts.user_id = users.user_id WHERE country != ? ORDER BY posts.post_id DESC', [userCountry]
         )
         res.status(200).json(posts[0]);
     } catch (error) {

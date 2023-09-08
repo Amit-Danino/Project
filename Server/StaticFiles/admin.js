@@ -56,12 +56,17 @@ function adminWelcome(user_id) {
     }
 }
 const loadAdminFeed = async() => {
-    const user_id = await getCurrentUserId();
-    adminWelcome(user_id);
-    await addActivityFeed();
-    await showAllUsers();
+    try {
+        const user_id = await getCurrentUserId();
+        adminWelcome(user_id);
+        await addActivityFeed();
+        await showAllUsers();
 
-    await additionalFeaturePages();
+        await additionalFeaturePages();
+    } catch (error) {
+        alert('Please log in to view the admin page.');
+        window.location.href = 'login.html';
+    }
 }
 
 async function getFeatureData() {

@@ -117,7 +117,7 @@ function displayPosts(posts) {
                 const followButton = postElement.querySelector('.follow-button');
                 const unfollowButton = postElement.querySelector('.unfollow-button');
                 followButtonVisibility(post.user_id);
-                likeAndDislikeButtonVisibility(post.user_id);
+                likeAndDislikeButtonVisibility(post.post_id);
 
                 const postButton = postElement.querySelector('.post-button');
                 const commentTextBox = postElement.querySelector('.comment-textbox');
@@ -178,11 +178,11 @@ function displayPosts(posts) {
                         });
                 }
 
-                async function likeAndDislikeButtonVisibility(post_user_id) {
-                    if (await checkIfAlreadyLikedPost(post_user_id)) {
+                async function likeAndDislikeButtonVisibility(post_id) {
+                    if (await checkIfAlreadyLikedPost(post_id)) {
                         likeButton.click();
                     }
-                    if (await checkIfAlreadyDislikedPost(post_user_id)) {
+                    if (await checkIfAlreadyDislikedPost(post_id)) {
                         dislikeButton.click();
                     }
                 }
