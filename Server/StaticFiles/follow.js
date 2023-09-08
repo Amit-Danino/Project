@@ -38,10 +38,7 @@ async function handlefollow(user_id) {
         }
 
         // After successfully unfollowing, update the following list
-        populateFollowersList();
-
-        // Optionally, display a confirmation message to the user
-        // You can use the user's name from the screen if needed
+        populateFollowingList();
     } catch (error) {
         console.error(error);
     }
@@ -157,16 +154,15 @@ async function populateFollowingList() {
         const followingData = await getFollowingData(userId);
 
         followingList.innerHTML = '';
-
         followingData.forEach((user) => {
             let listItem = document.createElement('li');
-            // Assuming that the 'follower' object has a 'full_name' property
+            listItem.classList.add('following-list-item')
             listItem.textContent = user.full_name;
             const unfollowButton2 = document.createElement('button');
+            unfollowButton2.classList.add('following-button')
             unfollowButton2.textContent = 'Unfollow';
             // Add a data attribute to store the user_id
             unfollowButton2.dataset.userId = user.user_id;
-            unfollowButton2.className = "unfollow-button";
 
 
             // Attach a click event listener to the "Unfollow" button
@@ -212,7 +208,6 @@ async function populateFollowingList() {
 // Function to populate the "Your Following List" on the HTML page
 async function populateFollowersList() {
     const followersList = document.getElementById('followers-list');
-
     try {
         const userId = await getCurrentUserId();
         const followersData = await getFollowersData(userId);
@@ -223,11 +218,13 @@ async function populateFollowersList() {
         // Loop through the followingData and create list items for each user you are following
         followersData.forEach((user) => {
             const listItem = document.createElement('li');
+            listItem.classList.add('followers-list-item');
             listItem.textContent = user.full_name;
             // Create an "Unfollow" button
             const removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
-            removeButton.className = "remove-button";
+            removeButton.classList.add('followers-button');
+            // removeButton.className = "remove-button";
 
             // Add a data attribute to store the user_id
             removeButton.dataset.userId = user.user_id;
@@ -244,7 +241,6 @@ async function populateFollowersList() {
 
             // Append the list item to the following list
             followersList.appendChild(listItem);
-
         });
     } catch (error) {
         console.error(error);
@@ -293,13 +289,14 @@ async function populateNotFollowUsersList(searchText) {
             // Check if the search text is empty or if it matches the user's name
             if (searchText === '' || user.full_name.toLowerCase().startsWith(searchText.toLowerCase())) {
                 let listItem = document.createElement('li');
+                listItem.classList.add('not-following-list-item');
 
                 // Create a div to hold the user's name
                 listItem.textContent = user.full_name;
 
                 // Create an "Unfollow" button
                 const followButton = document.createElement('button');
-                followButton.className = "follow-button";
+                followButton.classList.add('not-following-button');
                 followButton.textContent = 'Follow';
 
                 // Add a data attribute to store the user_id
