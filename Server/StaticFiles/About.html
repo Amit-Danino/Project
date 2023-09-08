@@ -1,33 +1,83 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>About World Link</title>
     <link rel="stylesheet" href="About.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="top-bar">
-        <!--<img class="logo" src="Logo.png" alt="Logo" height="40" width="40"> -->
-            <div class="buttons">
-                <a href="register.html" class="button">Register</a>
-                <a href="login.html" class="button">Login</a>
-                <a href="readMe.html" class="button">Read Me</a>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
+        <a href="feed.html"><button class="button">Feed</button></a>
+        <a href="explore.html"><button class="button">Explore</button></a>
+        <a href="SuccessStories.html"><button class="button">Success Stories</button></a>
+        <a href="About.html"><button class="button">About</button></a>
+        <a href="login.html"><button id="logoutButton" class="button">Logout</button></a>
+    </div>
+    <br>
+    <br>
+    <br>
     <div class="container">
-        <div class="main-content-center"> <!-- Change class to main-content-about -->
-            <h1>About World Link</h1>
+        <div class="main-content-center">
+            <!-- Change class to main-content-about -->
+            <h1 class="title">About World Link</h1>
             <p>Welcome to World Link, the global social media platform that connects people from across the world.</p>
-            <p>At World Link, our purpose is to bridge geographical boundaries and provide a platform for individuals to connect with people outside their own country. We believe in the power of diverse perspectives, and our platform enables you to interact, share opinions, and make friends with individuals from different cultures and backgrounds.</p>
-            <p>Our mission is to create a virtual space where you can engage in meaningful conversations, broaden your horizons, and learn about the world through the eyes of others. Whether you're looking to discuss current events, exchange ideas, or simply make new friends abroad, World Link is here to facilitate those connections.</p>
+            <p>At World Link, our purpose is to bridge geographical boundaries and provide a platform for individuals to connect with people outside their own country. We believe in the power of diverse perspectives, and our platform enables you to interact,
+                share opinions, and make friends with individuals from different cultures and backgrounds.</p>
+            <p>Our mission is to create a virtual space where you can engage in meaningful conversations, broaden your horizons, and learn about the world through the eyes of others. Whether you're looking to discuss current events, exchange ideas, or simply
+                make new friends abroad, World Link is here to facilitate those connections.</p>
             <p>Join us on this journey of exploration, understanding, and friendship. Together, we can build a global community that celebrates diversity, fosters dialogue, and strengthens the bonds between people from every corner of the world.</p>
         </div>
     </div>
     <div class="footer">
         &copy; 2023 WorldLink. All rights reserved.
     </div>
+    <script>
+        async function getCurrentUserId() {
+            const cookies = document.cookie.split(';');
+            let [name, value] = cookies[cookies.length - 1].split('=');
+            name = name.split(' ').join('')
+            const response = await fetch('http://localhost:3000/api/users/getUserId', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: name
+                }), // Make sure you define post_id and user_id
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            return data[0].user_id;
+        }
+
+        async function displayAdminButtons() {
+            const user_id = await getCurrentUserId();
+            if (user_id == 1) {
+                const topBar = document.querySelector('.top-bar');
+                const adminButton = document.createElement('button');
+                adminButton.textContent = 'Admin Feature';
+                adminButton.classList.add('button');
+
+                // Add an event handler for the admin button
+                adminButton.addEventListener('click', () => {
+                    // Perform the admin-specific action here
+                    window.location.href = 'admin.html';
+                    // You can replace the alert with your admin feature logic
+                });
+
+                // Append the admin button to the top-bar
+                topBar.prepend(adminButton);
+            }
+        }
+        window.addEventListener("load", displayAdminButtons);
+    </script>
 </body>
+
 </html>

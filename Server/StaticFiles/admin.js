@@ -106,17 +106,23 @@ function statusToText(status) {
 }
 async function additionalFeaturePages() {
     const data = await getFeatureData();
-    createFeatureDeletionComponent(data, 'dislikes');
-    createFeatureDeletionComponent(data, 'comments');
-    createFeatureDeletionComponent(data, 'aboutMe');
-    createFeatureDeletionComponent(data, 'successStories');
+    const feedContainer = document.getElementById('feed');
+    const featureContainer = document.createElement('div');
+    featureContainer.classList.add('featureContainer');
+    createFeatureDeletionComponent(data, 'dislikes', featureContainer);
+    createFeatureDeletionComponent(data, 'comments', featureContainer);
+    createFeatureDeletionComponent(data, 'aboutMe', featureContainer);
+    createFeatureDeletionComponent(data, 'successStories', featureContainer);
+    feedContainer.appendChild(featureContainer);
 }
 
-function createFeatureDeletionComponent(data, feature) {
+function createFeatureDeletionComponent(data, feature, featureContainer) {
     const paragraph = document.createElement("p");
+    paragraph.classList.add('paragraph-feature');
     paragraph.textContent = `Toggle ${feature} feature -> `;
 
     const enableButton = document.createElement("button");
+    enableButton.classList.add('feature-button');
     enableButton.textContent = statusToText(getStatus(data, feature));
 
     enableButton.addEventListener("click", async() => {
@@ -125,15 +131,20 @@ function createFeatureDeletionComponent(data, feature) {
         if (status == 'disabled') {
             enableButton.textContent = 'Disable'
             modifyFeatureData(feature, 'enabled');
+            enableButton.style.backgroundColor = 'red';
         } else {
             enableButton.textContent = 'Enable'
             modifyFeatureData(feature, 'disabled');
+            enableButton.style.backgroundColor = '#3498db';
         }
     });
-
+    if (enableButton.textContent == 'Disable') {
+        enableButton.style.backgroundColor = 'red';
+    }
     paragraph.appendChild(enableButton);
 
-    document.body.appendChild(paragraph);
+    featureContainer.appendChild(paragraph);
+    // document.body.appendChild(paragraph);
 }
 
 async function modifyFeatureData(feature, info) {

@@ -12,20 +12,6 @@ li {
 
 /* Top bar styling */
 
-.top-bar {
-    background-color: #3498db;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-    padding: 10px 20px;
-}
-
-.readme-title {
-    font-family: 'Poppins', sans-serif;
-    color: #3498db;
-}
-
 body {
     background-image: url('Background.png');
     /* Replace 'background.jpg' with your image file path */
@@ -74,46 +60,43 @@ body {
 
 /* Reduce padding and margins for buttons */
 
+.top-bar {
+    background-color: #f2f2f2;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    --justify-content: space-between;
+    /* padding: 10px 20px; */
+    height: 60px;
+}
 
-/* .button {
-    background-color: #fff;
-    color: #3498db;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    margin: 2px 3px;
-} */
+.button:hover {
+    background-color: #2980b9;
+    color: #fff
+}
 
 .top-bar {
     background-color: #f2f2f2;
     color: #fff;
     display: flex;
-    padding: 10px 20px;
-}
-
-.top-bar a {
-    text-decoration: none;
-    margin-left: 10px;
+    align-items: center;
+    --justify-content: space-between;
+    /* padding: 10px 20px; */
+    height: 60px;
 }
 
 .button {
-    background-color: #3498db;
-    color: #fff;
+    background-color: #fff;
+    color: #3498db;
     border: none;
-    padding: 10px 20px;
+    margin-right: 10px;
+    padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    font-family: 'Dosis', sans-serif;
-    font-family: 'Lexend Deca', sans-serif;
-}
-
-.button:hover {
-    background-color: #2980b9;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    gap: 10px;
 }
 
 
@@ -125,30 +108,27 @@ body {
 } */
 
 .readme-title {
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: #2980b9;
+    font-family: 'Dosis', sans-serif;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 36px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 
 /* Footer styling */
 
 .footer {
-    background-color: #f2f2f2;
-    text-align: center;
-    padding: 10px 0;
-    color: #333;
-    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    color: #000;
+    text-align: left;
+    padding: 10px;
+    position: fixed;
     bottom: 0;
     left: 0;
-    position: fixed;
-    /* Change from fixed to relative */
-    width: 100%;
-    clear: both;
-    /* Add this to ensure proper clearing */
-    z-index: 1;
-    /* Ensure the footer is above other content */
+    right: 0;
+    font-size: 10px;
 }
 
 .main-content-readme {

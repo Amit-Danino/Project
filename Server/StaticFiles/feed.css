@@ -18,42 +18,48 @@ body {
     background-color: #f2f2f2;
     color: #fff;
     display: flex;
-    /* justify-content: flex-end; */
-    /* Align buttons to the right */
-    padding: 10px 20px;
-}
-
-.top-bar a {
-    text-decoration: none;
-    /* Remove underlines from anchor tags */
-    margin-left: 10px;
-    /* Add some spacing between buttons */
-}
-
-.button {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    font-family: 'Dosis', sans-serif;
-    font-family: 'Lexend Deca', sans-serif;
+    align-items: center;
+    --justify-content: space-between;
+    /* padding: 10px 20px; */
+    height: 60px;
 }
 
 .button:hover {
     background-color: #2980b9;
+    color: #fff
+}
+
+.top-bar {
+    background-color: #f2f2f2;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    --justify-content: space-between;
+    /* padding: 10px 20px; */
+    height: 60px;
+}
+
+.button {
+    background-color: #fff;
+    color: #3498db;
+    border: none;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    gap: 10px;
 }
 
 h1 {
-    font-size: 48px;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    font-size: 42px;
+    margin-bottom: 20px;
     color: #2980b9;
     font-family: 'Dosis', sans-serif;
-    font-family: 'Lexend Deca', sans-serif;
+    text-align: center;
+    margin-top: 10px;
 }
 
 p {
@@ -100,11 +106,9 @@ p {
     align-items: center;
 }
 
-
-/* .post-header h3 {
-    margin-right: 10px;
-    font-weight: bold;
-} */
+h3 {
+    font-family: 'Poppins', sans-serif;
+}
 
 .date {
     font-size: 12px;
@@ -115,6 +119,7 @@ p {
 
 .post-caption {
     margin-top: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -190,6 +195,7 @@ p {
 .post-comments {
     color: #777;
     margin-bottom: 16px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .country {
@@ -274,4 +280,16 @@ p {
 .post-button {
     align-self: flex-end;
     margin-top: 6px;
+}
+
+.no-posts-paragraph {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
 }

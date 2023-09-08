@@ -70,7 +70,10 @@ function displayPosts(posts) {
     const feedContainer = document.getElementById('feed');
     // feedContainer.innerHTML = '';
     if (posts.length === 0) {
-        feedContainer.textContent = 'No posts available from other countries.';
+        const noPostsParagraph = document.createElement('p');
+        noPostsParagraph.classList.add('no-posts-paragraph');
+        noPostsParagraph.textContent = 'Please follow some users from the explore/following pages to see feed posts!';
+        feedContainer.appendChild(noPostsParagraph);
     } else {
         let currentPost = null;
         posts.forEach(async post => {
@@ -553,6 +556,8 @@ async function displayPostForm() {
     // Create a text input for the post content
     const postInput = document.createElement('textarea');
     postInput.setAttribute('placeholder', 'What\'s on your mind?');
+    postInput.style.fontFamily = 'Poppins, sans-serif';
+
     postInput.classList.add('post-input');
     postInput.setAttribute('rows', '3');
     postInput.setAttribute('cols', '50');

@@ -9,37 +9,34 @@ body {
     background-image: url('Background.png');
 }
 
+.button:hover {
+    background-color: #2980b9;
+    color: #fff
+}
+
 .top-bar {
     background-color: #f2f2f2;
     color: #fff;
     display: flex;
-    /* justify-content: flex-end; */
-    /* Align buttons to the right */
-    padding: 10px 20px;
-}
-
-.top-bar a {
-    text-decoration: none;
-    /* Remove underlines from anchor tags */
-    margin-left: 10px;
-    /* Add some spacing between buttons */
+    align-items: center;
+    --justify-content: space-between;
+    /* padding: 10px 20px; */
+    height: 60px;
+    margin-bottom: 20px;
 }
 
 .button {
-    background-color: #3498db;
-    color: #fff;
+    background-color: #fff;
+    color: #3498db;
     border: none;
-    padding: 10px 20px;
+    margin-right: 10px;
+    padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    font-family: 'Dosis', sans-serif;
-    font-family: 'Lexend Deca', sans-serif;
-}
-
-.button:hover {
-    background-color: #2980b9;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    gap: 10px;
 }
 
 .activity-containers {
@@ -99,6 +96,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
+    transform: translateX(100%);
 }
 
 
@@ -141,4 +139,59 @@ body {
 
 .user-item button:hover {
     background-color: #2980b9;
+}
+
+.user-item,
+li,
+h2,
+p,
+button {
+    font-family: 'Poppins', sans-serif;
+}
+
+.featureContainer {
+    max-height: 200px;
+    width: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    transform: translateX(100%);
+}
+
+.paragraph-feature {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #2980b9;
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+}
+
+.feature-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+    cursor: pointer;
 }

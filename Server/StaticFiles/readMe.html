@@ -13,22 +13,16 @@
 <body>
 
     <div class="top-bar">
-        <div class="buttons">
-            <a href="register.html" class="button">Register</a>
-            <a href="login.html" class="button">Login</a>
-            <a href="readMe.html" class="button">Read Me</a>
-        </div>
+        <a href="home.html"><button class="button">Home</button></a>
+        <a href="register.html"><button class="button">Register</button></a>
+        <a href="login.html"><button class="button">Login</button></a>
+        <a href="readMe.html"><button class="button">Read Me</button></a>
     </div>
     <h1 class="readme-title">World Link Read Me</h1>
-    <!-- Added title here -->
-
     <div class="main-content-readme">
-        <br>
-        <br>
-
         <div class="chapter-box left">
             <h2>1. Social network name</h2>
-            <p>The name of our social network is "MySocialHub".</p>
+            <p>The name of our social network is "WorldLink".</p>
         </div>
 
         <div class="chapter-box right">
@@ -36,9 +30,9 @@
             <p>We have added the following additional pages:</p>
             <ul>
                 <li>About Us: Provides information about our social network and the team behind it.</li>
-                <li>Contact: Allows users to get in touch with our support team.</li>
+                <li>Success Stories: Here you can hear about people who met using our app.</li>
                 <li>Privacy Policy: Explains our privacy practices and how user data is handled.</li>
-                <li>Terms of Service: Outlines the terms and conditions users must adhere to while using our platform.</li>
+                <li>Terms of Service: Outlines the terms and conditions users must obey to while using our platform.</li>
             </ul>
         </div>
 
@@ -46,48 +40,95 @@
             <h2>3. What additional features did you add?</h2>
             <p>We have implemented the following additional features:</p>
             <ul>
-                <li>Groups: Users can create and join groups based on their interests.</li>
-                <li>Photo Gallery: Users can upload and share photos in albums.</li>
-                <li>Events: Users can create and RSVP to events or gatherings.</li>
-                <li>Badges/Achievements: Users can earn badges for specific activities on the platform.</li>
+                <li>UnLikes - users can unlike a post</li>
+                <li>DisLike and Undislike - users can dislike and undislike posts</li>
+                <li>Comments - users can comment on posts</li>
             </ul>
         </div>
 
         <div class="chapter-box right">
             <h2>4. What was hard to do?</h2>
-            <p>Implementing real-time updates for the activity feed and handling user authentication securely were some of the challenging aspects of the development process.</p>
+            <h2> Hagar - Key Development Challenges</h2>
+            <p> Database Design and Integration: Creating a well-structured database with tables for users, followers, likes, comments, posts, and other entities is a crucial foundation. Integrating this database effectively into the application can be challenging,
+                ensuring that data is stored and retrieved accurately.</p>
+            <p> Server Architecture: Designing a robust server architecture with a clear separation of concerns into app.js, routers, and controllers is essential for scalability and maintainability. Coordinating these components to handle various endpoints
+                and routes can be complex.</p>
+            <p> Frontend Development: Developing individual HTML, CSS, and JavaScript files for each page of the app can become unwieldy as the project grows. Ensuring consistency in design and functionality across all pages is a challenge.</p>
+            <ul>
+
+            </ul>
+            <h2>Amit - Key Development Challenges</h2>
+            <p>Throughout the development process, we encountered several significant challenges:</p>
+            <p>Admin's page - enable/disable each of the additional features/pages was a difficult task.
+                <br> Server's flow management was very challenging to handle.
+                <br> Pages design has taken a long time using many files for each page such as .js, .html, .css.
+                <br> Login Authentication has proved to be troublesome, as I encountered many problems with hashing the password along the way.
+                <br> User logged in verification - authenticating which user is logged in has taken many hours of trial and error.
+                <br> Making sure that Like and Dislike buttons are not pushed simultaneously by the same user, and remembered in the next page refresh.</p>
+            <ul>
+
+            </ul>
         </div>
 
         <div class="chapter-box left">
-            <h2>5. Who is your partner? Name and &lt;id&gt;</h2>
-            <p>My partner in this project is John Doe &lt;johndoe123&gt;. We collaborated on the development of various features and the overall design of the social network.</p>
-            <p>My contributions: I worked on implementing the event feature, activity feed, and server routes.</p>
-            <p>Partner's contributions: John worked on the groups feature, photo gallery, and user authentication.</p>
+            <h3>Hagar:</h3>
+            <h2>5. Who is your partner? Amit danino , id:316564194</h2>
+            <p>We collaborated on the development of various features and the overall architecrure of the social network.</p>
+            <p>My contributions:</p>
+            <p>* Database Design-Building the database and create the connections between the tables.</p>
+            <p>* Server Setup - create route and controller for each flow.</p>
+            <p>* Frontend Development -Home,Follow,SuccessStories,Feed,About,Login, Register</p>
+            <p>* Testing and Debugging</p>
+            <p>* Site's Design</p>
+            <p>Partner's contributions:</p>
+            <p>* Database Design-Building the database and create the connections between the tables.</p>
+            <p>* Server Setup - create route and controller for each flow such as dislike,comments, posts</p>
+            <p>* Frontend Development - Admin activity log,Explore,Feed,Login,Register</p>
+            <p>* Testing and Debugging.</p>
+            <p>* Site's Design.</p>
+            <h3>Amit:</h3>
+            <h2>5. Who is your partner? Hagar Yulevich , id:209046671</h2>
+            <p>We collaborated on the development of various features and the overall architecrure of the social network.</p>
+            <p>My contributions:???????????????????</p>
+            <p>Partner's contributions:???????????????</p>
+
         </div>
 
         <div class="chapter-box right">
             <h2>6. Specify all the different (server) routes your app supports</h2>
             <p>Our app supports the following server routes:</p>
             <ul>
-                <li>GET /: Returns the homepage of the social network.</li>
-                <li>GET /about: Displays the "About Us" page.</li>
-                <li>GET /contact: Displays the "Contact" page.</li>
-                <li>GET /privacy: Displays the "Privacy Policy" page.</li>
-                <li>GET /terms: Displays the "Terms of Service" page.</li>
-                <li>GET /groups: Displays a list of groups and allows users to create or join groups.</li>
-                <li>POST /groups: Handles the creation of a new group.</li>
-                <li>GET /gallery: Displays user photo albums and allows photo uploads.</li>
-                <li>POST /gallery: Handles the upload of photos to user albums.</li>
-                <li>GET /events: Displays upcoming events and allows users to create or RSVP to events.</li>
-                <li>POST /events: Handles the creation of a new event.</li>
-                <li>POST /events/rsvp: Handles user RSVP to an event.</li>
-                <li>GET /badges: Displays earned badges and achievements for a user.</li>
+                <li>POST /addActivity:Adding activity to activity log.</li>
+                <li>POST /getActivity: get activity from activity log.</li>
+                <li>POST /addComment: add comment to post.</li>
+                <li>POST /getCommentsFromPost: get all comments of a post.</li>
+                <li>POST /followers: get all followers of the logged in user.</li>
+                <li>POST /following: get all following of a logged in user.</li>
+                <li>POST /unfollow:unfollow user.</li>
+                <li>POST /remove user:remove user from your followers list.</li>
+                <li>POST /feed:get the feed of logged in user.</li>
+                <li>POST /like:like a post.</li>
+                <li>POST /dislike: dislike a post.</li>
+                <li>POST /cancel-like:cancel-like to a post.</li>
+                <li>POST /cancel-dislike:cancel-dislike to a post.</li>
+                <li>POST /like-count:count the likes of a post.</li>
+                <li>POST /dislike-count:count the dislikes of a post.</li>
+                <li>GET /selectSuccessStories:present success stories from db.</li>
+                <li>POST /register:register a user to the app.</li>
+                <li>POST /getUsers:get the users info.</li>
+                <li>POST /encryptPass:encrypt Password.</li>
+                <li>POST /getUserId:get the user's id.</li>
+                <li>POST /getUserCountry:get the user's country.</li>
+                <li>POST /getUserFullname: get user's full name.</li>
+                <li>POST /removeUser:remove a user from the db.</li>
+                <li>POST /????????????????????????????????????</li>
+
             </ul>
         </div>
     </div>
 
     <div class="footer">
-        &copy; 2023 World Link Social Network. All rights reserved.
+        &copy; 2023 WorldLink. All rights reserved.
     </div>
 </body>
 
