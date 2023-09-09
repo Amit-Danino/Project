@@ -738,8 +738,6 @@ const loadFeed = async() => {
             throw new Error('Error fetching posts');
         }
         const posts = await response.json();
-        // // Display posts like on Facebook
-        displayPostForm();
         displayPosts(posts);
         if (user_id == 1) {
             displayAdminButtons();

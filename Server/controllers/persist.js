@@ -209,9 +209,7 @@ router.post("/remove_by_2_ids", async(req, res) => {
 router.post("/getUserId", async(req, res) => {
     try {
         const email = req.body.email;
-
         const user = jsonData.Users.find(user => user.email === email);
-
         if (user) {
             res.status(200).json(user.user_id);
         } else {
@@ -243,8 +241,8 @@ router.post("/addActivity", async(req, res) => {
         const currentTime = Date.now(); // Get the current timestamp
         const timeSinceLastActivity = currentTime - lastActivityTime;
         if (timeSinceLastActivity >= 500) {
-            lastActivityTime = currentTime; // Update the last activity time
 
+            lastActivityTime = currentTime; // Update the last activity time
             const log_id = incrementId("ActivityLog");
             const user_id = req.body.user_id;
             const activity_type = req.body.activity;

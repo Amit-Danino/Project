@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt'); // npm install bcrypt
-const db = require('../../database/db'); //improt db connectoin
+const db = require('../database/db'); //improt db connectoin
 
 const feed = async(req, res) => {
     try {

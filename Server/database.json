@@ -27,7 +27,7 @@
       "bio": "Foodie and blogger",
       "profile_picture_url": "profile3.jpg",
       "country": "Israel",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1996-11-07",
       "gender": "male"
     },
@@ -40,7 +40,7 @@
       "bio": "I love photography!",
       "profile_picture_url": "profile1.jpg",
       "country": "USA",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1990-06-20",
       "gender": "male"
     },
@@ -53,7 +53,7 @@
       "bio": "Travel enthusiast",
       "profile_picture_url": "profile2.jpg",
       "country": "Afghanistan",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1997-03-11",
       "gender": "female"
     },
@@ -66,7 +66,7 @@
       "bio": "Foodie and blogger",
       "profile_picture_url": "profile3.jpg",
       "country": "Croatia",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1996-05-07",
       "gender": "other"
     },
@@ -79,7 +79,7 @@
       "bio": "Photographer",
       "profile_picture_url": "profile4.jpg",
       "country": "Canada",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1985-09-15",
       "gender": "female"
     },
@@ -92,7 +92,7 @@
       "bio": "Travel enthusiast",
       "profile_picture_url": "profile5.jpg",
       "country": "USA",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1992-02-28",
       "gender": "male"
     },
@@ -105,7 +105,7 @@
       "bio": "Foodie and chef",
       "profile_picture_url": "profile6.jpg",
       "country": "France",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1988-12-03",
       "gender": "female"
     },
@@ -118,7 +118,7 @@
       "bio": "Outdoor enthusiast",
       "profile_picture_url": "profile7.jpg",
       "country": "Australia",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1994-07-10",
       "gender": "male"
     },
@@ -131,7 +131,7 @@
       "bio": "Nature lover",
       "profile_picture_url": "profile8.jpg",
       "country": "Canada",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1983-04-22",
       "gender": "female"
     },
@@ -144,21 +144,21 @@
       "bio": "Musician and composer",
       "profile_picture_url": "profile9.jpg",
       "country": "USA",
-      "registration_date": "CURRENT_TIMESTAMP",
+      "registration_date": "2023-09-09T14:54:49.459Z",
       "birth_date": "1990-03-19",
       "gender": "male"
     },
     {
-      "username": "t_t",
-      "email": "test@gmail.com",
-      "password_hash": "$2b$10$BnDhGai.HaMelsHKslIFyOz.yUoljkOKeTAZQw3bQfs.SYhsotRi6",
-      "full_name": "t t",
-      "bio": "t",
-      "profile_picture_url": "t",
-      "country": "Afghanistan",
-      "registration_date": "2023-09-09T13:08:12.665Z",
-      "birth_date": "2007-04-17",
-      "gender": "male",
+      "username": "Hagar_Yul",
+      "email": "hagar@gmail.com",
+      "password_hash": "$2b$10$TYZCTRaKBLZOvJpjDlBQEeiVNpNf5ZscuQ0LJmQMFE3.AZT55fCbm",
+      "full_name": "Hagar Yul",
+      "bio": "g",
+      "profile_picture_url": "g",
+      "country": "Antarctica",
+      "registration_date": "2023-09-09T14:54:24.107Z",
+      "birth_date": "2007-04-16",
+      "gender": "female",
       "user_id": 11
     }
   ],
@@ -168,7 +168,7 @@
       "user_id": 2,
       "caption": "Exploring the world, one adventure at a time. #Wanderlust #Traveler #Adventure",
       "image_url": "travel1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "John Doe"
     },
     {
@@ -176,7 +176,7 @@
       "user_id": 3,
       "caption": "Delicious homemade pizza for dinner tonight. Here is the recipe! #Foodie #Cooking",
       "image_url": "pizza1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "Hagar Yulevich"
     },
     {
@@ -184,7 +184,7 @@
       "user_id": 4,
       "caption": "Capturing the beauty of nature in its purest form. #NaturePhotography #Wilderness",
       "image_url": "nature1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "Elad Ozer"
     },
     {
@@ -192,7 +192,7 @@
       "user_id": 5,
       "caption": "Creating soul-touching music with every note. #Music #Composer",
       "image_url": "music1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "Sara Smith"
     },
     {
@@ -200,7 +200,7 @@
       "user_id": 6,
       "caption": "Sunset views that take your breath away. #SunsetLovers #Nature",
       "image_url": "sunset1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "Mike Johnson"
     },
     {
@@ -208,7 +208,7 @@
       "user_id": 7,
       "caption": "French cuisine at its finest. Bon appétit! #FrenchCuisine #Foodie",
       "image_url": "french_cuisine1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "Rachel Green"
     },
     {
@@ -216,7 +216,7 @@
       "user_id": 8,
       "caption": "Camping under the starry night sky. #Camping #Adventure",
       "image_url": "camping1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "David Miller"
     },
     {
@@ -224,7 +224,7 @@
       "user_id": 9,
       "caption": "Nature's symphony - birds, rivers, and trees. #NatureLover #Outdoors",
       "image_url": "nature2.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "Linda Davis"
     },
     {
@@ -232,7 +232,7 @@
       "user_id": 10,
       "caption": "Exploring historical landmarks and their stories. #History #Travel",
       "image_url": "landmarks1.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "Peter Walker"
     },
     {
@@ -240,7 +240,7 @@
       "user_id": 2,
       "caption": "Making memories that last a lifetime. #AdventureTime #TravelGoals",
       "image_url": "travel2.jpg",
-      "post_date": "CURRENT_TIMESTAMP",
+      "post_date": "2023-09-09T14:54:49.459Z",
       "full_name": "John Doe"
     }
   ],
@@ -250,70 +250,70 @@
       "user_id": 3,
       "post_id": 1,
       "comment_text": "Amazing sunset view! I wish I could be there right now.",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 2,
       "user_id": 4,
       "post_id": 2,
       "comment_text": "This adventure looks incredible! How did you find this place?",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 3,
       "user_id": 5,
       "post_id": 3,
       "comment_text": "That pizza looks mouthwatering! Can you share the recipe, please?",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 4,
       "user_id": 6,
       "post_id": 4,
       "comment_text": "The beauty of nature is awe-inspiring. Great shot!",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 5,
       "user_id": 7,
       "post_id": 5,
       "comment_text": "Your music touches my soul. Keep creating!",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 6,
       "user_id": 8,
       "post_id": 6,
       "comment_text": "I adore French cuisine. What dish is that?",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 7,
       "user_id": 9,
       "post_id": 7,
       "comment_text": "Camping under the stars must be magical. Tell me more!",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 8,
       "user_id": 10,
       "post_id": 8,
       "comment_text": "Nature's beauty is unparalleled, and you capture it perfectly.",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 9,
       "user_id": 2,
       "post_id": 9,
       "comment_text": "Your music is inspiring. Do you have any upcoming concerts?",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "comment_id": 10,
       "user_id": 4,
       "post_id": 10,
       "comment_text": "These landmarks have so much history. Which one is your favorite?",
-      "comment_date": "CURRENT_TIMESTAMP"
+      "comment_date": "2023-09-09T14:54:49.459Z"
     }
   ],
   "Likes": [
@@ -321,61 +321,61 @@
       "like_id": 1,
       "user_id": 1,
       "post_id": 1,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 2,
       "user_id": 2,
       "post_id": 2,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 3,
       "user_id": 3,
       "post_id": 3,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 4,
       "user_id": 4,
       "post_id": 4,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 5,
       "user_id": 5,
       "post_id": 5,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 6,
       "user_id": 6,
       "post_id": 6,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 7,
       "user_id": 7,
       "post_id": 7,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 8,
       "user_id": 8,
       "post_id": 8,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 9,
       "user_id": 9,
       "post_id": 9,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     },
     {
       "like_id": 10,
       "user_id": 10,
       "post_id": 10,
-      "like_date": "CURRENT_TIMESTAMP"
+      "like_date": "2023-09-09T14:54:49.459Z"
     }
   ],
   "DisLikes": [
@@ -383,141 +383,123 @@
       "dislike_id": 1,
       "user_id": 2,
       "post_id": 1,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 2,
       "user_id": 3,
       "post_id": 2,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 3,
       "user_id": 4,
       "post_id": 3,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 4,
       "user_id": 5,
       "post_id": 4,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 5,
       "user_id": 6,
       "post_id": 5,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 6,
       "user_id": 7,
       "post_id": 6,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 7,
       "user_id": 8,
       "post_id": 7,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 8,
       "user_id": 9,
       "post_id": 8,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 9,
       "user_id": 10,
       "post_id": 9,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     },
     {
       "dislike_id": 10,
       "user_id": 1,
       "post_id": 10,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "dislike_date": "2023-09-09T14:54:57.730Z"
     }
   ],
   "Follows": [
     {
+      "follow_id": 1,
+      "follower_user_id": 1,
+      "following_user_id": 2,
+      "follow_date": "2023-09-09T14:57:18.800Z"
+    },
+    {
       "follow_id": 2,
       "follower_user_id": 2,
       "following_user_id": 3,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 3,
       "follower_user_id": 3,
       "following_user_id": 4,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 4,
       "follower_user_id": 4,
       "following_user_id": 5,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 5,
       "follower_user_id": 5,
       "following_user_id": 6,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 6,
       "follower_user_id": 6,
       "following_user_id": 7,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 7,
       "follower_user_id": 7,
       "following_user_id": 8,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 8,
       "follower_user_id": 8,
       "following_user_id": 9,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 9,
       "follower_user_id": 9,
       "following_user_id": 10,
-      "follow_date": "CURRENT_TIMESTAMP"
+      "follow_date": "2023-09-09T14:57:18.800Z"
     },
     {
       "follow_id": 10,
       "follower_user_id": 10,
       "following_user_id": 1,
-      "follow_date": "CURRENT_TIMESTAMP"
-    },
-    {
-      "follower_user_id": 11,
-      "following_user_id": 8,
-      "follow_date": "2023-09-09T13:08:25.205Z",
-      "follow_id": 11
-    },
-    {
-      "follower_user_id": 11,
-      "following_user_id": 10,
-      "follow_date": "2023-09-09T13:08:33.034Z",
-      "follow_id": 12
-    },
-    {
-      "follower_user_id": 1,
-      "following_user_id": 8,
-      "follow_date": "2023-09-09T13:15:40.523Z",
-      "follow_id": 13
-    },
-    {
-      "follower_user_id": 1,
-      "following_user_id": 3,
-      "follow_date": "2023-09-09T13:15:41.202Z",
-      "follow_id": 14
+      "follow_date": "2023-09-09T14:57:18.800Z"
     }
   ],
   "ActivityLog": [
@@ -525,225 +507,113 @@
       "log_id": 1,
       "user_id": 1,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
+      "activity_time": "2023-09-09T14:54:29.990Z",
       "full_name": "admin admin"
     },
     {
       "log_id": 2,
-      "user_id": 2,
-      "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "John Doe"
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T15:11:00.114Z",
+      "full_name": "admin admin"
     },
     {
       "log_id": 3,
-      "user_id": 3,
+      "user_id": 1,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "Hagar Yulevich"
+      "activity_time": "2023-09-09T15:11:01.173Z",
+      "full_name": "admin admin"
     },
     {
       "log_id": 4,
-      "user_id": 4,
-      "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "Elad Ozer"
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T15:12:00.798Z",
+      "full_name": "admin admin"
     },
     {
       "log_id": 5,
-      "user_id": 5,
+      "user_id": 1,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "Sara Smith"
+      "activity_time": "2023-09-09T15:12:02.212Z",
+      "full_name": "admin admin"
     },
     {
       "log_id": 6,
-      "user_id": 6,
-      "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "Mike Johnson"
-    },
-    {
-      "log_id": 7,
-      "user_id": 7,
-      "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "Rachel Green"
-    },
-    {
-      "log_id": 8,
-      "user_id": 8,
-      "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "David Miller"
-    },
-    {
-      "log_id": 9,
-      "user_id": 9,
-      "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "Linda Davis"
-    },
-    {
-      "log_id": 10,
-      "user_id": 10,
-      "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP",
-      "full_name": "Peter Walker"
-    },
-    {
-      "log_id": 11,
       "user_id": 1,
       "activity_type": "logout",
-      "activity_time": "2023-09-09T13:07:58.206Z",
-      "full_name": "admin admin"
-    },
-    {
-      "log_id": 12,
-      "user_id": 1,
-      "activity_type": "login",
-      "activity_time": "2023-09-09T13:07:59.236Z",
-      "full_name": "admin admin"
-    },
-    {
-      "log_id": 13,
-      "user_id": 1,
-      "activity_type": "logout",
-      "activity_time": "2023-09-09T13:08:02.423Z",
-      "full_name": "admin admin"
-    },
-    {
-      "log_id": 14,
-      "user_id": 11,
-      "activity_type": "login",
-      "activity_time": "2023-09-09T13:08:16.736Z",
-      "full_name": "t t"
-    },
-    {
-      "log_id": 15,
-      "user_id": 11,
-      "activity_type": "logout",
-      "activity_time": "2023-09-09T13:08:52.443Z",
-      "full_name": "t t"
-    },
-    {
-      "log_id": 16,
-      "user_id": 11,
-      "activity_type": "login",
-      "activity_time": "2023-09-09T13:09:01.247Z",
-      "full_name": "t t"
-    },
-    {
-      "log_id": 17,
-      "user_id": 11,
-      "activity_type": "logout",
-      "activity_time": "2023-09-09T13:09:02.641Z",
-      "full_name": "t t"
-    },
-    {
-      "log_id": 18,
-      "user_id": 1,
-      "activity_type": "login",
-      "activity_time": "2023-09-09T13:09:12.456Z",
-      "full_name": "admin admin"
-    },
-    {
-      "log_id": 19,
-      "user_id": 1,
-      "activity_type": "logout",
-      "activity_time": "2023-09-09T13:09:18.229Z",
-      "full_name": "admin admin"
-    },
-    {
-      "log_id": 20,
-      "user_id": 1,
-      "activity_type": "login",
-      "activity_time": "2023-09-09T13:12:34.666Z",
-      "full_name": "admin admin"
-    },
-    {
-      "log_id": 21,
-      "user_id": 1,
-      "activity_type": "login",
-      "activity_time": "2023-09-09T13:15:36.122Z",
-      "full_name": "admin admin"
-    },
-    {
-      "log_id": 22,
-      "user_id": 1,
-      "activity_type": "logout",
-      "activity_time": "2023-09-09T13:15:49.443Z",
+      "activity_time": "2023-09-09T15:12:10.211Z",
       "full_name": "admin admin"
     }
   ],
   "SuccessStories": [
     {
       "story_id": 1,
-      "user1_id": 1,
-      "user2_id": 2,
+      "user1_name": "Hagar",
+      "user2_name": "Amit",
       "story_text": "We met through this platform and became travel buddies! #TravelBuddies",
       "story_date": "08/01/2023"
     },
     {
       "story_id": 2,
-      "user1_id": 2,
-      "user2_id": 3,
+      "user1_name": "Dovi",
+      "user2_name": "Rustam",
       "story_text": "Found a food blogging partner here. It changed our lives! #FoodBloggers",
       "story_date": "08/05/2023"
     },
     {
       "story_id": 3,
-      "user1_id": 3,
-      "user2_id": 4,
+      "user1_name": "Yuval",
+      "user2_name": "Dotan",
       "story_text": "Happily married after meeting on this social media! #LoveStory",
       "story_date": "08/10/2023"
     },
     {
       "story_id": 4,
-      "user1_id": 4,
-      "user2_id": 5,
+      "user1_name": "Michal",
+      "user2_name": "Shelly",
       "story_text": "Our photography journey began here, and it keeps getting better! #PhotographyJourney",
       "story_date": "08/12/2023"
     },
     {
       "story_id": 5,
-      "user1_id": 5,
-      "user2_id": 6,
+      "user1_name": "Rotem",
+      "user2_name": "Christina",
       "story_text": "Music brought us together, and we've been making beautiful music ever since! #Musicians",
       "story_date": "08/15/2023"
     },
     {
       "story_id": 6,
-      "user1_id": 6,
-      "user2_id": 7,
+      "user1_name": "Tamara",
+      "user2_name": "Roy",
       "story_text": "Exploring the culinary world, one dish at a time. #FoodiesForLife",
       "story_date": "08/20/2023"
     },
     {
       "story_id": 7,
-      "user1_id": 7,
-      "user2_id": 8,
+      "user1_name": "Shurla",
+      "user2_name": "Rihanna",
       "story_text": "Nature lovers who found their paradise on this platform. #NatureLovers",
       "story_date": "08/25/2023"
     },
     {
       "story_id": 8,
-      "user1_id": 8,
-      "user2_id": 9,
+      "user1_name": "Shaked",
+      "user2_name": "Daniel",
       "story_text": "Our outdoor adventures started here, and they are still going strong! #AdventureTime",
       "story_date": "08/30/2023"
     },
     {
       "story_id": 9,
-      "user1_id": 9,
-      "user2_id": 10,
+      "user1_name": "Chen",
+      "user2_name": "Inbar",
       "story_text": "History buffs exploring the world's wonders together. #HistoryExplorers",
       "story_date": "09/01/2023"
     },
     {
       "story_id": 10,
-      "user1_id": 10,
-      "user2_id": 1,
+      "user1_name": "Arnon",
+      "user2_name": "Geva",
       "story_text": "From different worlds to a world of our own. #LoveKnowsNoBounds",
       "story_date": "09/05/2023"
     }

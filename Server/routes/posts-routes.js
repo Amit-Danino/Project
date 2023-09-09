@@ -1,7 +1,7 @@
 const express = require('express');
 
 //import users controllers
-const postsController = require('../controllers/posts-controller');
+const postsController = require('../old_controllers/posts-controller');
 
 const router = express.Router();
 
