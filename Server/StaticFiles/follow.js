@@ -2,11 +2,9 @@ async function getCurrentUserId() {
     const cookies = document.cookie.split(';');
     let [name, value] = cookies[cookies.length - 1].split('=');
     name = name.split(' ').join('')
-    const response = await fetch('http://localhost:3000/api/users/getUserId', {
+    const response = await fetch('http://localhost:3000/api/persist/getUserId', {
         method: 'POST',
-        body: JSON.stringify({
-            email: name
-        }), // Make sure you define post_id and user_id
+        body: JSON.stringify({ email: name }), // Make sure you define post_id and user_id
         headers: {
             'Content-Type': 'application/json',
         },
@@ -17,38 +15,34 @@ async function getCurrentUserId() {
     }
 
     const data = await response.json();
-    return data[0].user_id;
+    return data;
 }
 
-
-async function handlefollow(user_id) {
+async function addFollow(user_id, post_user_id) {
     try {
-        // Make a fetch request to your server to unfollow the user using their userId
-        const current_user_id = await getCurrentUserId();
-        const response = await fetch('http://localhost:3000/api/follows/follow', {
+        jsonData = { table: 'Follows', data: { follower_user_id: user_id, following_user_id: post_user_id, follow_date: new Date() } }
+        const response = await fetch('http://localhost:3000/api/persist/insert', {
             method: 'POST',
-            body: JSON.stringify({ user_id: user_id, current_user_id: current_user_id }),
             headers: {
                 'Content-Type': 'application/json',
             },
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        // After successfully unfollowing, update the following list
-        populateFollowingList();
+            body: JSON.stringify(jsonData),
+        })
     } catch (error) {
-        console.error(error);
+        console.error('Error adding follow:', error);
+        return null;
     }
 }
+
+
 // Function to retrieve followers data from the server
-async function getFollowingData(userId) {
+async function getFollowingData(user_id) {
     try {
-        const response = await fetch('http://localhost:3000/api/follows/following', {
+        // const current_user_id = await getCurrentUserId();
+        const jsonData = { table: "Follows", field: "follower_user_id", value: user_id };
+        const response = await fetch('http://localhost:3000/api/persist/get_table_data_id', {
             method: 'POST',
-            body: JSON.stringify({ user_id: userId }),
+            body: JSON.stringify(jsonData),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -59,74 +53,51 @@ async function getFollowingData(userId) {
         }
 
         const data = await response.json();
-        return data; // Assuming your server returns an array of followers
+        return data; // Assuming your server returns an array of following
     } catch (error) {
         console.error(error);
         return []; // Return an empty array in case of an error
     }
 }
+
+async function removeFollow(user_id, post_user_id) {
+    try {
+        jsonData = { table: 'Follows', id1: 'follower_user_id', id2: 'following_user_id', id_value_1: user_id, id_value_2: post_user_id };
+        await fetch('http://localhost:3000/api/persist/remove_by_2_ids', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(jsonData),
+        })
+    } catch (error) {
+        console.error('Error adding follow:', error);
+        return null;
+    }
+}
+
+
 // Function to handle unfollowing a user
-async function handleRemove(userId) {
+async function handleRemove(user_id) {
     try {
         const current_user_id = await getCurrentUserId();
 
-        // Make a fetch request to your server to unfollow the user using their userId
-        const response = await fetch('http://localhost:3000/api/follows/remove', {
-            method: 'POST',
-            body: JSON.stringify({ user_id: userId, current_user_id: current_user_id }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        // After successfully unfollowing, update the following list
+        await removeFollow(user_id, current_user_id);
         populateFollowersList();
-
-        // Optionally, display a confirmation message to the user
-        // You can use the user's name from the screen if needed
-        alert(`You removed user with ID ${userId}`);
+        alert(`You removed user with ID ${user_id}`);
     } catch (error) {
         console.error(error);
     }
 }
-
-async function handleUnfollow(userId) {
-    try {
-        const current_user_id = await getCurrentUserId();
-
-        // Make a fetch request to your server to unfollow the user using their userId
-        const response = await fetch('http://localhost:3000/api/follows/unfollow', {
-            method: 'POST',
-            body: JSON.stringify({ user_id: userId, current_user_id: current_user_id }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        // After successfully unfollowing, update the following list
-        populateNotFollowUsersList('');
-
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 
 // Function to retrieve following data from the server
-async function getFollowersData(userId) {
+async function getFollowersData(user_id) {
     try {
-        const current_user_id = await getCurrentUserId();
-        const response = await fetch('http://localhost:3000/api/follows/followers', {
+        // const current_user_id = await getCurrentUserId();
+        const jsonData = { table: "Follows", field: "following_user_id", value: user_id };
+        const response = await fetch('http://localhost:3000/api/persist/get_table_data_id', {
             method: 'POST',
-            body: JSON.stringify({ user_id: userId, current_user_id: current_user_id }),
+            body: JSON.stringify(jsonData),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -147,53 +118,30 @@ async function getFollowersData(userId) {
 // Function to populate the "People Who Follow You" list on the HTML page
 async function populateFollowingList() {
     const followingList = document.getElementById('following-list');
-    const notfollowingList = document.getElementById('NotFolllowUsersList');
 
     try {
-        const userId = await getCurrentUserId();
-        const followingData = await getFollowingData(userId);
+        const current_user_id = await getCurrentUserId();
+        const followingData = await getFollowingData(current_user_id);
+        const following_data_with_full_name = await addFullName(followingData, "following_user_id");
+
+        following_data_with_full_name.sort((a, b) => a.full_name.localeCompare(b.full_name));
 
         followingList.innerHTML = '';
-        followingData.forEach((user) => {
+        following_data_with_full_name.forEach((user) => {
             let listItem = document.createElement('li');
             listItem.classList.add('following-list-item')
             listItem.textContent = user.full_name;
             const unfollowButton2 = document.createElement('button');
             unfollowButton2.classList.add('following-button')
             unfollowButton2.textContent = 'Unfollow';
-            // Add a data attribute to store the user_id
-            unfollowButton2.dataset.userId = user.user_id;
-
 
             // Attach a click event listener to the "Unfollow" button
             unfollowButton2.addEventListener('click', (event) => {
-                const userId = event.target.dataset.userId;
-                const userName = user.full_name; // Get the follower's full name
-                handleUnfollow(userId, userName); // Pass both userId and userName to the function
-                followingList.removeChild(listItem);
+                const user_id = user.following_user_id;
 
-                listItem = document.createElement('li');
-                listItem.textContent = userName;
-                // Assuming that the 'follower' object has a 'full_name' property
-                const followButton = document.createElement('button');
-                followButton.textContent = 'follow';
-                followButton.style.backgroundColor = "#5391f4";
-                followButton.style.color = "white";
-                followButton.style.border = "none";
-                followButton.style.padding = "6px 12px";
-                followButton.style.fontSize = "12px";
-                // Add a data attribute to store the user_id
-                followButton.dataset.userId = user.user_id;
-                // Attach a click event listener to the "Unfollow" button
-                followButton.addEventListener('click', (event) => {
-                    const userId = event.target.dataset.userId;
-                    const userName = user.full_name; // Get the follower's full name
-                    handlefollow(userId, userName); // Pass both userId and userName to the function
-                });
-                listItem.appendChild(followButton);
-                notfollowingList.appendChild(listItem);
-
-
+                removeFollow(current_user_id, user_id); // Pass both userId and userName to the function
+                populateFollowingList();
+                populateNotFollowUsersList('');
             });
             listItem.textContent = user.full_name;
             listItem.appendChild(unfollowButton2);
@@ -204,19 +152,41 @@ async function populateFollowingList() {
     }
 }
 
+async function addFullName(data_to_send, field_to_fetch_from) {
+    try {
+        // const current_user_id = await getCurrentUserId();
+        const jsonData = { data: data_to_send, field: field_to_fetch_from };
+        const response = await fetch('http://localhost:3000/api/persist/add_full_name', {
+            method: 'POST',
+            body: JSON.stringify(jsonData),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data; // Assuming your server returns an array of following
+    } catch (error) {
+        console.error(error);
+        return []; // Return an empty array in case of an error
+    }
+}
 
 // Function to populate the "Your Following List" on the HTML page
 async function populateFollowersList() {
     const followersList = document.getElementById('followers-list');
     try {
-        const userId = await getCurrentUserId();
-        const followersData = await getFollowersData(userId);
-
+        const user_id = await getCurrentUserId();
+        const followersData = await getFollowersData(user_id);
+        const followers_data_with_full_name = await addFullName(followersData, "follower_user_id");
         // Clear any existing list items
         followersList.innerHTML = '';
-
         // Loop through the followingData and create list items for each user you are following
-        followersData.forEach((user) => {
+        followers_data_with_full_name.forEach((user) => {
             const listItem = document.createElement('li');
             listItem.classList.add('followers-list-item');
             listItem.textContent = user.full_name;
@@ -231,9 +201,9 @@ async function populateFollowersList() {
 
             // Attach a click event listener to the "Unfollow" button
             removeButton.addEventListener('click', (event) => {
-                const userId = event.target.dataset.userId;
+                const user_id = user.follower_user_id;
                 const userName = user.full_name; // Get the user's full name
-                handleRemove(userId, userName); // Pass both userId and userName to the function
+                handleRemove(user_id, userName); // Pass both userId and userName to the function
             });
 
             // Append the nameDiv and "Unfollow" button to the list item
@@ -250,10 +220,9 @@ async function populateFollowersList() {
 
 async function getUsersNotFollow(userId) {
     try {
-        const current_user_id = await getCurrentUserId();
-        const response = await fetch('http://localhost:3000/api/follows/getUsersNotFollow', {
+        const response = await fetch('http://localhost:3000/api/persist/getUsersNotFollow', {
             method: 'POST',
-            body: JSON.stringify({ user_id: userId, current_user_id: current_user_id }),
+            body: JSON.stringify({ user_id: userId }),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -276,12 +245,10 @@ async function getUsersNotFollow(userId) {
 // Function to populate the "Not Following Users List" on the HTML page with autocomplete
 async function populateNotFollowUsersList(searchText) {
     const notfollowingList = document.getElementById('NotFolllowUsersList');
-    const followinglist = document.getElementById('following-list');
     try {
         const userId = await getCurrentUserId();
         const notfollowingData = await getUsersNotFollow(userId);
         notfollowingData.sort((a, b) => a.full_name.localeCompare(b.full_name));
-
         // Clear any existing list items
         notfollowingList.innerHTML = '';
 
@@ -305,32 +272,9 @@ async function populateNotFollowUsersList(searchText) {
 
                 // Attach a click event listener to the "Unfollow" button
                 followButton.addEventListener('click', (event) => {
-                    const userId = event.target.dataset.userId;
-                    const userName = user.full_name; // Get the user's full name
-                    handlefollow(userId);
-                    notfollowingList.removeChild(listItem);
-
-                    listItem = document.createElement('li');
-                    listItem.textContent = userName;
-                    // Assuming that the 'follower' object has a 'full_name' property
-                    const unfollowButton2 = document.createElement('button');
-                    unfollowButton2.textContent = 'Unfollow';
-                    unfollowButton2.style.backgroundColor = "#e74c3c";
-                    unfollowButton2.style.color = "white";
-                    unfollowButton2.style.border = "none";
-                    unfollowButton2.style.padding = "6px 12px";
-                    unfollowButton2.style.fontSize = "12px";
-                    // Add a data attribute to store the user_id
-                    unfollowButton2.dataset.userId = user.user_id;
-                    // Attach a click event listener to the "Unfollow" button
-                    unfollowButton2.addEventListener('click', (event) => {
-                        const userId = event.target.dataset.userId;
-                        const userName = user.full_name; // Get the follower's full name
-                        handleUnfollow(userId, userName); // Pass both userId and userName to the function
-                        followinglist.removeChild(listItem);
-                    });
-                    listItem.appendChild(unfollowButton2);
-                    followinglist.appendChild(listItem);
+                    addFollow(userId, user.user_id);
+                    populateFollowingList();
+                    populateNotFollowUsersList('')
                 });
 
                 // Append the nameDiv and "Unfollow" button to the list item
@@ -360,14 +304,32 @@ async function displayAdminButtons() {
 
     // Add an event handler for the admin button
     adminButton.addEventListener('click', () => {
-        // Perform the admin-specific action here
         window.location.href = 'admin.html';
-        // You can replace the alert with your admin feature logic
     });
 
     // Append the admin button to the top-bar
     topBar.prepend(adminButton);
 
+}
+
+function addActivity(user_id, activity) {
+    const jsonData = {
+        activity: activity,
+        user_id: user_id
+    }
+    try {
+        fetch('http://localhost:3000/api/persist/addActivity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(jsonData),
+        });
+        return true;
+    } catch (error) {
+        alert(`error adding ${activity} activity`)
+        return false;
+    }
 }
 
 // Call the populateFollowersList and populateFollowingList functions when the page loads

@@ -585,16 +585,24 @@ async function displayPostForm() {
         if (isWhitespace(caption)) return;
         postInput.value = ''
         const user_id = await getCurrentUserId();
+        const full_name = await getUserFullname(user_id);
         try {
-            window.location.reload();
-            const jsonData = { table: "Posts", data: { user_id: user_id, caption: caption, image_url: "landmarks1.jpg", post_date: new Date() } }
-            await fetch('http://localhost:3000/api/persist/insert', {
+            const jsonData = { table: "Posts", data: { user_id: user_id, caption: caption, image_url: "landmarks1.jpg", post_date: new Date(), full_name: full_name } }
+            const response = await fetch('http://localhost:3000/api/persist/insert', {
                 method: 'POST',
                 body: JSON.stringify(jsonData),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
+
+            if (response.ok) {
+                // Reload the page if the request was successful
+                window.location.reload();
+            } else {
+                // Handle the error condition appropriately
+                console.error('Error in inserting data:', response.statusText);
+            }
         } catch (error) {
             console.error('Errors adding post:', error);
             return false;

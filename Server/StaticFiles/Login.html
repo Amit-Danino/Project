@@ -62,17 +62,21 @@
             const rememberMe = document.getElementById('rememberMe').checked;
             event.preventDefault();
 
-            fetch('http://localhost:3000/api/users/getUsers', {
+            fetch('http://localhost:3000/api/persist/get_table_data', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    body: JSON.stringify({
+                        table: "Users"
+                    }),
                 })
                 .then(response => response.json())
                 .then(users => {
                     correctCredentials = false
                     const promises = [];
                     users.forEach(user => {
+                        console.log(user)
                         const promise = encryptPass(user.password_hash, password)
                             .then((authenticationResult) => {
                                 if ((authenticationResult && user.email == email) || (user.email == 'admin' && user.password_hash == 'admin')) {
@@ -84,7 +88,7 @@
                                         setCookie(email, password, 0.0208); // (1/24) * 0.5 = 0.0208
                                     }
                                     correctCredentials = true
-                                    addLoginActivity(user.user_id);
+                                    addActivity(user.user_id, "login");
                                     window.location.href = 'feed.html';
                                 }
                             });
@@ -103,22 +107,23 @@
                 });
         }
 
-        async function addLoginActivity(user_id) {
+        function addActivity(user_id, activity) {
             const jsonData = {
-                activity: "login",
+                activity: activity,
                 user_id: user_id
             }
             try {
-                const response = await fetch('http://localhost:3000/api/activitylog/addActivity', {
+                fetch('http://localhost:3000/api/persist/addActivity', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(jsonData),
                 });
+                return true;
             } catch (error) {
-                alert(error.message)
-                alert("error adding login activity")
+                alert(`error adding ${activity} activity`)
+                return false;
             }
         }
 
@@ -143,7 +148,7 @@
             };
 
             try {
-                const response = await fetch('http://localhost:3000/api/users/encryptPass', {
+                const response = await fetch('http://localhost:3000/api/persist/encryptPass', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

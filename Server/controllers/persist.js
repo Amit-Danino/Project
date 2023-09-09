@@ -2,6 +2,7 @@ const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const jsonData = require('../database.json'); // Adjust the file path as needed
+const bcrypt = require('bcrypt'); // npm install bcrypt
 
 const primaryKeyMapping = {
     Users: 'user_id',
@@ -20,6 +21,7 @@ router.post("/insert", async(req, res) => {
     const data = req.body.data;
     data[primaryKeyMapping[table]] = incrementId(table);
     writeData(table, data);
+    res.status(200).json({});
 });
 
 router.post("/insertLikeIfNotExists", async(req, res) => {
@@ -54,6 +56,43 @@ router.post("/get_table_data_id", async(req, res) => {
         const value = req.body.value;
         const data = jsonData[table].filter(entry => entry[field] === value);
         res.status(200).json(data);
+    } catch (error) {
+        console.error('Error in unfollow:', error);
+        res.status(500).json({ message: 'Error in unfollowing' });
+    }
+})
+
+router.post("/add_full_name", async(req, res) => {
+    try {
+        const data = req.body.data;
+        const field = req.body.field;
+        const userIdToFullNameMap = {};
+        jsonData.Users.forEach(user => {
+            userIdToFullNameMap[user.user_id] = user.full_name;
+        });
+        data.forEach(log => {
+            log.full_name = userIdToFullNameMap[log[field]];
+        });
+        console.log(data)
+            // const data = jsonData[table].filter(entry => entry[field] === value);
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Error in unfollow:', error);
+        res.status(500).json({ message: 'Error in unfollowing' });
+    }
+})
+
+router.post("/getUsersNotFollow", async(req, res) => {
+    try {
+        const user_id = req.body.user_id;
+        const followingUserIds = jsonData["Follows"]
+            .filter(entry => entry.follower_user_id === user_id)
+            .map(entry => entry.following_user_id);
+
+        const usersNotFollowed = jsonData["Users"].filter(user => {
+            return user.user_id !== user_id && !followingUserIds.includes(user.user_id);
+        });
+        res.status(200).json(usersNotFollowed);
     } catch (error) {
         console.error('Error in unfollow:', error);
         res.status(500).json({ message: 'Error in unfollowing' });
@@ -155,13 +194,10 @@ router.post("/remove_by_2_ids", async(req, res) => {
         const id2 = req.body.id2;
         const id_value_1 = req.body.id_value_1;
         const id_value_2 = req.body.id_value_2;
-
-        console.log("BEFORE: ", jsonData[table])
         jsonData[table] = jsonData[table].filter(entry => {
             return entry[id1] !== id_value_1 || entry[id2] !== id_value_2;
         });
 
-        console.log("AFTER: ", jsonData[table])
         overwriteJSON(jsonData);
 
         res.status(200).json({ message: 'modified feature successfully' });
@@ -224,6 +260,30 @@ router.post("/addActivity", async(req, res) => {
     }
 })
 
+router.post("/encryptPass", (req, res) => {
+    try {
+        const body = req.body;
+        const hashed_password = body.password_hashed
+        const password = body.passwordToHash;
+        bcrypt.compare(password, hashed_password, (err, result) => {
+            if (err) {
+                // Handle the error (e.g., log it or return an error response)
+                console.error('Error comparing passwords:', err);
+                return res.status(500).json({ success: false, message: 'Internal Server Error' });
+            } else if (result) {
+                // Passwords match, authentication is successful
+                return res.status(200).json({ success: true, message: 'Authentication successful' });
+            } else {
+                // Passwords do not match, authentication failed
+                return res.status(200).json({ success: false, message: 'Invalid email or password' });
+            }
+        });
+    } catch (error) {
+        console.error('Error encrypting password:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
 function add_full_name_using_user_id(data) {
     const userIdToFullNameMap = {};
     jsonData.Users.forEach(user => {
@@ -268,6 +328,13 @@ function overwriteJSON(jsonData) {
         console.log("error overwriting: ", error)
     }
 }
+
+const encryptPassFunc = (password) => {
+    const saltRounds = 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(password, salt);
+    return hash;
+};
 
 
 module.exports = router;
