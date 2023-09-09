@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True/False Quiz</title>
+    <style>
+        body,
+        h1,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .title {
+            font-size: 36px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            color: #2980b9;
+            font-family: 'Dosis', sans-serif;
+            text-align: center;
+        }
+        
+        .top-bar {
+            background-color: #f2f2f2;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            /* --justify-content: space-between; */
+            height: 60px;
+        }
+        
+        .correct {
+            color: green;
+        }
+        
+        .incorrect {
+            color: red;
+        }
+        /* Style for disabled button */
+        
+        #submitBtn:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+        
+        .footer {
+            background-color: rgba(0, 0, 0, 0);
+            color: #000;
+            text-align: left;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 10px;
+        }
+        
+        .button {
+            background-color: #fff;
+            color: #3498db;
+            border: none;
+            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            gap: 10px;
+        }
+        
+        body {
+            background-image: url('Background.png');
+            /* Replace with your image file path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            /* Text color for the entire page */
+        }
+        
+        button[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        
+        .button:hover {
+            background-color: #2980b9;
+            color: #fff
+        }
+        
+        #questions {
+            transform: translateX(25%);
+            overflow-x: auto;
+        }
+        
+        #questions p {
+            margin-top: 0.5em;
+            margin-bottom: 1.5em;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="top-bar">
+        <a href="feed.html"><button class="button">Feed</button></a>
+        <a href="explore.html"><button class="button">Explore</button></a>
+        <a href="follow.html"><button class="button">Follow</button></a>
+        <a href="SuccessStories.html"><button class="button">Success Stories</button></a>
+        <a href="quiz.html"><button class="button">Quiz</button></a>
+        <a href="About.html"><button class="button">About</button></a>
+        <a href="login.html"><button id="logoutButton" class="button">Logout</button></a>
+    </div>
+    <h1 class="title">True/False Quiz</h1>
+
+    <div id="questions">
+        <p>
+            <strong>True/False: World-Link was designed specifically to connect users from different countries.</strong><br>
+            <label><input type="radio" name="q1" value="True"> True</label>
+            <label><input type="radio" name="q1" value="False"> False</label>
+        </p>
+
+        <!-- Add more questions in a similar format -->
+        <p>
+            <strong>True/False: World-Link provides users with the option to filter and connect only with individuals from their own country.</strong><br>
+            <label><input type="radio" name="q2" value="True"> True</label>
+            <label><input type="radio" name="q2" value="False"> False</label>
+        </p>
+
+        <p>
+            <strong>True/False: World-Link offers a unique feature where each person who registers on the site receives $1000 as a welcome gift.</strong><br>
+            <label><input type="radio" name="q3" value="True"> True</label>
+            <label><input type="radio" name="q3" value="False"> False</label>
+        </p>
+
+        <p>
+            <strong>True/False: World-Link was designed by two best friends who met in their 20's.</strong><br>
+            <label><input type="radio" name="q4" value="True"> True</label>
+            <label><input type="radio" name="q4" value="False"> False</label>
+        </p>
+
+        <p>
+            <strong>True/False: World-Link was designed as part of the best course of the degree.</strong><br>
+            <label><input type="radio" name="q5" value="True"> True</label>
+            <label><input type="radio" name="q5" value="False"> False</label>
+        </p>
+
+        <p>
+            <strong>True/False: World-Link was created with the intention of combating "echo chambers," where individuals often<br> encounter repetitive opinions, by encouraging users to broaden their perspectives and expand their minds.</strong><br>
+            <label><input type="radio" name="q6" value="True"> True</label>
+            <label><input type="radio" name="q6" value="False"> False</label>
+        </p>
+    </div>
+
+    <button id="submitBtn" onclick="gradeQuiz()" type="submit">Submit</button>
+
+    <script>
+        function gradeQuiz() {
+            const questions = document.querySelectorAll('div#questions > p');
+
+            questions.forEach((question, index) => {
+                const radios = question.querySelectorAll('input[type="radio"]');
+                // const selectedValue = Array.from(radios).find(radio => radio.checked)?.value;
+                let selectedValue;
+
+                const checkedRadio = Array.from(radios).find(radio => radio.checked);
+                if (checkedRadio) {
+                    selectedValue = checkedRadio.value;
+                }
+
+                if (selectedValue) {
+                    if (index === 0 && selectedValue === 'True') {
+                        question.classList.add('correct');
+                    } else if (index === 1 && selectedValue === 'False') {
+                        question.classList.add('correct');
+                    } else if (index === 2 && selectedValue === 'False') {
+                        question.classList.add('correct');
+                    } else if (index === 3 && selectedValue === 'True') {
+                        question.classList.add('correct');
+                    } else if (index === 4 && selectedValue === 'True') {
+                        question.classList.add('correct');
+                    } else if (index === 5 && selectedValue === 'True') {
+                        question.classList.add('correct');
+                    } else {
+                        question.classList.add('incorrect');
+                    }
+                }
+            });
+            submitBtn.setAttribute('disabled', 'true');
+
+        }
+        async function getCurrentUserId() {
+            const cookies = document.cookie.split(';');
+            let [name, value] = cookies[cookies.length - 1].split('=');
+            name = name.split(' ').join('')
+            const response = await fetch('http://localhost:3000/api/persist/getUserId', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: name
+                }), // Make sure you define post_id and user_id
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            return data;
+        }
+
+        async function displayAdminButtons() {
+            try {
+                const user_id = await getCurrentUserId();
+                if (user_id == 1) {
+                    const topBar = document.querySelector('.top-bar');
+                    const adminButton = document.createElement('button');
+                    adminButton.textContent = 'Admin Feature';
+                    adminButton.classList.add('button');
+
+                    // Add an event handler for the admin button
+                    adminButton.addEventListener('click', () => {
+                        // Perform the admin-specific action here
+                        window.location.href = 'admin.html';
+                        // You can replace the alert with your admin feature logic
+                    });
+
+                    // Append the admin button to the top-bar
+                    topBar.prepend(adminButton);
+                }
+            } catch (error) {
+                alert('Please log in to view the about page.');
+                window.location.href = 'login.html';
+            }
+        }
+
+        function addActivity(user_id, activity) {
+            const jsonData = {
+                activity: activity,
+                user_id: user_id
+            }
+            try {
+                fetch('http://localhost:3000/api/persist/addActivity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonData),
+                });
+                return true;
+            } catch (error) {
+                alert(`error adding ${activity} activity`)
+                return false;
+            }
+        }
+
+        window.addEventListener("load", () => {
+            displayAdminButtons();
+            const logoutButton = document.getElementById('logoutButton');
+            logoutButton.addEventListener('click', async() => {
+                const user_id = await getCurrentUserId();
+                const pastDate = new Date();
+                pastDate.setTime(pastDate.getTime() - (1 * 24 * 60 * 60 * 1000));
+                document.cookie = 'logout=logout;expires=' + pastDate.toUTCString() + ';path=/';
+                document.cookie = 'logout=logout;path=/';
+                addActivity(user_id, 'logout');
+            })
+        });
+    </script>
+    <div class="footer">
+        &copy; 2023 WorldLink. All rights reserved.
+    </div>
+</body>
+
+</html>
