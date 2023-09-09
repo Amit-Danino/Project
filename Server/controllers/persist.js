@@ -100,6 +100,7 @@ router.post("/feed", async(req, res) => {
         const followedUserIds = jsonData['Follows']
             .filter(follow => follow.follower_user_id === user_id)
             .map(follow => follow.following_user_id);
+        followedUserIds.push(user_id);
 
         const filteredPosts = jsonData['Posts'].filter(post => {
             const user = jsonData['Users'].find(user => user.user_id === post.user_id);

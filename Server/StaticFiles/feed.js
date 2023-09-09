@@ -69,7 +69,6 @@ function addActivity(user_id, activity) {
 // Function to display the posts like on Facebook
 function displayPosts(posts) {
     const feedContainer = document.getElementById('feed');
-    // feedContainer.innerHTML = '';
     if (posts.length === 0) {
         feedContainer.textContent = 'No posts available from other countries.';
     } else {
@@ -85,8 +84,6 @@ function displayPosts(posts) {
                         <h3>${post.full_name}</h3>
                         <p class="date">${formatDate(post.post_date)}</p>
                         <p class="country"> </p>
-                        <button class="follow-button" >Follow</button>
-                        <button class="unfollow-button" style="display: none;">Unfollow</button>
                     </div>
                     
                     <p class="post-caption">${post.caption}</p>
@@ -114,9 +111,6 @@ function displayPosts(posts) {
                 const dislikeButton = postElement.querySelector('.dislike-button');
                 const cancelLikeButton = postElement.querySelector('.cancel-like-button'); // Add this line 
                 const cancelDislikeButton = postElement.querySelector('.cancel-dislike-button');
-                const followButton = postElement.querySelector('.follow-button');
-                const unfollowButton = postElement.querySelector('.unfollow-button');
-                followButtonVisibility(post.user_id);
 
                 likeAndDislikeButtonVisibility(post.post_id);
 
@@ -186,29 +180,6 @@ function displayPosts(posts) {
                         dislikeButton.click();
                     }
                 }
-
-                async function followButtonVisibility(post_user_id) {
-                    if (await checkIfAlreadyFollowingUser(post_user_id)) {
-                        followButton.style.display = 'none'; // Hide the Like button
-                        unfollowButton.style.display = 'inline-block'; // Show the Cancel Like button
-                    }
-                }
-
-                followButton.addEventListener('click', async() => {
-                    const user_id = await getCurrentUserId();
-                    const post_user_id = post.user_id;
-                    addFollow(user_id, post_user_id);
-                    followButton.style.display = 'none'; // Hide the Like button
-                    unfollowButton.style.display = 'inline-block'; // Show the Cancel Like button
-                })
-
-                unfollowButton.addEventListener('click', async() => {
-                    const user_id = await getCurrentUserId();
-                    const post_user_id = post.user_id;
-                    removeFollow(user_id, post_user_id);
-                    followButton.style.display = 'inline-block'; // Show the Cancel Like button
-                    unfollowButton.style.display = 'none'; // Hide the Like button
-                })
 
                 logoutButton.addEventListener('click', async() => {
                     const user_id = await getCurrentUserId();
@@ -337,61 +308,6 @@ function displayPosts(posts) {
                     } catch (error) {
                         console.error('Error adding follow:', error);
                         return false;
-                    }
-                }
-
-
-                async function checkIfAlreadyFollowingUser(post_user_id) {
-                    try {
-                        const user_id = await getCurrentUserId();
-                        jsonData = { table: "Follows", field1: "follower_user_id", field2: "following_user_id", value1: user_id, value2: post_user_id };
-                        const response = await fetch('http://localhost:3000/api/persist/get_table_data_id_2_values', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(jsonData),
-                        })
-                        if (response.ok) {
-                            const data = await response.json();
-                            return data.length > 0;
-                        } else {
-                            throw new error('Unable to add follow')
-                            return false;
-                        }
-                    } catch (error) {
-                        console.error('Error adding follow:', error);
-                        return false;
-                    }
-                }
-                async function addFollow(user_id, post_user_id) {
-                    try {
-                        jsonData = { table: 'Follows', data: { follower_user_id: user_id, following_user_id: post_user_id, follow_date: new Date() } }
-                        const response = await fetch('http://localhost:3000/api/persist/insert', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(jsonData),
-                        })
-                    } catch (error) {
-                        console.error('Error adding follow:', error);
-                        return null;
-                    }
-                }
-                async function removeFollow(user_id, post_user_id) {
-                    try {
-                        jsonData = { table: 'Follows', id1: 'follower_user_id', id2: 'following_user_id', id_value_1: user_id, id_value_2: post_user_id };
-                        await fetch('http://localhost:3000/api/persist/remove_by_2_ids', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(jsonData),
-                        })
-                    } catch (error) {
-                        console.error('Error adding follow:', error);
-                        return null;
                     }
                 }
 
@@ -670,19 +586,15 @@ async function displayPostForm() {
         postInput.value = ''
         const user_id = await getCurrentUserId();
         try {
+            window.location.reload();
             const jsonData = { table: "Posts", data: { user_id: user_id, caption: caption, image_url: "landmarks1.jpg", post_date: new Date() } }
-            const response = await fetch('http://localhost:3000/api/persist/insert', {
+            await fetch('http://localhost:3000/api/persist/insert', {
                 method: 'POST',
                 body: JSON.stringify(jsonData),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            if (response.ok) {
-                window.location.reload();
-            } else {
-                throw new Error('Errorz adding post');
-            }
         } catch (error) {
             console.error('Errors adding post:', error);
             return false;
