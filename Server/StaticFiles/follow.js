@@ -123,11 +123,12 @@ async function populateFollowingList() {
         const current_user_id = await getCurrentUserId();
         const followingData = await getFollowingData(current_user_id);
         const following_data_with_full_name = await addFullName(followingData, "following_user_id");
+        const filteredData = following_data_with_full_name.filter(item => item.full_name !== undefined);
 
-        following_data_with_full_name.sort((a, b) => a.full_name.localeCompare(b.full_name));
+        filteredData.sort((a, b) => a.full_name.localeCompare(b.full_name));
 
         followingList.innerHTML = '';
-        following_data_with_full_name.forEach((user) => {
+        filteredData.forEach((user) => {
             let listItem = document.createElement('li');
             listItem.classList.add('following-list-item')
             listItem.textContent = user.full_name;

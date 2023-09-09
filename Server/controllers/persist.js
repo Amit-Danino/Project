@@ -73,8 +73,7 @@ router.post("/add_full_name", async(req, res) => {
         data.forEach(log => {
             log.full_name = userIdToFullNameMap[log[field]];
         });
-        console.log(data)
-            // const data = jsonData[table].filter(entry => entry[field] === value);
+        // const data = jsonData[table].filter(entry => entry[field] === value);
         res.status(200).json(data);
     } catch (error) {
         console.error('Error in unfollow:', error);
@@ -326,7 +325,7 @@ function writeData(table, data) {
         if (err) {
             console.error('Error writing to JSON file:', err);
         } else {
-            console.log(`${table} added successfully: `, data);
+            console.log(`entry to ${table} added successfully`);
         }
     })
 };
