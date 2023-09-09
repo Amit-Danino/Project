@@ -34,7 +34,7 @@
             const cookies = document.cookie.split(';');
             let [name, value] = cookies[cookies.length - 1].split('=');
             name = name.split(' ').join('')
-            const response = await fetch('http://localhost:3000/api/users/getUserId', {
+            const response = await fetch('http://localhost:3000/api/persist/getUserId', {
                 method: 'POST',
                 body: JSON.stringify({
                     email: name
@@ -49,7 +49,7 @@
             }
 
             const data = await response.json();
-            return data[0].user_id;
+            return data;
         }
 
         async function displayAdminButtons() {
@@ -79,15 +79,23 @@
         // Function to fetch and populate success stories
         async function fetchAndPopulateStories() {
             try {
-                const response = await fetch("http://localhost:3000/api/successstories/selectSuccessStories");
+                const response = await fetch("http://localhost:3000/api/persist/get_table_data", {
+                    body: JSON.stringify({
+                        table: "SuccessStories"
+                    }),
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
                 if (response.ok) {
                     const data = await response.json();
 
                     // Clear existing list items
                     successStoriesList.innerHTML = "";
-
+                    console.log(data);
                     // Loop through the data and create list items
-                    data.data.forEach((story) => {
+                    data.forEach((story) => {
                         // Create a list item
                         const listItem = document.createElement("li");
 

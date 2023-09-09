@@ -73,7 +73,7 @@ const registerUser = async(e) => {
 
     const firstname = document.querySelector("#firstname").value;
     const lastname = document.querySelector("#lastname").value;
-    const password = document.querySelector("#password").value;
+    let password = document.querySelector("#password").value;
     const email = document.querySelector("#email").value;
     const bio = document.querySelector("#bio").value;
     const profile_picture_url = document.querySelector("#profile_picture_url").value;
@@ -89,13 +89,15 @@ const registerUser = async(e) => {
             break;
         }
     }
+    password_hash = await getEncryptedPass(password);
+    const full_name = firstname + " " + lastname;
+    const username = firstname + "_" + lastname;
     const birth_date = new Date(birthYear, monthNameToNumber[birthMonth], birthDay).toISOString().slice(0, 10);
-    const newUser = { firstname, lastname, password, email, bio, profile_picture_url, country, birth_date, gender };
-    console.log(birth_date);
-    console.log(newUser);
+    const newUser = { username, email, password_hash, full_name, bio, profile_picture_url, country, registration_date: new Date(), birth_date, gender };
 
-    fetch("http://localhost:3000/api/users/register", {
-            body: JSON.stringify(newUser),
+    const user_json_data = { table: "Users", data: newUser }
+    fetch("http://localhost:3000/api/persist/insert", {
+            body: JSON.stringify(user_json_data),
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -115,3 +117,25 @@ const registerUser = async(e) => {
             alert("Email already exists in the system.");
         });
 };
+
+async function getEncryptedPass(password) {
+    return fetch("http://localhost:3000/api/persist/getEncryptedPass", {
+            body: JSON.stringify({ passwordToHash: password }),
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Request failed");
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data.encrypted_password;
+        })
+        .catch(error => {
+            alert("Email already exists in the system.");
+        });
+}

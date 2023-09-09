@@ -236,24 +236,33 @@ router.post("/getActivity", async(req, res) => {
     }
 })
 
+let lastActivityTime = 0; // Initialize the last activity time
+
 router.post("/addActivity", async(req, res) => {
     try {
-        const log_id = incrementId("ActivityLog");
-        const user_id = req.body.user_id;
-        const activity_type = req.body.activity;
-        const activity_time = new Date();
+        const currentTime = Date.now(); // Get the current timestamp
+        const timeSinceLastActivity = currentTime - lastActivityTime;
+        if (timeSinceLastActivity >= 500) {
+            lastActivityTime = currentTime; // Update the last activity time
 
-        const data = {
-            log_id: log_id,
-            user_id: user_id,
-            activity_type: activity_type,
-            activity_time: activity_time,
+            const log_id = incrementId("ActivityLog");
+            const user_id = req.body.user_id;
+            const activity_type = req.body.activity;
+            const activity_time = new Date();
+
+            const data = {
+                log_id: log_id,
+                user_id: user_id,
+                activity_type: activity_type,
+                activity_time: activity_time,
+            }
+
+            add_full_name_using_user_id([data]);
+
+            writeData("ActivityLog", data);
         }
-
-        add_full_name_using_user_id([data]);
-        writeData("ActivityLog", data);
-
         res.status(200).json({ message: "added activity successfully" });
+
     } catch (error) {
         console.error('Error in unfollow:', error);
         res.status(500).json({ message: 'Error in unfollowing' });
@@ -262,9 +271,10 @@ router.post("/addActivity", async(req, res) => {
 
 router.post("/encryptPass", (req, res) => {
     try {
-        const body = req.body;
-        const hashed_password = body.password_hashed
-        const password = body.passwordToHash;
+        const hashed_password = req.body.password_hashed
+        const password = req.body.passwordToHash;
+        console.log(hashed_password);
+        console.log(password);
         bcrypt.compare(password, hashed_password, (err, result) => {
             if (err) {
                 // Handle the error (e.g., log it or return an error response)
@@ -278,6 +288,17 @@ router.post("/encryptPass", (req, res) => {
                 return res.status(200).json({ success: false, message: 'Invalid email or password' });
             }
         });
+    } catch (error) {
+        console.error('Error encrypting password:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+router.post("/getEncryptedPass", (req, res) => {
+    try {
+        const password = req.body.passwordToHash;
+        const enc_password = encryptPassFunc(password);
+        res.status(200).json({ encrypted_password: enc_password });
     } catch (error) {
         console.error('Error encrypting password:', error);
         res.status(500).json({ error: 'Internal Server Error' });

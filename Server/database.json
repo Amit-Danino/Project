@@ -147,6 +147,19 @@
       "registration_date": "CURRENT_TIMESTAMP",
       "birth_date": "1990-03-19",
       "gender": "male"
+    },
+    {
+      "username": "t_t",
+      "email": "test@gmail.com",
+      "password_hash": "$2b$10$BnDhGai.HaMelsHKslIFyOz.yUoljkOKeTAZQw3bQfs.SYhsotRi6",
+      "full_name": "t t",
+      "bio": "t",
+      "profile_picture_url": "t",
+      "country": "Afghanistan",
+      "registration_date": "2023-09-09T13:08:12.665Z",
+      "birth_date": "2007-04-17",
+      "gender": "male",
+      "user_id": 11
     }
   ],
   "Posts": [
@@ -179,21 +192,24 @@
       "user_id": 5,
       "caption": "Creating soul-touching music with every note. #Music #Composer",
       "image_url": "music1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Sara Smith"
     },
     {
       "post_id": 5,
       "user_id": 6,
       "caption": "Sunset views that take your breath away. #SunsetLovers #Nature",
       "image_url": "sunset1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Mike Johnson"
     },
     {
       "post_id": 6,
       "user_id": 7,
       "caption": "French cuisine at its finest. Bon appétit! #FrenchCuisine #Foodie",
       "image_url": "french_cuisine1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Rachel Green"
     },
     {
       "post_id": 7,
@@ -208,14 +224,16 @@
       "user_id": 9,
       "caption": "Nature's symphony - birds, rivers, and trees. #NatureLover #Outdoors",
       "image_url": "nature2.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Linda Davis"
     },
     {
       "post_id": 9,
       "user_id": 10,
       "caption": "Exploring historical landmarks and their stories. #History #Travel",
       "image_url": "landmarks1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Peter Walker"
     },
     {
       "post_id": 10,
@@ -478,28 +496,28 @@
       "follow_date": "CURRENT_TIMESTAMP"
     },
     {
-      "follower_user_id": 1,
-      "following_user_id": 2,
-      "follow_date": "2023-09-09T12:02:01.681Z",
+      "follower_user_id": 11,
+      "following_user_id": 8,
+      "follow_date": "2023-09-09T13:08:25.205Z",
+      "follow_id": 11
+    },
+    {
+      "follower_user_id": 11,
+      "following_user_id": 10,
+      "follow_date": "2023-09-09T13:08:33.034Z",
       "follow_id": 12
     },
     {
       "follower_user_id": 1,
       "following_user_id": 8,
-      "follow_date": "2023-09-09T12:02:04.438Z",
+      "follow_date": "2023-09-09T13:15:40.523Z",
       "follow_id": 13
     },
     {
       "follower_user_id": 1,
       "following_user_id": 3,
-      "follow_date": "2023-09-09T12:02:50.972Z",
+      "follow_date": "2023-09-09T13:15:41.202Z",
       "follow_id": 14
-    },
-    {
-      "follower_user_id": 1,
-      "following_user_id": 4,
-      "follow_date": "2023-09-09T12:10:44.774Z",
-      "follow_id": 15
     }
   ],
   "ActivityLog": [
@@ -507,95 +525,154 @@
       "log_id": 1,
       "user_id": 1,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "admin admin"
     },
     {
       "log_id": 2,
       "user_id": 2,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "John Doe"
     },
     {
       "log_id": 3,
       "user_id": 3,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Hagar Yulevich"
     },
     {
       "log_id": 4,
       "user_id": 4,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Elad Ozer"
     },
     {
       "log_id": 5,
       "user_id": 5,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Sara Smith"
     },
     {
       "log_id": 6,
       "user_id": 6,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Mike Johnson"
     },
     {
       "log_id": 7,
       "user_id": 7,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Rachel Green"
     },
     {
       "log_id": 8,
       "user_id": 8,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "David Miller"
     },
     {
       "log_id": 9,
       "user_id": 9,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Linda Davis"
     },
     {
       "log_id": 10,
       "user_id": 10,
       "activity_type": "login",
-      "activity_time": "CURRENT_TIMESTAMP"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Peter Walker"
     },
     {
       "log_id": 11,
       "user_id": 1,
       "activity_type": "logout",
-      "activity_time": "2023-09-09T12:05:37.859Z",
+      "activity_time": "2023-09-09T13:07:58.206Z",
       "full_name": "admin admin"
     },
     {
       "log_id": 12,
       "user_id": 1,
       "activity_type": "login",
-      "activity_time": "2023-09-09T12:10:37.468Z",
+      "activity_time": "2023-09-09T13:07:59.236Z",
       "full_name": "admin admin"
     },
     {
       "log_id": 13,
       "user_id": 1,
       "activity_type": "logout",
-      "activity_time": "2023-09-09T12:10:46.024Z",
+      "activity_time": "2023-09-09T13:08:02.423Z",
       "full_name": "admin admin"
     },
     {
       "log_id": 14,
-      "user_id": 1,
+      "user_id": 11,
       "activity_type": "login",
-      "activity_time": "2023-09-09T12:10:59.652Z",
-      "full_name": "admin admin"
+      "activity_time": "2023-09-09T13:08:16.736Z",
+      "full_name": "t t"
     },
     {
       "log_id": 15,
+      "user_id": 11,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T13:08:52.443Z",
+      "full_name": "t t"
+    },
+    {
+      "log_id": 16,
+      "user_id": 11,
+      "activity_type": "login",
+      "activity_time": "2023-09-09T13:09:01.247Z",
+      "full_name": "t t"
+    },
+    {
+      "log_id": 17,
+      "user_id": 11,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T13:09:02.641Z",
+      "full_name": "t t"
+    },
+    {
+      "log_id": 18,
       "user_id": 1,
       "activity_type": "login",
-      "activity_time": "2023-09-09T12:11:02.382Z",
+      "activity_time": "2023-09-09T13:09:12.456Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 19,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T13:09:18.229Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 20,
+      "user_id": 1,
+      "activity_type": "login",
+      "activity_time": "2023-09-09T13:12:34.666Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 21,
+      "user_id": 1,
+      "activity_type": "login",
+      "activity_time": "2023-09-09T13:15:36.122Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 22,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T13:15:49.443Z",
       "full_name": "admin admin"
     }
   ],
