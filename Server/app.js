@@ -1,13 +1,4 @@
-//import express , mysql library, userRountes
 const express = require('express');
-// const usersRoutes = require("./routes/users-routes");
-// const postsRoutes = require("./routes/posts-routes");
-// const commentsRoutes = require("./routes/comments-routes");
-// const successstoriesRoutes = require("./routes/successstories-routes");
-// const activitylogRoutes = require("./routes/activitylog-routes");
-// const followsRoutes = require("./routes/follows-routes");
-// const likesRoutes = require("./routes/likes-routes");
-// const featureRoutes = require("./routes/feature-routes");
 
 const persistRoutes = require("./controllers/persist");
 
@@ -40,19 +31,10 @@ app.use((req, res, next) => {
 
 
 //routes - routes the requests to the server
-// app.use(`/api/users`, usersRoutes);
-// app.use(`/api/posts`, postsRoutes);
-// app.use(`/api/comments`, commentsRoutes);
-// app.use(`/api/successstories`, successstoriesRoutes);
-// app.use(`/api/activitylog`, activitylogRoutes);
-// app.use(`/api/follows`, followsRoutes);
-// app.use(`/api/likes`, likesRoutes);
-// app.use(`/api/feature`, featureRoutes);
 
 app.use(`/api/persist`, persistRoutes);
 
 
-//TODO:
 //open html file - later on maybe change to home page
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/StaticFiles/home.html');
