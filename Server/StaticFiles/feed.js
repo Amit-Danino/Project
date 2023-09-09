@@ -70,7 +70,10 @@ function addActivity(user_id, activity) {
 function displayPosts(posts) {
     const feedContainer = document.getElementById('feed');
     if (posts.length === 0) {
-        feedContainer.textContent = 'No posts available from other countries.';
+        const div_to_add = document.createElement('div');
+        div_to_add.textContent = 'No posts available posts for your feed, try following users in the following/explore pages or even make your own post!.';
+        div_to_add.classList.add('no-posts-div');
+        feedContainer.appendChild(div_to_add);
     } else {
         let currentPost = null;
         posts.forEach(async post => {
@@ -657,7 +660,6 @@ const loadFeed = async() => {
             throw new Error('Error fetching posts');
         }
         const posts = await response.json();
-        console.log(posts);
         // Display posts like on Facebook
         displayPostForm();
         displayPosts(posts);

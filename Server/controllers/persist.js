@@ -271,8 +271,6 @@ router.post("/encryptPass", (req, res) => {
     try {
         const hashed_password = req.body.password_hashed
         const password = req.body.passwordToHash;
-        console.log(hashed_password);
-        console.log(password);
         bcrypt.compare(password, hashed_password, (err, result) => {
             if (err) {
                 // Handle the error (e.g., log it or return an error response)

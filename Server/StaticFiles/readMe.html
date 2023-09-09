@@ -100,31 +100,23 @@
             <h2>6. Specify all the different (server) routes your app supports</h2>
             <p>Our app supports the following server routes:</p>
             <ul>
-                <li>POST /addActivity:Adding activity to activity log.</li>
-                <li>POST /getActivity: get activity from activity log.</li>
-                <li>POST /addComment: add comment to post.</li>
-                <li>POST /getCommentsFromPost: get all comments of a post.</li>
-                <li>POST /followers: get all followers of the logged in user.</li>
-                <li>POST /following: get all following of a logged in user.</li>
-                <li>POST /unfollow:unfollow user.</li>
-                <li>POST /remove user:remove user from your followers list.</li>
-                <li>POST /feed:get the feed of logged in user.</li>
-                <li>POST /like:like a post.</li>
-                <li>POST /dislike: dislike a post.</li>
-                <li>POST /cancel-like:cancel-like to a post.</li>
-                <li>POST /cancel-dislike:cancel-dislike to a post.</li>
-                <li>POST /like-count:count the likes of a post.</li>
-                <li>POST /dislike-count:count the dislikes of a post.</li>
-                <li>GET /selectSuccessStories:present success stories from db.</li>
-                <li>POST /register:register a user to the app.</li>
-                <li>POST /getUsers:get the users info.</li>
-                <li>POST /encryptPass:encrypt Password.</li>
-                <li>POST /getUserId:get the user's id.</li>
-                <li>POST /getUserCountry:get the user's country.</li>
-                <li>POST /getUserFullname: get user's full name.</li>
-                <li>POST /removeUser:remove a user from the db.</li>
-                <li>POST /????????????????????????????????????</li>
-
+                <li>POST /insert: inserts an entry into a table </li>
+                <li>POST /insertLikeIfNotExists: inserts an entry into a table if it doesnt already exist</li>
+                <li>POST /get_table_data: gets all table data</li>
+                <li>POST /get_table_data_id: gets all table data according to id</li>
+                <li>POST /add_full_name: adds full_name to a json element</li>
+                <li>POST /getUsersNotFollow: gets all users that you do not follow</li>
+                <li>POST /get_table_data_id_2_values: gets all table data according to 2 id values</li>
+                <li>POST /explore: gets all explore posts</li>
+                <li>POST /feed: gets all feed posts</li>
+                <li>POST /modify_feature: modifies feature</li>
+                <li>POST /remove_by_id: remove entry in database according to id</li>
+                <li>POST /remove_by_2_ids: remove entry in database according to 2 id values</li>
+                <li>POST /getUserId: gets user_id of the currently logged in account</li>
+                <li>POST /getActivity: gets all activities of activity_type</li>
+                <li>POST /addActivity: adds activity to ActivityLog</li>
+                <li>POST /encryptPass: encrypts password</li>
+                <li>POST /getEncryptedPass: gets the encrypted password</li>
             </ul>
         </div>
     </div>
