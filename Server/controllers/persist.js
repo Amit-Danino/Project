@@ -8,7 +8,7 @@ const primaryKeyMapping = {
     Posts: 'post_id',
     Comments: 'comment_id',
     Likes: 'like_id',
-    Dislikes: 'dislike_id',
+    DisLikes: 'dislike_id',
     Follows: 'follow_id',
     ActivityLog: 'log_id',
     SuccessStories: 'story_id',
@@ -22,6 +22,21 @@ router.post("/insert", async(req, res) => {
     writeData(table, data);
 });
 
+router.post("/insertLikeIfNotExists", async(req, res) => {
+    const table = req.body.table;
+    const data = req.body.data;
+    const existingLike = jsonData[table].some(entry =>
+        entry.post_id === data.post_id && entry.user_id === data.user_id
+    );
+
+    if (!existingLike) {
+        data[primaryKeyMapping[table]] = incrementId(table);
+        writeData(table, data);
+    }
+
+    res.status(200).json({ response: existingLike });
+});
+
 router.post("/get_table_data", async(req, res) => {
     try {
         const table = req.body.table;
@@ -29,6 +44,73 @@ router.post("/get_table_data", async(req, res) => {
     } catch (error) {
         console.error('Error in unfollow:', error);
         res.status(500).json({ message: 'Error in unfollowing' });
+    }
+})
+
+router.post("/get_table_data_id", async(req, res) => {
+    try {
+        const table = req.body.table;
+        const field = req.body.field;
+        const value = req.body.value;
+        const data = jsonData[table].filter(entry => entry[field] === value);
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Error in unfollow:', error);
+        res.status(500).json({ message: 'Error in unfollowing' });
+    }
+})
+
+router.post("/get_table_data_id_2_values", async(req, res) => {
+    try {
+        const table = req.body.table;
+        const field1 = req.body.field1;
+        const field2 = req.body.field2;
+        const value1 = req.body.value1;
+        const value2 = req.body.value2;
+
+        const data = jsonData[table].filter(entry => {
+            return entry[field1] == value1 && entry[field2] == value2;
+        });
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Error in unfollow:', error);
+        res.status(500).json({ message: 'Error in unfollowing' });
+    }
+})
+
+router.post("/explore", async(req, res) => {
+    try {
+        const country = req.body.country;
+        const filteredPosts = jsonData['Posts'].filter(post => {
+            const user = jsonData['Users'].find(user => user.user_id === post.user_id);
+            return user && user.country !== country;
+        });
+        const sortedPosts = filteredPosts.sort((a, b) => b.post_id - a.post_id);
+        add_full_name_using_user_id(sortedPosts);
+        res.status(200).json(sortedPosts);
+    } catch (error) {
+        res.status(500).json({ message: 'Error in showing explore posts' });
+    }
+})
+
+router.post("/feed", async(req, res) => {
+    try {
+        const user_id = req.body.user_id;
+
+        const followedUserIds = jsonData['Follows']
+            .filter(follow => follow.follower_user_id === user_id)
+            .map(follow => follow.following_user_id);
+
+        const filteredPosts = jsonData['Posts'].filter(post => {
+            const user = jsonData['Users'].find(user => user.user_id === post.user_id);
+            return user && followedUserIds.includes(user.user_id);
+        });
+
+        const sortedPosts = filteredPosts.sort((a, b) => b.post_id - a.post_id);
+        add_full_name_using_user_id(sortedPosts);
+        res.status(200).json(sortedPosts);
+    } catch (error) {
+        res.status(500).json({ message: 'Error in showing explore posts' });
     }
 })
 
@@ -65,7 +147,28 @@ router.post("/remove_by_id", async(req, res) => {
         res.status(500).json({ message: 'Error in modifying feature' });
     }
 })
+router.post("/remove_by_2_ids", async(req, res) => {
+    try {
+        const table = req.body.table;
+        const id1 = req.body.id1;
+        const id2 = req.body.id2;
+        const id_value_1 = req.body.id_value_1;
+        const id_value_2 = req.body.id_value_2;
 
+        console.log("BEFORE: ", jsonData[table])
+        jsonData[table] = jsonData[table].filter(entry => {
+            return entry[id1] !== id_value_1 || entry[id2] !== id_value_2;
+        });
+
+        console.log("AFTER: ", jsonData[table])
+        overwriteJSON(jsonData);
+
+        res.status(200).json({ message: 'modified feature successfully' });
+    } catch (error) {
+        console.error('Error in unfollow:', error);
+        res.status(500).json({ message: 'Error in modifying feature' });
+    }
+})
 router.post("/getUserId", async(req, res) => {
     try {
         const email = req.body.email;
@@ -87,6 +190,7 @@ router.post("/getActivity", async(req, res) => {
     try {
         const activity = req.body.activity;
         const activityResult = jsonData.ActivityLog.filter((element) => element.activity_type == activity);
+        activityResult.sort((a, b) => b.log_id - a.log_id);
         add_full_name_using_user_id(activityResult);
         res.status(200).json(activityResult);
     } catch (error) {
@@ -144,7 +248,7 @@ function writeData(table, data) {
         if (err) {
             console.error('Error writing to JSON file:', err);
         } else {
-            console.log('User added successfully.');
+            console.log(`${table} added successfully: `, data);
         }
     })
 };

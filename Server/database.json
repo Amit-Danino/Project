@@ -10,7 +10,7 @@
     },
     {
       "feature_name": "successStories",
-      "feature_status": "disabled"
+      "feature_status": "enabled"
     },
     {
       "feature_name": "aboutMe",
@@ -58,6 +58,19 @@
       "gender": "female"
     },
     {
+      "user_id": 4,
+      "username": "elad_foodie",
+      "email": "elad@example.com",
+      "password_hash": "eladpassword",
+      "full_name": "Elad Ozer",
+      "bio": "Foodie and blogger",
+      "profile_picture_url": "profile3.jpg",
+      "country": "Croatia",
+      "registration_date": "CURRENT_TIMESTAMP",
+      "birth_date": "1996-05-07",
+      "gender": "other"
+    },
+    {
       "user_id": 5,
       "username": "sara_photography",
       "email": "sara@example.com",
@@ -97,19 +110,6 @@
       "gender": "female"
     },
     {
-      "user_id": 8,
-      "username": "david_outdoor",
-      "email": "david@example.com",
-      "password_hash": "davidpassword",
-      "full_name": "David Miller",
-      "bio": "Outdoor enthusiast",
-      "profile_picture_url": "profile7.jpg",
-      "country": "Australia",
-      "registration_date": "CURRENT_TIMESTAMP",
-      "birth_date": "1994-07-10",
-      "gender": "male"
-    },
-    {
       "user_id": 9,
       "username": "linda_nature",
       "email": "linda@example.com",
@@ -134,47 +134,6 @@
       "registration_date": "CURRENT_TIMESTAMP",
       "birth_date": "1990-03-19",
       "gender": "male"
-    },
-    {
-      "user_id": 16,
-      "username": "admin",
-      "email": "admin",
-      "password_hash": "admin",
-      "full_name": "admin admin",
-      "bio": "Foodie and blogger",
-      "profile_picture_url": "profile3.jpg",
-      "country": "Israel",
-      "registration_date": "1996-11-07T00:00:00.000Z",
-      "birth_date": "1996-11-07",
-      "gender": "male",
-      "Users": 11
-    },
-    {
-      "user_id": 16,
-      "username": "admin",
-      "email": "admin",
-      "password_hash": "admin",
-      "full_name": "admin admin",
-      "bio": "Foodie and blogger",
-      "profile_picture_url": "profile3.jpg",
-      "country": "Israel",
-      "registration_date": "1996-11-07T00:00:00.000Z",
-      "birth_date": "1996-11-07",
-      "gender": "male",
-      "Users": 17
-    },
-    {
-      "username": "admin",
-      "email": "admin",
-      "password_hash": "admin",
-      "full_name": "admin admin",
-      "bio": "Foodie and blogger",
-      "profile_picture_url": "profile3.jpg",
-      "country": "Israel",
-      "registration_date": "1996-11-07T00:00:00.000Z",
-      "birth_date": "1996-11-07",
-      "gender": "male",
-      "user_id": 17
     }
   ],
   "Posts": [
@@ -183,70 +142,87 @@
       "user_id": 2,
       "caption": "Exploring the world, one adventure at a time. #Wanderlust #Traveler #Adventure",
       "image_url": "travel1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "John Doe"
     },
     {
       "post_id": 2,
       "user_id": 3,
       "caption": "Delicious homemade pizza for dinner tonight. Here is the recipe! #Foodie #Cooking",
       "image_url": "pizza1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Hagar Yulevich"
     },
     {
       "post_id": 3,
       "user_id": 4,
       "caption": "Capturing the beauty of nature in its purest form. #NaturePhotography #Wilderness",
       "image_url": "nature1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Elad Ozer"
     },
     {
       "post_id": 4,
       "user_id": 5,
       "caption": "Creating soul-touching music with every note. #Music #Composer",
       "image_url": "music1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Sara Smith"
     },
     {
       "post_id": 5,
       "user_id": 6,
       "caption": "Sunset views that take your breath away. #SunsetLovers #Nature",
       "image_url": "sunset1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Mike Johnson"
     },
     {
       "post_id": 6,
       "user_id": 7,
       "caption": "French cuisine at its finest. Bon appétit! #FrenchCuisine #Foodie",
       "image_url": "french_cuisine1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Rachel Green"
     },
     {
       "post_id": 7,
       "user_id": 8,
       "caption": "Camping under the starry night sky. #Camping #Adventure",
       "image_url": "camping1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "David Miller"
     },
     {
       "post_id": 8,
       "user_id": 9,
       "caption": "Nature's symphony - birds, rivers, and trees. #NatureLover #Outdoors",
       "image_url": "nature2.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Linda Davis"
     },
     {
       "post_id": 9,
       "user_id": 10,
       "caption": "Exploring historical landmarks and their stories. #History #Travel",
       "image_url": "landmarks1.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "Peter Walker"
     },
     {
       "post_id": 10,
       "user_id": 2,
       "caption": "Making memories that last a lifetime. #AdventureTime #TravelGoals",
       "image_url": "travel2.jpg",
-      "post_date": "CURRENT_TIMESTAMP"
+      "post_date": "CURRENT_TIMESTAMP",
+      "full_name": "John Doe"
+    },
+    {
+      "user_id": 1,
+      "caption": "testing testing",
+      "image_url": "landmarks1.jpg",
+      "post_date": "2023-09-09T04:36:36.269Z",
+      "post_id": 11
     }
   ],
   "Comments": [
@@ -319,15 +295,21 @@
       "post_id": 10,
       "comment_text": "These landmarks have so much history. Which one is your favorite?",
       "comment_date": "CURRENT_TIMESTAMP"
+    },
+    {
+      "post_id": 10,
+      "user_id": 1,
+      "comment_text": "test",
+      "comment_id": 11
+    },
+    {
+      "post_id": 10,
+      "user_id": 1,
+      "comment_text": "asdfasdf",
+      "comment_id": 12
     }
   ],
   "Likes": [
-    {
-      "like_id": 1,
-      "user_id": 1,
-      "post_id": 1,
-      "like_date": "CURRENT_TIMESTAMP"
-    },
     {
       "like_id": 2,
       "user_id": 2,
@@ -374,12 +356,6 @@
       "like_id": 9,
       "user_id": 9,
       "post_id": 9,
-      "like_date": "CURRENT_TIMESTAMP"
-    },
-    {
-      "like_id": 10,
-      "user_id": 10,
-      "post_id": 10,
       "like_date": "CURRENT_TIMESTAMP"
     }
   ],
@@ -439,25 +415,19 @@
       "dislike_date": "CURRENT_TIMESTAMP"
     },
     {
-      "dislike_id": 10,
-      "user_id": 1,
       "post_id": 10,
-      "dislike_date": "CURRENT_TIMESTAMP"
+      "user_id": 1,
+      "like_date": "2023-09-09T04:12:48.236Z",
+      "dislike_id": 10
+    },
+    {
+      "post_id": 9,
+      "user_id": 1,
+      "like_date": "2023-09-09T04:12:49.320Z",
+      "dislike_id": 11
     }
   ],
   "Follows": [
-    {
-      "follow_id": 1,
-      "follower_user_id": 1,
-      "following_user_id": 2,
-      "follow_date": "CURRENT_TIMESTAMP"
-    },
-    {
-      "follow_id": 2,
-      "follower_user_id": 2,
-      "following_user_id": 3,
-      "follow_date": "CURRENT_TIMESTAMP"
-    },
     {
       "follow_id": 3,
       "follower_user_id": 3,
@@ -505,6 +475,12 @@
       "follower_user_id": 10,
       "following_user_id": 1,
       "follow_date": "CURRENT_TIMESTAMP"
+    },
+    {
+      "follower_user_id": 1,
+      "following_user_id": 2,
+      "follow_date": "2023-09-09T04:35:10.054Z",
+      "follow_id": 17
     }
   ],
   "ActivityLog": [
@@ -512,90 +488,139 @@
       "log_id": 1,
       "user_id": 1,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "admin admin"
     },
     {
       "log_id": 2,
       "user_id": 2,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "John Doe"
     },
     {
       "log_id": 3,
       "user_id": 3,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "Hagar Yulevich"
     },
     {
       "log_id": 4,
       "user_id": 4,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10"
+      "activity_time": "CURRENT_TIMESTAMP",
+      "full_name": "Elad Ozer"
     },
     {
       "log_id": 5,
       "user_id": 5,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "Sara Smith"
     },
     {
       "log_id": 6,
       "user_id": 6,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "Mike Johnson"
     },
     {
       "log_id": 7,
       "user_id": 7,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "Rachel Green"
     },
     {
       "log_id": 8,
       "user_id": 8,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
-      "full_name": "David Miller"
+      "activity_time": "CURRENT_TIMESTAMP"
     },
     {
       "log_id": 9,
       "user_id": 9,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "Linda Davis"
     },
     {
       "log_id": 10,
       "user_id": 10,
       "activity_type": "login",
-      "activity_time": "2023-09-08 17:02:10",
+      "activity_time": "CURRENT_TIMESTAMP",
       "full_name": "Peter Walker"
     },
     {
       "log_id": 11,
-      "user_id": 10,
+      "user_id": 1,
       "activity_type": "logout",
-      "activity_time": "2023-09-08 17:02:10",
-      "full_name": "Peter Walker"
+      "activity_time": "2023-09-09T04:00:34.558Z",
+      "full_name": "admin admin"
     },
     {
       "log_id": 12,
-      "user_id": 10,
-      "activity_type": "post",
-      "activity_time": "2023-09-08 17:02:10",
-      "full_name": "Peter Walker"
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.563Z",
+      "full_name": "admin admin"
     },
     {
       "log_id": 13,
       "user_id": 1,
       "activity_type": "logout",
-      "activity_time": "2023-09-09T01:23:15.311Z",
+      "activity_time": "2023-09-09T04:00:34.564Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 14,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.565Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 15,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.566Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 16,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.578Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 17,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.579Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 18,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.580Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 19,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.588Z",
+      "full_name": "admin admin"
+    },
+    {
+      "log_id": 20,
+      "user_id": 1,
+      "activity_type": "logout",
+      "activity_time": "2023-09-09T04:00:34.589Z",
       "full_name": "admin admin"
     }
   ],
