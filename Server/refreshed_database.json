@@ -1,0 +1,607 @@
+{
+    "features": [{
+            "feature_name": "dislikes",
+            "feature_status": "enabled"
+        },
+        {
+            "feature_name": "comments",
+            "feature_status": "enabled"
+        },
+        {
+            "feature_name": "successStories",
+            "feature_status": "enabled"
+        },
+        {
+            "feature_name": "aboutMe",
+            "feature_status": "enabled"
+        }
+    ],
+    "Users": [{
+            "user_id": 1,
+            "username": "admin",
+            "email": "admin",
+            "password_hash": "admin",
+            "full_name": "admin admin",
+            "bio": "Foodie and blogger",
+            "profile_picture_url": "profile3.jpg",
+            "country": "Israel",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1996-11-07",
+            "gender": "male"
+        },
+        {
+            "user_id": 2,
+            "username": "john_doe",
+            "email": "john@example.com",
+            "password_hash": "johnpassword",
+            "full_name": "John Doe",
+            "bio": "I love photography!",
+            "profile_picture_url": "profile1.jpg",
+            "country": "USA",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1990-06-20",
+            "gender": "male"
+        },
+        {
+            "user_id": 3,
+            "username": "hagar_traveler",
+            "email": "hagar@example.com",
+            "password_hash": "hagarpassword",
+            "full_name": "Hagar Yulevich",
+            "bio": "Travel enthusiast",
+            "profile_picture_url": "profile2.jpg",
+            "country": "Afghanistan",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1997-03-11",
+            "gender": "female"
+        },
+        {
+            "user_id": 4,
+            "username": "elad_foodie",
+            "email": "elad@example.com",
+            "password_hash": "eladpassword",
+            "full_name": "Elad Ozer",
+            "bio": "Foodie and blogger",
+            "profile_picture_url": "profile3.jpg",
+            "country": "Croatia",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1996-05-07",
+            "gender": "other"
+        },
+        {
+            "user_id": 5,
+            "username": "sara_photography",
+            "email": "sara@example.com",
+            "password_hash": "sarapassword",
+            "full_name": "Sara Smith",
+            "bio": "Photographer",
+            "profile_picture_url": "profile4.jpg",
+            "country": "Canada",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1985-09-15",
+            "gender": "female"
+        },
+        {
+            "user_id": 6,
+            "username": "mike_traveler",
+            "email": "mike@example.com",
+            "password_hash": "mikepassword",
+            "full_name": "Mike Johnson",
+            "bio": "Travel enthusiast",
+            "profile_picture_url": "profile5.jpg",
+            "country": "USA",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1992-02-28",
+            "gender": "male"
+        },
+        {
+            "user_id": 7,
+            "username": "rachel_foodie",
+            "email": "rachel@example.com",
+            "password_hash": "rachelpassword",
+            "full_name": "Rachel Green",
+            "bio": "Foodie and chef",
+            "profile_picture_url": "profile6.jpg",
+            "country": "France",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1988-12-03",
+            "gender": "female"
+        },
+        {
+            "user_id": 8,
+            "username": "david_outdoor",
+            "email": "david@example.com",
+            "password_hash": "davidpassword",
+            "full_name": "David Miller",
+            "bio": "Outdoor enthusiast",
+            "profile_picture_url": "profile7.jpg",
+            "country": "Australia",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1994-07-10",
+            "gender": "male"
+        },
+        {
+            "user_id": 9,
+            "username": "linda_nature",
+            "email": "linda@example.com",
+            "password_hash": "lindapassword",
+            "full_name": "Linda Davis",
+            "bio": "Nature lover",
+            "profile_picture_url": "profile8.jpg",
+            "country": "Canada",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1983-04-22",
+            "gender": "female"
+        },
+        {
+            "user_id": 10,
+            "username": "peter_music",
+            "email": "peter@example.com",
+            "password_hash": "peterpassword",
+            "full_name": "Peter Walker",
+            "bio": "Musician and composer",
+            "profile_picture_url": "profile9.jpg",
+            "country": "USA",
+            "registration_date": "CURRENT_TIMESTAMP",
+            "birth_date": "1990-03-19",
+            "gender": "male"
+        }
+    ],
+    "Posts": [{
+            "post_id": 1,
+            "user_id": 2,
+            "caption": "Exploring the world, one adventure at a time. #Wanderlust #Traveler #Adventure",
+            "image_url": "travel1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 2,
+            "user_id": 3,
+            "caption": "Delicious homemade pizza for dinner tonight. Here is the recipe! #Foodie #Cooking",
+            "image_url": "pizza1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 3,
+            "user_id": 4,
+            "caption": "Capturing the beauty of nature in its purest form. #NaturePhotography #Wilderness",
+            "image_url": "nature1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 4,
+            "user_id": 5,
+            "caption": "Creating soul-touching music with every note. #Music #Composer",
+            "image_url": "music1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 5,
+            "user_id": 6,
+            "caption": "Sunset views that take your breath away. #SunsetLovers #Nature",
+            "image_url": "sunset1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 6,
+            "user_id": 7,
+            "caption": "French cuisine at its finest. Bon appétit! #FrenchCuisine #Foodie",
+            "image_url": "french_cuisine1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 7,
+            "user_id": 8,
+            "caption": "Camping under the starry night sky. #Camping #Adventure",
+            "image_url": "camping1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 8,
+            "user_id": 9,
+            "caption": "Nature's symphony - birds, rivers, and trees. #NatureLover #Outdoors",
+            "image_url": "nature2.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 9,
+            "user_id": 10,
+            "caption": "Exploring historical landmarks and their stories. #History #Travel",
+            "image_url": "landmarks1.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "post_id": 10,
+            "user_id": 2,
+            "caption": "Making memories that last a lifetime. #AdventureTime #TravelGoals",
+            "image_url": "travel2.jpg",
+            "post_date": "CURRENT_TIMESTAMP"
+        }
+    ],
+    "Comments": [{
+            "comment_id": 1,
+            "user_id": 3,
+            "post_id": 1,
+            "comment_text": "Amazing sunset view! I wish I could be there right now.",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 2,
+            "user_id": 4,
+            "post_id": 2,
+            "comment_text": "This adventure looks incredible! How did you find this place?",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 3,
+            "user_id": 5,
+            "post_id": 3,
+            "comment_text": "That pizza looks mouthwatering! Can you share the recipe, please?",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 4,
+            "user_id": 6,
+            "post_id": 4,
+            "comment_text": "The beauty of nature is awe-inspiring. Great shot!",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 5,
+            "user_id": 7,
+            "post_id": 5,
+            "comment_text": "Your music touches my soul. Keep creating!",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 6,
+            "user_id": 8,
+            "post_id": 6,
+            "comment_text": "I adore French cuisine. What dish is that?",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 7,
+            "user_id": 9,
+            "post_id": 7,
+            "comment_text": "Camping under the stars must be magical. Tell me more!",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 8,
+            "user_id": 10,
+            "post_id": 8,
+            "comment_text": "Nature's beauty is unparalleled, and you capture it perfectly.",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 9,
+            "user_id": 2,
+            "post_id": 9,
+            "comment_text": "Your music is inspiring. Do you have any upcoming concerts?",
+            "comment_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "comment_id": 10,
+            "user_id": 4,
+            "post_id": 10,
+            "comment_text": "These landmarks have so much history. Which one is your favorite?",
+            "comment_date": "CURRENT_TIMESTAMP"
+        }
+    ],
+    "Likes": [{
+            "like_id": 1,
+            "user_id": 1,
+            "post_id": 1,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 2,
+            "user_id": 2,
+            "post_id": 2,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 3,
+            "user_id": 3,
+            "post_id": 3,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 4,
+            "user_id": 4,
+            "post_id": 4,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 5,
+            "user_id": 5,
+            "post_id": 5,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 6,
+            "user_id": 6,
+            "post_id": 6,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 7,
+            "user_id": 7,
+            "post_id": 7,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 8,
+            "user_id": 8,
+            "post_id": 8,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 9,
+            "user_id": 9,
+            "post_id": 9,
+            "like_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "like_id": 10,
+            "user_id": 10,
+            "post_id": 10,
+            "like_date": "CURRENT_TIMESTAMP"
+        }
+    ],
+    "DisLikes": [{
+            "dislike_id": 1,
+            "user_id": 2,
+            "post_id": 1,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 2,
+            "user_id": 3,
+            "post_id": 2,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 3,
+            "user_id": 4,
+            "post_id": 3,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 4,
+            "user_id": 5,
+            "post_id": 4,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 5,
+            "user_id": 6,
+            "post_id": 5,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 6,
+            "user_id": 7,
+            "post_id": 6,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 7,
+            "user_id": 8,
+            "post_id": 7,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 8,
+            "user_id": 9,
+            "post_id": 8,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 9,
+            "user_id": 10,
+            "post_id": 9,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "dislike_id": 10,
+            "user_id": 1,
+            "post_id": 10,
+            "dislike_date": "CURRENT_TIMESTAMP"
+        }
+    ],
+    "Follows": [{
+            "follow_id": 1,
+            "follower_user_id": 1,
+            "following_user_id": 2,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 2,
+            "follower_user_id": 2,
+            "following_user_id": 3,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 3,
+            "follower_user_id": 3,
+            "following_user_id": 4,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 4,
+            "follower_user_id": 4,
+            "following_user_id": 5,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 5,
+            "follower_user_id": 5,
+            "following_user_id": 6,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 6,
+            "follower_user_id": 6,
+            "following_user_id": 7,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 7,
+            "follower_user_id": 7,
+            "following_user_id": 8,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 8,
+            "follower_user_id": 8,
+            "following_user_id": 9,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 9,
+            "follower_user_id": 9,
+            "following_user_id": 10,
+            "follow_date": "CURRENT_TIMESTAMP"
+        },
+        {
+            "follow_id": 10,
+            "follower_user_id": 10,
+            "following_user_id": 1,
+            "follow_date": "CURRENT_TIMESTAMP"
+        }
+    ],
+    "ActivityLog": [{
+            "log_id": 1,
+            "user_id": 1,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 2,
+            "user_id": 2,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 3,
+            "user_id": 3,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 4,
+            "user_id": 4,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 5,
+            "user_id": 5,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 6,
+            "user_id": 6,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 7,
+            "user_id": 7,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 8,
+            "user_id": 8,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 9,
+            "user_id": 9,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        },
+        {
+            "log_id": 10,
+            "user_id": 10,
+            "activity_type": "login",
+            "activity_time": "CURRENT_TIMESTAMP"
+        }
+    ],
+    "SuccessStories": [{
+            "story_id": 1,
+            "user1_id": 1,
+            "user2_id": 2,
+            "story_text": "We met through this platform and became travel buddies! #TravelBuddies",
+            "story_date": "08\/01\/2023"
+        },
+        {
+            "story_id": 2,
+            "user1_id": 2,
+            "user2_id": 3,
+            "story_text": "Found a food blogging partner here. It changed our lives! #FoodBloggers",
+            "story_date": "08\/05\/2023"
+        },
+        {
+            "story_id": 3,
+            "user1_id": 3,
+            "user2_id": 4,
+            "story_text": "Happily married after meeting on this social media! #LoveStory",
+            "story_date": "08\/10\/2023"
+        },
+        {
+            "story_id": 4,
+            "user1_id": 4,
+            "user2_id": 5,
+            "story_text": "Our photography journey began here, and it keeps getting better! #PhotographyJourney",
+            "story_date": "08\/12\/2023"
+        },
+        {
+            "story_id": 5,
+            "user1_id": 5,
+            "user2_id": 6,
+            "story_text": "Music brought us together, and we've been making beautiful music ever since! #Musicians",
+            "story_date": "08\/15\/2023"
+        },
+        {
+            "story_id": 6,
+            "user1_id": 6,
+            "user2_id": 7,
+            "story_text": "Exploring the culinary world, one dish at a time. #FoodiesForLife",
+            "story_date": "08\/20\/2023"
+        },
+        {
+            "story_id": 7,
+            "user1_id": 7,
+            "user2_id": 8,
+            "story_text": "Nature lovers who found their paradise on this platform. #NatureLovers",
+            "story_date": "08\/25\/2023"
+        },
+        {
+            "story_id": 8,
+            "user1_id": 8,
+            "user2_id": 9,
+            "story_text": "Our outdoor adventures started here, and they are still going strong! #AdventureTime",
+            "story_date": "08\/30\/2023"
+        },
+        {
+            "story_id": 9,
+            "user1_id": 9,
+            "user2_id": 10,
+            "story_text": "History buffs exploring the world's wonders together. #HistoryExplorers",
+            "story_date": "09\/01\/2023"
+        },
+        {
+            "story_id": 10,
+            "user1_id": 10,
+            "user2_id": 1,
+            "story_text": "From different worlds to a world of our own. #LoveKnowsNoBounds",
+            "story_date": "09\/05\/2023"
+        }
+    ]
+}

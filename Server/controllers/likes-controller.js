@@ -10,6 +10,7 @@ const checkIfUserLikes = async(req, res) => {
         res.status(500).json({ message: 'error adding login activity' });
     }
 }
+
 const checkIfUserDislikes = async(req, res) => {
     try {
         const { user_id, post_user_id } = req.body;

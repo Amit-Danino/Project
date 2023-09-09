@@ -2,7 +2,7 @@ async function getCurrentUserId() {
     const cookies = document.cookie.split(';');
     let [name, value] = cookies[cookies.length - 1].split('=');
     name = name.split(' ').join('')
-    const response = await fetch('http://localhost:3000/api/users/getUserId', {
+    const response = await fetch('http://localhost:3000/api/persist/getUserId', {
         method: 'POST',
         body: JSON.stringify({ email: name }), // Make sure you define post_id and user_id
         headers: {
@@ -15,8 +15,7 @@ async function getCurrentUserId() {
     }
 
     const data = await response.json();
-    console.log(data[0].user_id)
-    return data[0].user_id;
+    return data;
 }
 
 function addActivity(user_id, activity) {
@@ -25,7 +24,7 @@ function addActivity(user_id, activity) {
         user_id: user_id
     }
     try {
-        fetch('http://localhost:3000/api/activitylog/addActivity', {
+        fetch('http://localhost:3000/api/persist/addActivity', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +60,6 @@ const loadAdminFeed = async() => {
         adminWelcome(user_id);
         await addActivityFeed();
         await showAllUsers();
-
         await additionalFeaturePages();
     } catch (error) {
         alert('Please log in to view the admin page.');
@@ -69,12 +67,64 @@ const loadAdminFeed = async() => {
     }
 }
 
-async function getFeatureData() {
-    return fetch('http://localhost:3000/api/feature/getFeatureData', {
+async function testPersist() {
+    // testInsertData();
+    // testReadData();
+}
+
+async function testReadData() {
+    await fetch('http://localhost:3000/api/persist/get_table_data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ table: "Posts" }),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                console.log("not ok response")
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // You can use response.json() if the server sends JSON back
+        })
+        .then((data) => {
+            return data;
+        })
+}
+
+async function testInsertData() {
+    const featureData = {
+        table: "Users",
+        data: {
+            // user_id: 16,
+            username: "admin",
+            email: "admin",
+            password_hash: "admin",
+            full_name: "admin admin",
+            bio: "Foodie and blogger",
+            profile_picture_url: "profile3.jpg",
+            country: "Israel",
+            registration_date: "1996-11-07T00:00:00.000Z",
+            birth_date: "1996-11-07",
+            gender: "male"
+        },
+    };
+    fetch('http://localhost:3000/api/persist/insert', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(featureData),
+    })
+}
+
+async function getFeatureData() {
+    return fetch('http://localhost:3000/api/persist/get_table_data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ table: "features" })
         })
         .then((response) => {
             if (!response.ok) {
@@ -158,30 +208,23 @@ async function modifyFeatureData(feature, info) {
         feature: feature,
         info: info,
     };
-    fetch('http://localhost:3000/api/feature/modify', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(featureData),
-        })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text(); // You can use response.json() if the server sends JSON back
-        })
-        .catch((error) => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+
+    fetch('http://localhost:3000/api/persist/modify_feature', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(featureData),
+    })
 }
 
 async function showAllUsers() {
-    fetch('http://localhost:3000/api/users/getUsers', {
+    fetch('http://localhost:3000/api/persist/get_table_data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ table: "Users" })
         })
         .then(response => response.json())
         .then(users => {
@@ -221,8 +264,8 @@ async function showAllUsers() {
 }
 
 async function removeUser(user_id) {
-    const jsonData = { user_id: user_id }
-    const response = await fetch('http://localhost:3000/api/users/removeUser', {
+    const jsonData = { table: "Users", id: user_id }
+    const response = await fetch('http://localhost:3000/api/persist/remove_by_id', {
         method: 'POST',
         body: JSON.stringify(jsonData),
         headers: {
@@ -261,8 +304,7 @@ async function addActivityToFeed(activityType) {
     titleElement.textContent = `All recent ${activityType}s`;
     activityContainer.appendChild(titleElement);
 
-    const response = await getActivityFromDB(activityType);
-    const activity = await response.json();
+    const activity = await getActivityFromDB(activityType);
 
     activity.forEach(activity => {
         const activityItemElement = document.createElement('li');
@@ -303,17 +345,16 @@ function timeAgo(dateTimeString) {
 
 async function getActivityFromDB(activityType) {
     const jsonData = { activity: activityType }
-    const response = await fetch('http://localhost:3000/api/activitylog/getActivity', {
+    const response = await fetch('http://localhost:3000/api/persist/getActivity', {
         method: 'POST',
         body: JSON.stringify(jsonData),
         headers: {
             'Content-Type': 'application/json',
         },
     });
-
     if (!response.ok) {
         throw new Error('Error getting activity feed');
     }
-
-    return response;
+    const data = await response.json();
+    return data;
 }

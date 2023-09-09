@@ -9,6 +9,7 @@ const followsRoutes = require("./routes/follows-routes");
 const likesRoutes = require("./routes/likes-routes");
 const featureRoutes = require("./routes/feature-routes");
 
+const persistRoutes = require("./controllers/persist");
 
 //function that saves the server 
 const app = express();
@@ -48,6 +49,7 @@ app.use(`/api/follows`, followsRoutes);
 app.use(`/api/likes`, likesRoutes);
 app.use(`/api/feature`, featureRoutes);
 
+app.use(`/api/persist`, persistRoutes);
 
 
 //TODO:
